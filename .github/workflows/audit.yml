@@ -1,0 +1,17 @@
+# The publication gates are only worth anything if they cannot be forgotten.
+# sync.py --check needs the private working trees and can only run locally;
+# audit.py needs nothing but this repository, so it runs on every push.
+name: audit
+on:
+  push:
+  pull_request:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python scripts/audit.py

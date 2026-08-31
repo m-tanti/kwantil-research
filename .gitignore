@@ -1,0 +1,42 @@
+# No data files, derived or otherwise. Every analysis carries a DATA.md
+# explaining how to fetch or rebuild its inputs and outputs.
+*.parquet
+*.h5
+*.hdf5
+*.nc
+*.feather
+
+# Raw third-party data is never committed. See README, "What is deliberately not here".
+analyses/*/artifacts/raw/
+analyses/*/artifacts/raw_nl/
+analyses/*/artifacts/interim/
+analyses/*/artifacts/panel.parquet
+analyses/*/data/
+# Row-level derived series. Matched at any depth: an earlier pattern assumed
+# experiments/<arm>/ and missed experiments/factorial/<arm>/, which left 2 MB of
+# price-derived data one `git add -A` away from being published.
+**/details.csv
+**/controller_state.csv
+**/output/dashboard/
+**/artifacts/raw/
+**/artifacts/raw_nl/
+**/artifacts/interim/
+*.mat
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Env
+.env
+.env.*
+!.env.example
+
+# OS
+.DS_Store
+Thumbs.db
