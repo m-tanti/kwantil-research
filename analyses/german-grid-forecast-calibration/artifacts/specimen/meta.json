@@ -1,5 +1,7 @@
 {
  "zone": "NL",
+ "mean_load_mw": 13436.72564430766,
+ "width_useless_frac": 0.5,
  "tz": "Europe/Amsterdam",
  "window": 90,
  "min_points": 60,
@@ -18,7 +20,7 @@
  "panel_rows": 38016,
  "scored_days": 336,
  "scored_intervals": 32252,
- "artifact_digest_sha256": "30b8cc6bd3d2d4a3275f2775ccd51adc4350671a508a26ebce47c62341e1704b",
+ "artifact_digest_sha256": "c8a30cbaafd68e50c24d911b9849e2f22daf52b13fae9cb6693528037d7f29ef",
  "months": [
   "2025-07",
   "2025-08",

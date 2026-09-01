@@ -48,6 +48,10 @@ ROOT = Path(__file__).resolve().parents[1]
 # ---------------------------------------------------------------- pre-registered
 WIN, MINP, GAMMA = 90, 60, 0.02        # identical to the article's constructions
 LEVELS = (0.80, 0.90, 0.95)
+# A band wider than this fraction of mean load is not a decision an operator can
+# act on, whatever its coverage. Fixed here so the width finding is scored by the
+# same discipline as the coverage one.
+WIDTH_USELESS_FRAC = 0.50
 PORTFOLIO_MW = 100.0
 EXPENSIVE_Q = 0.80                     # top quintile of adverse spread
 N_BOOT = 2000
@@ -178,6 +182,14 @@ def score(p: pd.DataFrame) -> pd.DataFrame:
                 }
                 aa = float(np.clip(a_t[s], 0.001, 0.45))
                 bands["aci"] = (np.quantile(window, aa / 2), np.quantile(window, 1 - aa / 2))
+                # Oracle: this slot's quantiles over the WHOLE period, which no
+                # forecaster could have known. It is not a competitor and never
+                # enters the register; it exists so the cost table has a floor.
+                # A perfectly calibrated 90% band still misses 10% of the time
+                # and those misses still cost money, and without this line a
+                # reader cannot tell how much of the exposure was avoidable.
+                full = E[:, s][~np.isnan(E[:, s])]
+                bands["oracle"] = (np.quantile(full, alpha / 2), np.quantile(full, 1 - alpha / 2))
                 a_t[s] = a_t[s] + GAMMA * (alpha - (0.0 if bands["aci"][0] <= y <= bands["aci"][1] else 1.0))
 
                 for method, (lo, hi) in bands.items():
@@ -252,6 +264,7 @@ def main() -> None:
     print(f"pre-registered 'expensive' = adverse spread >= EUR {expensive_threshold:.2f}/MWh "
           f"(top {(1-EXPENSIVE_Q)*100:.0f}% of {len(universe):,} scored intervals)")
 
+    mean_load = float(p["act"].mean())
     rng = np.random.default_rng(BOOT_SEED)
     coverage = []
     for (level, method), g in s.groupby(["level", "method"]):
@@ -272,7 +285,22 @@ def main() -> None:
                              concentration_lo=float(r_lo), concentration_hi=float(r_hi),
                              mean_width=float(g["width"].mean()),
                              p95_width=float(np.quantile(g["width"], 0.95)),
-                             max_width=float(g["width"].max())))
+                             max_width=float(g["width"].max()),
+                             share_unusable=float((g["width"] > WIDTH_USELESS_FRAC * mean_load).mean()),
+                             # Where a band spends its width. A band can lower its
+                             # exposure simply by being wider everywhere, so the
+                             # question that separates skill from padding is
+                             # whether the extra width lands in the intervals that
+                             # cost money.
+                             width_expensive=float(g[g["expensive"]]["width"].mean()),
+                             width_cheap=float(g[~g["expensive"]]["width"].mean()),
+                             # How big a miss is when it happens. Coverage counts
+                             # misses; exposure is paid on their size, and the two
+                             # come apart for any band that changes width over
+                             # time rather than across slots.
+                             mean_excess_on_miss=float(g[~g["inside"]]["excess"].mean()),
+                             p95_excess_on_miss=float(np.quantile(g[~g["inside"]]["excess"], 0.95)),
+                             max_width_frac_load=float(g["width"].max() / mean_load)))
         print(f"  {method:<10} {level:.0%}  coverage {cov:.3f} "
               f"[{lo:.3f}, {hi:.3f}]  nominal {'INSIDE' if lo <= level <= hi else 'outside'}  "
               f"concentration {ratio:.2f}x [{r_lo:.2f}, {r_hi:.2f}]")
@@ -312,14 +340,15 @@ def main() -> None:
     # materially at 95% has failed, and reporting only the headline level would
     # let the register choose its own evidence. The CSV keeps all nine rows.
     RANK = {"Observation": 0, "Significant": 1, "Material": 2}
-    LABEL = {"gaussian": "Parametric Gaussian band",
+    LABEL = {"oracle": "Oracle band (lookahead, not achievable)",
+             "gaussian": "Parametric Gaussian band",
              "conformal": "Rolling split-conformal band",
              "aci": "Adaptive conformal band"}
     eur_of = lambda lv, m: float(
         cost[(cost.level == lv) & (cost.method == m)]["eur"].iloc[0])
 
     findings, n = [], 0
-    for method in ("gaussian", "conformal", "aci"):
+    for method in ("gaussian", "conformal", "aci"):   # oracle excluded: it is a floor, not a competitor
         rows = sorted([c_ for c_ in coverage if c_["method"] == method],
                       key=lambda r: r["level"])
         head = next(r for r in rows if r["level"] == HEADLINE_LEVEL)
@@ -400,7 +429,8 @@ def main() -> None:
             digest.update(f.read_bytes())
     scored_intervals = int(max(c_["n"] for c_ in coverage))
 
-    meta = dict(zone=args.zone, tz=args.tz, window=WIN, min_points=MINP, gamma=GAMMA,
+    meta = dict(zone=args.zone, mean_load_mw=mean_load,
+                width_useless_frac=WIDTH_USELESS_FRAC, tz=args.tz, window=WIN, min_points=MINP, gamma=GAMMA,
                 levels=list(LEVELS), portfolio_mw=PORTFOLIO_MW,
                 expensive_quantile=EXPENSIVE_Q, expensive_threshold_eur_mwh=expensive_threshold,
                 n_boot=N_BOOT, boot_seed=BOOT_SEED,

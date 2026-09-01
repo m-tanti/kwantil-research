@@ -16,6 +16,11 @@
    "eur": 586617.0
   },
   {
+   "level": 0.8,
+   "method": "oracle",
+   "eur": 512932.0
+  },
+  {
    "level": 0.9,
    "method": "aci",
    "eur": 158145.0
@@ -31,6 +36,11 @@
    "eur": 362495.0
   },
   {
+   "level": 0.9,
+   "method": "oracle",
+   "eur": 275026.0
+  },
+  {
    "level": 0.95,
    "method": "aci",
    "eur": 78539.0
@@ -44,6 +54,11 @@
    "level": 0.95,
    "method": "gaussian",
    "eur": 241799.0
+  },
+  {
+   "level": 0.95,
+   "method": "oracle",
+   "eur": 121372.0
   }
  ],
  "mean_adverse_all": 31.000741349373683,
