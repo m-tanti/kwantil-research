@@ -17,6 +17,8 @@
  "concentration_trigger": 1.25,
  "panel_rows": 38016,
  "scored_days": 336,
+ "scored_intervals": 32252,
+ "artifact_digest_sha256": "30b8cc6bd3d2d4a3275f2775ccd51adc4350671a508a26ebce47c62341e1704b",
  "months": [
   "2025-07",
   "2025-08",

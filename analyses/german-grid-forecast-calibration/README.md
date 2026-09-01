@@ -14,8 +14,13 @@ exposure, concentrated in exactly the hours where being wrong is expensive.
 
 The conformal result is the one worth reading closely. Adaptive conformal
 methods are usually presented as distribution-free insurance against
-miscalibration. Here they hold marginal coverage and still miss where it
-counts, because the guarantee is an average over all hours and the cost is not.
+miscalibration. What they actually deliver here is narrower than that and
+narrower than an earlier version of this file claimed: they restore marginal
+coverage, and they reduce but do not remove the tendency to miss in the
+intervals that cost the most. The specimen audit puts numbers on it, with the
+adaptive band's stated level inside its bootstrap interval at every level and
+its miss-rate concentration in the most expensive intervals still above one.
+The guarantee is an average over all hours; the cost is not.
 
 ## Data
 

@@ -29,6 +29,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import glob
 import json
 import sys
@@ -388,12 +389,25 @@ def main() -> None:
                  .rename(columns={"inside": "coverage"}))
     monthly.to_json(out / "monthly.json", orient="records", indent=1)
 
+    # Lineage by content, not by commit. The commit that adds a run cannot be
+    # known while the run is happening, so a hash written here always names the
+    # parent and sends a reader to a tree without the script in it. A digest over
+    # the emitted artifacts is checkable instead: regenerate, hash, compare.
+    digest = hashlib.sha256()
+    for f in sorted(out.glob("*")):
+        if f.name != "meta.json":
+            digest.update(f.name.encode())
+            digest.update(f.read_bytes())
+    scored_intervals = int(max(c_["n"] for c_ in coverage))
+
     meta = dict(zone=args.zone, tz=args.tz, window=WIN, min_points=MINP, gamma=GAMMA,
                 levels=list(LEVELS), portfolio_mw=PORTFOLIO_MW,
                 expensive_quantile=EXPENSIVE_Q, expensive_threshold_eur_mwh=expensive_threshold,
                 n_boot=N_BOOT, boot_seed=BOOT_SEED,
                 concentration_trigger=CONCENTRATION_TRIGGER,
                 panel_rows=int(len(p)), scored_days=int(s["date"].nunique()),
+                scored_intervals=scored_intervals,
+                artifact_digest_sha256=digest.hexdigest(),
                 months=sorted(p["month"].unique().tolist()))
     (out / "meta.json").write_text(json.dumps(meta, indent=1), encoding="utf-8")
     print(f"\nwrote {out}")
