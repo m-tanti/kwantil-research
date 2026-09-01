@@ -1,5 +1,12 @@
-"""NL variant of pull_data.py - same 13 months, zone NL, including imbalance prices
-(which the Netherlands, unlike Germany, publishes on the Transparency Platform).
+"""NL variant of pull_data.py - same 13 months, zone NL, including imbalance prices.
+
+The NL leg carries the priced findings because it is the leg that was run first,
+not because Germany withholds the data: the German uniform imbalance price
+(reBAP) is published quarter-hourly by the four TSOs on netztransparenz.de, with
+a CSV download and a WebAPI. Whether query_imbalance_prices returns a usable
+DE_LU series from the Transparency Platform is a separate question, and one for
+a run rather than an assumption.
+
 Writes artifacts/raw_nl/<series>/<YYYY-MM>.parquet; resumable."""
 import os
 import time

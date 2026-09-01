@@ -1,0 +1,53 @@
+{
+ "by_method_level": [
+  {
+   "level": 0.8,
+   "method": "aci",
+   "eur": 396290.0
+  },
+  {
+   "level": 0.8,
+   "method": "conformal",
+   "eur": 656087.0
+  },
+  {
+   "level": 0.8,
+   "method": "gaussian",
+   "eur": 586617.0
+  },
+  {
+   "level": 0.9,
+   "method": "aci",
+   "eur": 158145.0
+  },
+  {
+   "level": 0.9,
+   "method": "conformal",
+   "eur": 359943.0
+  },
+  {
+   "level": 0.9,
+   "method": "gaussian",
+   "eur": 362495.0
+  },
+  {
+   "level": 0.95,
+   "method": "aci",
+   "eur": 78539.0
+  },
+  {
+   "level": 0.95,
+   "method": "conformal",
+   "eur": 207305.0
+  },
+  {
+   "level": 0.95,
+   "method": "gaussian",
+   "eur": 241799.0
+  }
+ ],
+ "mean_adverse_all": 31.000741349373683,
+ "mean_adverse_on_miss": 39.44226559435072,
+ "scale_factor": 0.0074422893379804955,
+ "portfolio_mw": 100.0
+}

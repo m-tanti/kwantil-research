@@ -1,0 +1,35 @@
+{
+ "zone": "NL",
+ "tz": "Europe/Amsterdam",
+ "window": 90,
+ "min_points": 60,
+ "gamma": 0.02,
+ "levels": [
+  0.8,
+  0.9,
+  0.95
+ ],
+ "portfolio_mw": 100.0,
+ "expensive_quantile": 0.8,
+ "expensive_threshold_eur_mwh": 42.290000000000006,
+ "n_boot": 2000,
+ "boot_seed": 20260901,
+ "concentration_trigger": 1.25,
+ "panel_rows": 38016,
+ "scored_days": 336,
+ "months": [
+  "2025-07",
+  "2025-08",
+  "2025-09",
+  "2025-10",
+  "2025-11",
+  "2025-12",
+  "2026-01",
+  "2026-02",
+  "2026-03",
+  "2026-04",
+  "2026-05",
+  "2026-06",
+  "2026-07"
+ ]
+}
