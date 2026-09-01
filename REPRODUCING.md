@@ -45,7 +45,9 @@ python src/pull_data_nl.py         # NL comparison zone
 python src/assemble.py             # builds artifacts/panel.parquet
 python src/calibration.py          # coverage and conditional bias
 python src/monthly_coverage.py     # coverage by month, the regime-break result
+pytest -q                          # 11 tests, ~2 s
 python src/nl_monetize.py          # imbalance exposure in euros
+python src/audit_specimen.py --zone NL   # the specimen Vendor Band Audit
 ```
 
 The pull is the slow step and rate-limited at the source. `artifacts/panel.parquet`
@@ -130,6 +132,7 @@ https://phm-datasets.s3.amazonaws.com/NASA/3.+Milling.zip (14.7 MB) and extract
 cd analyses/tool-wear-calibration
 pip install numpy scipy pandas scikit-learn
 
+pytest -q                          # 15 tests, ~2 s
 python src/features.py             # windowed features; flags clipped channels
 python src/characterise.py         # per-insert wear trajectories
 python src/calibrate.py            # 6 interval constructions, leave-one-insert-out

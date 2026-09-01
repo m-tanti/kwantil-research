@@ -1,0 +1,22 @@
+[project]
+name = "kwantil-tool-wear-calibration"
+version = "1.0.0"
+description = "Calibration audit of a cut-count tool-wear model against the NASA Milling Data Set"
+requires-python = ">=3.11"
+
+# Pinned rather than bounded: see the note in the grid analysis. scikit-learn is
+# the one that matters most here, because the ensemble it fits is seeded and a
+# minor version can change the split logic underneath the seed.
+dependencies = [
+    "numpy==2.2.6",
+    "pandas==2.2.3",
+    "scipy==1.17.1",
+    "scikit-learn==1.8.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest==8.3.5"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

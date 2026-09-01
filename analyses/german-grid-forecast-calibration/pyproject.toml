@@ -1,0 +1,23 @@
+[project]
+name = "kwantil-grid-forecast-calibration"
+version = "1.0.0"
+description = "Calibration audit of ENTSO-E day-ahead forecasts, and the specimen Vendor Band Audit built from it"
+requires-python = ">=3.11"
+
+# Pinned rather than bounded. "Reproducible" has to mean the reader gets the
+# numbers in the paper, and a floating minor version of numpy or scipy is enough
+# to move a quantile in the last decimal place.
+dependencies = [
+    "numpy==2.2.6",
+    "pandas==2.2.3",
+    "scipy==1.17.1",
+    "pyarrow==19.0.1",
+    "entsoe-py==0.8.0",   # only for the data pull; the analysis runs without it
+]
+
+[project.optional-dependencies]
+dev = ["pytest==8.3.5"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
