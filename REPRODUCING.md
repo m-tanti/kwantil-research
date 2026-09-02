@@ -45,9 +45,16 @@ python src/pull_data_nl.py         # NL comparison zone
 python src/assemble.py             # builds artifacts/panel.parquet
 python src/calibration.py          # coverage and conditional bias
 python src/monthly_coverage.py     # coverage by month, the regime-break result
-pytest -q                          # 11 tests, ~2 s
+pytest -q                          # 26 tests, ~2 s
+#
+# The German price needs a client registered in the OAuth Manager of the
+# netztransparenz extranet (https://extranet.netztransparenz.de). There is no
+# anonymous tier. Export NETZTRANSPARENZ_CLIENT_ID and
+# NETZTRANSPARENZ_CLIENT_SECRET before running pull_data_de.py.
 python src/nl_monetize.py          # imbalance exposure in euros
-python src/audit_specimen.py --zone NL   # the specimen Vendor Band Audit
+python src/pull_data_de.py         # reBAP from netztransparenz; needs OAuth creds
+python src/audit_specimen.py --zone DE --tz Europe/Berlin      # the specimen
+python src/audit_specimen.py --zone NL --tz Europe/Amsterdam   # the control
 ```
 
 The pull is the slow step and rate-limited at the source. `artifacts/panel.parquet`
