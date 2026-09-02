@@ -1,6 +1,19 @@
 {
  "zone": "NL",
  "mean_load_mw": 13436.72564430766,
+ "integrity": {
+  "correlation": 0.6206076676318605,
+  "ols_slope": 0.6104392002828887,
+  "ols_intercept": 6476.587987496617,
+  "mean_bias_mw": 2034.8732508417506,
+  "mean_bias_frac_load": 0.1514411549888127,
+  "thresholds": {
+   "min_correlation": 0.9,
+   "slope_within": 0.15,
+   "max_abs_bias_frac": 0.05
+  },
+  "passes": false
+ },
  "width_useless_frac": 0.5,
  "tz": "Europe/Amsterdam",
  "window": 90,
@@ -23,7 +36,7 @@
  "artifact_digest_sha256": "25a62e5725da24141a922245dbde2b9ef62d40ac740f3706e64d8c314647aa21",
  "digest_rule": "sha256 over every file in artifacts/specimen except meta.json, in filename order, feeding each file's name as UTF-8 followed by its bytes. meta.json is excluded because it carries the digest and cannot hash itself.",
  "script": "src/audit_specimen.py",
- "script_sha256": "ac27ed8c1d6eab983a2375922a49e48ca85a69f919f2acbd8d786f92e9f75792",
+ "script_sha256": "6b4b8b6d66774a0bd56842cff1ef5a99a84cbf5f5a2cd864321868413bd1d59b",
  "months": [
   "2025-07",
   "2025-08",

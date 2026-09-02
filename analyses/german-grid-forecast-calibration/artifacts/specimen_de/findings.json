@@ -1,0 +1,35 @@
+[
+ {
+  "id": "F-01",
+  "title": "Parametric Gaussian band at nominal 90% covered 84.8%",
+  "severity": "Material",
+  "severity_reason": "nominal outside the coverage interval, and misses run 1.35x more frequent in the most expensive intervals (interval lower bound 1.16 > 1)",
+  "measurement": "Headline 90%: coverage 0.848, day-block bootstrap 95% interval [0.823, 0.871] over 32,252 scored intervals. Every audited level: 80%: covered 73.3% [70.3%, 76.2%], concentration 1.24x [1.10, 1.36], Significant; 90%: covered 84.8% [82.3%, 87.1%], concentration 1.35x [1.16, 1.55], Material; 95%: covered 91.2% [89.3%, 93.0%], concentration 1.50x [1.20, 1.81], Material",
+  "evidence": "coverage.json, findings.csv; Fig. Coverage ladder, Fig. Concentration",
+  "consequence": "EUR 90,042 of un-reserved adverse exposure per 100 MW mean load over the audited period at the 90% level",
+  "action": "Re-state the band at its measured coverage, or replace the parametric step. The failure is the Gaussian assumption itself: a symmetric two-sigma interval cannot track an error distribution whose shape moves, and widening it uniformly buys coverage in the calm hours it already had.",
+  "limit": "Measured on this series over this period. The interval is block-bootstrapped by day and so carries within-day dependence; it does not carry uncertainty in the price series used to value the misses."
+ },
+ {
+  "id": "F-02",
+  "title": "Rolling split-conformal band at nominal 90% covered 83.5%",
+  "severity": "Material",
+  "severity_reason": "nominal outside the coverage interval, and misses run 1.29x more frequent in the most expensive intervals (interval lower bound 1.11 > 1)",
+  "measurement": "Headline 90%: coverage 0.835, day-block bootstrap 95% interval [0.810, 0.860] over 32,252 scored intervals. Every audited level: 80%: covered 72.7% [69.7%, 75.7%], concentration 1.25x [1.13, 1.39], Material; 90%: covered 83.5% [81.0%, 86.0%], concentration 1.29x [1.11, 1.50], Material; 95%: covered 89.3% [87.3%, 91.3%], concentration 1.43x [1.19, 1.71], Material",
+  "evidence": "coverage.json, findings.csv; Fig. Coverage ladder, Fig. Concentration",
+  "consequence": "EUR 94,400 of un-reserved adverse exposure per 100 MW mean load over the audited period at the 90% level",
+  "action": "Do not read the conformal guarantee as insurance here. It is conditional on exchangeability, and a trailing window under distribution shift violates that condition, which is why this construction covers no better than the parametric one it was meant to replace. Either recalibrate adaptively or widen on a measured schedule.",
+  "limit": "As above. Note also that this construction is the static split-conformal band, not the adaptive one: the finding says nothing about conformal methods that update, which are audited separately as F-03."
+ },
+ {
+  "id": "F-03",
+  "title": "Adaptive conformal band at nominal 90% covered 89.6%",
+  "severity": "Observation",
+  "severity_reason": "nominal coverage lies inside the day-block bootstrap interval; this evidence does not show the band failing at this level",
+  "measurement": "Headline 90%: coverage 0.896, day-block bootstrap 95% interval [0.877, 0.914] over 32,252 scored intervals. Every audited level: 80%: covered 79.4% [76.7%, 82.0%], concentration 1.31x [1.16, 1.48], Observation; 90%: covered 89.6% [87.7%, 91.4%], concentration 1.42x [1.19, 1.67], Observation; 95%: covered 94.3% [92.9%, 95.7%], concentration 1.53x [1.22, 1.91], Observation",
+  "evidence": "coverage.json, findings.csv; Fig. Coverage ladder, Fig. Concentration",
+  "consequence": "EUR 44,495 of un-reserved adverse exposure per 100 MW mean load over the audited period at the 90% level",
+  "action": "Nothing to remediate on coverage. Two things to watch instead: the band pays for its coverage in width, so read this row against the width line before reserving against it; and the method is reactive, so a regime break costs a stretch of under-coverage before it recovers. If either matters, the question is how much width the desk can carry, not whether to recalibrate.",
+  "limit": "An Observation is not a pass in general. It says the stated level sits inside the bootstrap interval on this series and period, at a sample size this audit reports rather than hides. It does not establish that the band holds through a regime change, which this period contains only in part."
+ }
+]

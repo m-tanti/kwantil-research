@@ -1,0 +1,68 @@
+{
+ "by_method_level": [
+  {
+   "level": 0.8,
+   "method": "aci",
+   "eur": 124307.0
+  },
+  {
+   "level": 0.8,
+   "method": "conformal",
+   "eur": 183883.0
+  },
+  {
+   "level": 0.8,
+   "method": "gaussian",
+   "eur": 178824.0
+  },
+  {
+   "level": 0.8,
+   "method": "oracle",
+   "eur": 148069.0
+  },
+  {
+   "level": 0.9,
+   "method": "aci",
+   "eur": 44495.0
+  },
+  {
+   "level": 0.9,
+   "method": "conformal",
+   "eur": 94400.0
+  },
+  {
+   "level": 0.9,
+   "method": "gaussian",
+   "eur": 90042.0
+  },
+  {
+   "level": 0.9,
+   "method": "oracle",
+   "eur": 74714.0
+  },
+  {
+   "level": 0.95,
+   "method": "aci",
+   "eur": 21339.0
+  },
+  {
+   "level": 0.95,
+   "method": "conformal",
+   "eur": 55411.0
+  },
+  {
+   "level": 0.95,
+   "method": "gaussian",
+   "eur": 45794.0
+  },
+  {
+   "level": 0.95,
+   "method": "oracle",
+   "eur": 35687.0
+  }
+ ],
+ "mean_adverse_all": 24.57702778122287,
+ "mean_adverse_on_miss": 34.830120089558314,
+ "scale_factor": 0.0018521029892364371,
+ "portfolio_mw": 100.0
+}

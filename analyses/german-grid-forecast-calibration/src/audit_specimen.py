@@ -294,7 +294,7 @@ def main() -> None:
     args = ap.parse_args()
 
     raw = Path(args.raw) if args.raw else ROOT / "artifacts" / f"raw_{args.zone.lower()}"
-    out = ROOT / "artifacts" / "specimen"
+    out = ROOT / "artifacts" / f"specimen_{args.zone.lower()}"
     out.mkdir(parents=True, exist_ok=True)
 
     p = build_panel(raw, args.tz)
@@ -302,6 +302,23 @@ def main() -> None:
           f"{p['month'].nunique()} months, zone {args.zone}")
     print(f"imbalance price coverage: long {p['long'].notna().mean():.1%}, "
           f"short {p['short'].notna().mean():.1%}")
+
+    fc, ac = p["fc"].to_numpy(), p["act"].to_numpy()
+    slope_i, slope = np.polynomial.polynomial.polyfit(fc, ac, 1)
+    integrity = dict(
+        correlation=float(np.corrcoef(fc, ac)[0, 1]),
+        ols_slope=float(slope), ols_intercept=float(slope_i),
+        mean_bias_mw=float((ac - fc).mean()),
+        mean_bias_frac_load=float((ac - fc).mean() / ac.mean()),
+        thresholds=dict(min_correlation=0.90, slope_within=0.15, max_abs_bias_frac=0.05))
+    integrity["passes"] = bool(
+        integrity["correlation"] >= 0.90
+        and abs(integrity["ols_slope"] - 1.0) <= 0.15
+        and abs(integrity["mean_bias_frac_load"]) <= 0.05)
+    print(f"series integrity: correlation {integrity['correlation']:.3f}, "
+          f"slope {integrity['ols_slope']:.3f}, "
+          f"mean bias {integrity['mean_bias_frac_load']:+.2%} of load "
+          f"-> {'PASSES' if integrity['passes'] else 'FAILS'}")
 
     s = score(p)
     s = s.dropna(subset=["adverse"])
@@ -487,7 +504,7 @@ def main() -> None:
     script_sha = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
     scored_intervals = int(max(c_["n"] for c_ in coverage))
 
-    meta = dict(zone=args.zone, mean_load_mw=mean_load,
+    meta = dict(zone=args.zone, mean_load_mw=mean_load, integrity=integrity,
                 width_useless_frac=WIDTH_USELESS_FRAC, tz=args.tz, window=WIN, min_points=MINP, gamma=GAMMA,
                 levels=list(LEVELS), portfolio_mw=PORTFOLIO_MW,
                 expensive_quantile=EXPENSIVE_Q, expensive_threshold_eur_mwh=expensive_threshold,

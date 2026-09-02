@@ -15,7 +15,8 @@ import pathlib
 import pytest
 
 HERE = pathlib.Path(__file__).resolve().parents[1]
-SPECIMEN = HERE / "artifacts" / "specimen"
+# The client-grade specimen. specimen_nl is the control and is checked too.
+SPECIMEN = HERE / "artifacts" / "specimen_de"
 SCRIPT = HERE / "src" / "audit_specimen.py"
 
 _site = os.environ.get("KWANTIL_SITE_SPECIMEN_DATA")
@@ -37,10 +38,24 @@ def digest_of(directory: pathlib.Path) -> str:
     return d.hexdigest()
 
 
-@needs_run
-def test_digest_recomputes_from_the_shipped_files():
-    meta = json.loads((SPECIMEN / "meta.json").read_text(encoding="utf-8"))
-    assert meta["artifact_digest_sha256"] == digest_of(SPECIMEN)
+@pytest.mark.parametrize("zone", ["de", "nl"])
+def test_digest_recomputes_from_the_shipped_files(zone):
+    d = HERE / "artifacts" / f"specimen_{zone}"
+    if not (d / "meta.json").exists():
+        pytest.skip(f"specimen_{zone} not generated")
+    meta = json.loads((d / "meta.json").read_text(encoding="utf-8"))
+    assert meta["artifact_digest_sha256"] == digest_of(d)
+
+
+@pytest.mark.parametrize("zone,expected", [("de", True), ("nl", False)])
+def test_the_series_integrity_check_reaches_the_verdict_it_should(zone, expected):
+    """DE passes, NL fails. The control exists to prove the check catches
+    something, so if NL ever starts passing the check has stopped working."""
+    d = HERE / "artifacts" / f"specimen_{zone}"
+    if not (d / "meta.json").exists():
+        pytest.skip(f"specimen_{zone} not generated")
+    integ = json.loads((d / "meta.json").read_text(encoding="utf-8"))["integrity"]
+    assert integ["passes"] is expected
 
 
 @needs_run

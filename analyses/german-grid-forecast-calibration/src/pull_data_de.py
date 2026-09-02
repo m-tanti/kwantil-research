@@ -12,18 +12,19 @@ for them and, at the time of writing, is not answering.
 The fourth is reBAP, Germany's uniform imbalance price, which is not on the
 Transparency Platform in usable form and comes instead from the four TSOs:
 
-    GET https://ds.netztransparenz.de/api/v1/data/NrvSaldo/reBAP/Qualitaetsgesichert
-        ?dateFrom=yyyy-MM-ddTHH:mm:ss&dateTo=yyyy-MM-ddTHH:mm:ss
+    GET .../api/v1/data/NrvSaldo/reBAP/Qualitaetsgesichert/{from}/{to}
+
+with the dates as PATH segments in yyyy-MM-ddTHH:mm:ss. The documentation calls
+them URI parameters, which reads as a query string and returns 404.
 
 behind OAuth2 client credentials. Set NETZTRANSPARENZ_CLIENT_ID and
 NETZTRANSPARENZ_CLIENT_SECRET, issued through the OAuth Manager in the
 netztransparenz extranet. There is no anonymous tier.
 
-reBAP is one price for both directions, unlike the Dutch pair. It is written to
-both the Long and Short columns so the adverse-spread calculation in
-audit_specimen.py needs no zone-specific branch: a balancing party is exposed to
-the spread in whichever direction is against it, and with a single price that is
-the same number either way.
+The response carries two price columns, unterdeckt and ueberdeckt, which map
+onto the Short and Long columns the Dutch pull produces, so the adverse-spread
+calculation in audit_specimen.py needs no zone-specific branch. Under the
+uniform reBAP the two carry the same number; they are read separately anyway.
 
 "Qualitaetsgesichert" is the quality-assured series, published with a lag of
 some weeks. The coverage assertion below is not a formality: if the tail of the
@@ -75,32 +76,42 @@ def parse_rebap(text: str) -> pd.DataFrame:
     """Parse the semicolon CSV the endpoint returns.
 
     German conventions throughout: semicolon separator, comma decimal, dotted
-    date. Split out and unit-tested because a silent mis-parse here would move
-    every euro figure in the report and nothing downstream would notice.
-    """
-    df = pd.read_csv(io.StringIO(text), sep=";", dtype=str).rename(columns=str.strip)
-    cols = {c.lower(): c for c in df.columns}
+    date. Two things about the real response are worth stating, because both were
+    guessed wrong from the documentation before the endpoint was reachable.
 
-    def pick(*names):
+    The Zeitzone column says UTC, so the stamps are NOT Berlin local time.
+    Localising them to Berlin would shift every price by one or two hours and
+    silently mis-price the summer half of the year against the winter half.
+
+    There are two price columns, unterdeckt and ueberdeckt: what a short
+    balancing group pays and what a long one receives. Under the uniform reBAP
+    they carry the same number, but they are read separately rather than assumed
+    equal, because the day that stops being true is the day this quietly breaks.
+    """
+    df = pd.read_csv(io.StringIO(text), sep=";", dtype=str).rename(columns=lambda c: c.strip())
+    low = {c.lower(): c for c in df.columns}
+
+    def col(*names):
         for n in names:
-            if n in cols:
-                return cols[n]
+            if n in low:
+                return low[n]
         raise KeyError(f"none of {names} in {list(df.columns)}")
 
-    date_c, from_c = pick("datum", "date"), pick("von", "from", "uhrzeit")
-    val_c = next((c for c in df.columns
-                  if "rebap" in c.lower() or "eur" in c.lower() or "wert" in c.lower()),
-                 df.columns[-1])
+    def num(c):
+        return (df[c].str.strip()
+                .str.replace(".", "", regex=False)      # thousands
+                .str.replace(",", ".", regex=False)     # decimal
+                .astype(float).to_numpy())
 
-    ts = pd.to_datetime(df[date_c].str.strip() + " " + df[from_c].str.strip(),
-                        format="mixed", dayfirst=True)
-    vals = (df[val_c].str.strip()
-            .str.replace(".", "", regex=False)      # thousands
-            .str.replace(",", ".", regex=False)     # decimal
-            .astype(float))
-    out = pd.DataFrame({"reBAP": vals.to_numpy()},
-                       index=pd.DatetimeIndex(ts).tz_localize(
-                           "Europe/Berlin", ambiguous="infer", nonexistent="shift_forward"))
+    ts = pd.to_datetime(df[col("datum")].str.strip() + " " + df[col("von")].str.strip(),
+                        format="%d.%m.%Y %H:%M")
+    zones = set(df[col("zeitzone")].str.strip().str.upper())
+    if zones != {"UTC"}:
+        raise SystemExit(f"expected UTC stamps, endpoint returned {zones}")
+
+    out = pd.DataFrame(
+        {"short": num(col("rebap unterdeckt")), "long": num(col("rebap ueberdeckt"))},
+        index=pd.DatetimeIndex(ts).tz_localize("UTC"))
     return out[~out.index.duplicated(keep="first")].sort_index()
 
 
@@ -111,9 +122,10 @@ def fetch_rebap() -> pd.DataFrame:
         period_end = min(period_start + pd.offsets.MonthBegin(1), END)
         if period_start >= END:
             break
-        r = requests.get(API, headers=hdr, timeout=180, params={
-            "dateFrom": period_start.tz_convert("UTC").strftime("%Y-%m-%dT%H:%M:%S"),
-            "dateTo": period_end.tz_convert("UTC").strftime("%Y-%m-%dT%H:%M:%S")})
+        # The documentation calls these URI parameters; they are path segments.
+        a = period_start.tz_convert("UTC").strftime("%Y-%m-%dT%H:%M:%S")
+        b = period_end.tz_convert("UTC").strftime("%Y-%m-%dT%H:%M:%S")
+        r = requests.get(f"{API}/{a}/{b}", headers=hdr, timeout=300)
         r.raise_for_status()
         part = parse_rebap(r.text)
         print(f"  {period_start:%Y-%m}: {len(part):,} rows")
@@ -143,9 +155,7 @@ def main() -> None:
     print("fetching reBAP from netztransparenz")
     rebap = fetch_rebap()
 
-    # One price, both directions. See the module docstring.
-    imb = pd.DataFrame({"Long": rebap["reBAP"], "Short": rebap["reBAP"]},
-                       index=rebap.index).tz_convert("UTC")
+    imb = pd.DataFrame({"Long": rebap["long"], "Short": rebap["short"]}, index=rebap.index)
 
     # The quality-assured series lags publication by weeks. Scoring a window the
     # prices do not cover would quietly shorten the audit instead of failing.
