@@ -8,16 +8,21 @@ they diverge, and skips anywhere the site checkout is absent.
 """
 
 import json
+import os
 import pathlib
 
 import pytest
 
 HERE = pathlib.Path(__file__).resolve().parents[1]
 REPO_COPY = HERE / "artifacts" / "specimen"
-SITE_COPY = pathlib.Path(r"c:/work/BLOG/apps/site/src/routes/specimen/data")
+# Location of the site checkout, if there is one. Taken from the environment
+# rather than hardcoded: a path off this machine has no business in a public
+# repository, and the audit guard is right to reject one.
+_site = os.environ.get("KWANTIL_SITE_SPECIMEN_DATA")
+SITE_COPY = pathlib.Path(_site) if _site else None
 
 
-@pytest.mark.skipif(not SITE_COPY.exists(), reason="site checkout not present")
+@pytest.mark.skipif(SITE_COPY is None or not SITE_COPY.exists(), reason="KWANTIL_SITE_SPECIMEN_DATA not set")
 @pytest.mark.skipif(not (REPO_COPY / "meta.json").exists(), reason="specimen not generated")
 def test_published_digest_matches_the_repository():
     repo = json.loads((REPO_COPY / "meta.json").read_text(encoding="utf-8"))
@@ -27,7 +32,7 @@ def test_published_digest_matches_the_repository():
         "re-run audit_specimen.py with --publish-to")
 
 
-@pytest.mark.skipif(not SITE_COPY.exists(), reason="site checkout not present")
+@pytest.mark.skipif(SITE_COPY is None or not SITE_COPY.exists(), reason="KWANTIL_SITE_SPECIMEN_DATA not set")
 @pytest.mark.skipif(not (REPO_COPY / "meta.json").exists(), reason="specimen not generated")
 def test_every_published_artifact_is_byte_identical():
     for f in sorted(REPO_COPY.glob("*.json")):
