@@ -105,6 +105,39 @@ def severity(nominal_inside_ci: bool, conc: float, conc_lo: float) -> tuple[str,
         f"nominal outside the coverage interval; concentration {conc:.2f}x is real but "
         f"below the {CONCENTRATION_TRIGGER:.2f}x materiality floor")
 
+# ------------------------------------------------------------ per-finding text
+# What to do about a finding depends on which construction failed and how. A
+# register that repeats one action across every row tells a reader the rows were
+# templated, and in this one the passing row was being told to recalibrate.
+ACTION = {
+    "gaussian": ("Re-state the band at its measured coverage, or replace the parametric step. "
+                 "The failure is the Gaussian assumption itself: a symmetric two-sigma interval "
+                 "cannot track an error distribution whose shape moves, and widening it uniformly "
+                 "buys coverage in the calm hours it already had."),
+    "conformal": ("Do not read the conformal guarantee as insurance here. It is conditional on "
+                  "exchangeability, and a trailing window under distribution shift violates that "
+                  "condition, which is why this construction covers no better than the parametric "
+                  "one it was meant to replace. Either recalibrate adaptively or widen on a "
+                  "measured schedule."),
+    "aci": ("Nothing to remediate on coverage. Two things to watch instead: the band pays for "
+            "its coverage in width, so read this row against the width line before reserving "
+            "against it; and the method is reactive, so a regime break costs a stretch of "
+            "under-coverage before it recovers. If either matters, the question is how much "
+            "width the desk can carry, not whether to recalibrate."),
+}
+LIMIT = {
+    "gaussian": ("Measured on this series over this period. The interval is block-bootstrapped by "
+                 "day and so carries within-day dependence; it does not carry uncertainty in the "
+                 "price series used to value the misses."),
+    "conformal": ("As above. Note also that this construction is the static split-conformal band, "
+                  "not the adaptive one: the finding says nothing about conformal methods that "
+                  "update, which are audited separately as F-03."),
+    "aci": ("An Observation is not a pass in general. It says the stated level sits inside the "
+            "bootstrap interval on this series and period, at a sample size this audit reports "
+            "rather than hides. It does not establish that the band holds through a regime change, "
+            "which this period contains only in part."),
+}
+
 
 def load_series(raw: Path, name: str) -> pd.DataFrame:
     files = sorted(glob.glob(str(raw / name / "*.parquet")))
@@ -381,11 +414,8 @@ def main() -> None:
             consequence=(f"EUR {eur_of(HEADLINE_LEVEL, method):,.0f} of un-reserved adverse "
                          f"exposure per {PORTFOLIO_MW:.0f} MW mean load over the audited period "
                          f"at the {HEADLINE_LEVEL:.0%} level"),
-            action=("Re-state the band at its measured coverage, or recalibrate. The adaptive "
-                    "construction audited here is one option and its width cost is quantified."),
-            limit=("Measured on this series over this period only. The interval is "
-                   "block-bootstrapped by day and so already carries within-day dependence; "
-                   "it does not carry uncertainty in the price series.")))
+            action=ACTION[method],
+            limit=LIMIT[method]))
 
     (out / "findings.json").write_text(
         json.dumps([asdict(f) for f in findings], indent=1), encoding="utf-8")
@@ -428,11 +458,20 @@ def main() -> None:
     # known while the run is happening, so a hash written here always names the
     # parent and sends a reader to a tree without the script in it. A digest over
     # the emitted artifacts is checkable instead: regenerate, hash, compare.
+    DIGEST_RULE = ("sha256 over every file in artifacts/specimen except meta.json, "
+                   "in filename order, feeding each file's name as UTF-8 followed by "
+                   "its bytes. meta.json is excluded because it carries the digest and "
+                   "cannot hash itself.")
     digest = hashlib.sha256()
     for f in sorted(out.glob("*")):
         if f.name != "meta.json":
             digest.update(f.name.encode())
             digest.update(f.read_bytes())
+    # A digest says whether the outputs match. It does not say what code produced
+    # them, which is what a reader actually needs to reproduce the run, and which
+    # the commit line used to carry before it was removed for naming the wrong
+    # tree. The script hashes itself: checkable, and knowable at run time.
+    script_sha = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
     scored_intervals = int(max(c_["n"] for c_ in coverage))
 
     meta = dict(zone=args.zone, mean_load_mw=mean_load,
@@ -444,6 +483,9 @@ def main() -> None:
                 panel_rows=int(len(p)), scored_days=int(s["date"].nunique()),
                 scored_intervals=scored_intervals,
                 artifact_digest_sha256=digest.hexdigest(),
+                digest_rule=DIGEST_RULE,
+                script='src/audit_specimen.py',
+                script_sha256=script_sha,
                 months=sorted(p["month"].unique().tolist()))
     (out / "meta.json").write_text(json.dumps(meta, indent=1), encoding="utf-8")
 
