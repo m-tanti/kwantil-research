@@ -20,10 +20,10 @@
  "panel_rows": 38016,
  "scored_days": 336,
  "scored_intervals": 32252,
- "artifact_digest_sha256": "7390d22313a4655382d41c7b6e3425504b3b4ca3a6bc12647cba71463667e974",
+ "artifact_digest_sha256": "25a62e5725da24141a922245dbde2b9ef62d40ac740f3706e64d8c314647aa21",
  "digest_rule": "sha256 over every file in artifacts/specimen except meta.json, in filename order, feeding each file's name as UTF-8 followed by its bytes. meta.json is excluded because it carries the digest and cannot hash itself.",
  "script": "src/audit_specimen.py",
- "script_sha256": "3e1050ce77618925fefeb50e58fb519e5caf9fc685d31dd7f635539aacf1e85e",
+ "script_sha256": "ac27ed8c1d6eab983a2375922a49e48ca85a69f919f2acbd8d786f92e9f75792",
  "months": [
   "2025-07",
   "2025-08",

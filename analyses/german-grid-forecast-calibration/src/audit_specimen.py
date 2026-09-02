@@ -258,6 +258,18 @@ def day_counts(g: pd.DataFrame) -> dict[str, np.ndarray]:
     }
 
 
+def stream(*key) -> np.random.Generator:
+    """A generator keyed by what is being estimated, not by call order.
+
+    A single shared Generator makes every interval depend on how many draws
+    preceded it, so adding one statistic moves the intervals of every statistic
+    after it. The numbers then look unstable when nothing about the estimate has
+    changed. Seeding from the key makes each interval reproducible on its own.
+    """
+    digest = hashlib.sha256(("|".join(str(k) for k in key)).encode()).digest()
+    return np.random.default_rng([BOOT_SEED, int.from_bytes(digest[:8], "big")])
+
+
 def boot_days(c: dict[str, np.ndarray], stat, rng: np.random.Generator) -> tuple[float, float]:
     """Resample whole DAYS with replacement. A day is the block because the
     dependence that breaks the independent-trials assumption lives inside it."""
@@ -304,18 +316,19 @@ def main() -> None:
           f"(top {(1-EXPENSIVE_Q)*100:.0f}% of {len(universe):,} scored intervals)")
 
     mean_load = float(p["act"].mean())
-    rng = np.random.default_rng(BOOT_SEED)
     coverage = []
     for (level, method), g in s.groupby(["level", "method"]):
         cov = g["inside"].mean()
         c = day_counts(g)
-        lo, hi = boot_days(c, lambda b: b["inside"] / np.maximum(b["n"], 1), rng)
+        lo, hi = boot_days(c, lambda b: b["inside"] / np.maximum(b["n"], 1),
+                           stream(method, level, "coverage"))
         exp_miss = 1 - g[g["expensive"]]["inside"].mean()
         cheap_miss = 1 - g[~g["expensive"]]["inside"].mean()
         ratio = exp_miss / cheap_miss if cheap_miss > 0 else np.nan
         r_lo, r_hi = boot_days(
             c, lambda b: (b["miss_exp"] / np.maximum(b["n_exp"], 1))
-                         / np.maximum(b["miss_chp"] / np.maximum(b["n_chp"], 1), 1e-9), rng)
+                         / np.maximum(b["miss_chp"] / np.maximum(b["n_chp"], 1), 1e-9),
+            stream(method, level, "concentration"))
         coverage.append(dict(level=level, method=method, n=int(len(g)),
                              coverage=float(cov), lo=lo, hi=hi,
                              nominal_inside_ci=bool(lo <= level <= hi),
