@@ -240,6 +240,12 @@ def main() -> None:
     ap.add_argument("--zone", default="NL")
     ap.add_argument("--raw", default=None, help="raw dir (default artifacts/raw_<zone lower>)")
     ap.add_argument("--tz", default="Europe/Amsterdam")
+    # The site renders its own copy of these artifacts, because a static deploy
+    # cannot read across repositories. Two copies kept in step by hand is why the
+    # published lineage digest drifted from the repository's: writing both in one
+    # run removes the step that gets forgotten.
+    ap.add_argument("--publish-to", default=None,
+                    help="also write the artifacts here (the site's specimen data dir)")
     args = ap.parse_args()
 
     raw = Path(args.raw) if args.raw else ROOT / "artifacts" / f"raw_{args.zone.lower()}"
@@ -440,6 +446,15 @@ def main() -> None:
                 artifact_digest_sha256=digest.hexdigest(),
                 months=sorted(p["month"].unique().tolist()))
     (out / "meta.json").write_text(json.dumps(meta, indent=1), encoding="utf-8")
+
+    if args.publish_to:
+        dest = Path(args.publish_to)
+        dest.mkdir(parents=True, exist_ok=True)
+        copied = 0
+        for f in sorted(out.glob("*.json")):
+            (dest / f.name).write_bytes(f.read_bytes())
+            copied += 1
+        print(f"published {copied} artifacts to {dest}")
     print(f"\nwrote {out}")
 
 
