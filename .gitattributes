@@ -1,0 +1,6 @@
+# The specimen artifacts are hashed and the hash is published as the report's
+# lineage. End-of-line normalisation rewrote one of them between hashing and
+# commit, so every recomputation from a clean checkout failed on a file nobody
+# had edited. Git keeps its hands off everything here: the bytes a reader gets
+# are the bytes that were hashed.
+* -text

@@ -30,6 +30,7 @@ from __future__ import annotations
 import argparse
 import csv
 import hashlib
+import io
 import glob
 import json
 import sys
@@ -137,6 +138,20 @@ LIMIT = {
             "rather than hides. It does not establish that the band holds through a regime change, "
             "which this period contains only in part."),
 }
+
+
+def write_lf(path: Path, text: str) -> None:
+    """Write artifacts with LF endings, as bytes, on every platform.
+
+    The digest hashes what the script wrote; git hands a reader what it checked
+    out. Those were not the same file. Path.write_text emits CRLF on Windows
+    while pandas' to_json emits LF, so one artifact in seven was the odd one out
+    and git's end-of-line normalisation rewrote it between hashing and commit.
+    Every recomputation from a clean checkout then failed on a file nobody had
+    touched. Writing bytes with LF, plus a .gitattributes that tells git to keep
+    its hands off, makes the hashed bytes and the shipped bytes the same object.
+    """
+    path.write_bytes(text.replace(chr(13) + chr(10), chr(10)).encode("utf-8"))
 
 
 def load_series(raw: Path, name: str) -> pd.DataFrame:
@@ -377,7 +392,7 @@ def main() -> None:
     for c_ in coverage:
         c_["severity"], c_["severity_reason"] = severity(
             c_["nominal_inside_ci"], c_["concentration"], c_["concentration_lo"])
-    (out / "coverage.json").write_text(json.dumps(coverage, indent=1), encoding="utf-8")
+    write_lf(out / "coverage.json", json.dumps(coverage, indent=1))
 
     # ---- cost: the excess beyond the band edge, priced at that interval's adverse
     # spread. Favourable spreads were already clipped to zero upstream, so this is
@@ -393,8 +408,8 @@ def main() -> None:
         mean_adverse_on_miss=float(
             missed[(missed["method"] == "gaussian") & (missed["level"] == 0.90)]["adverse"].mean()),
         scale_factor=float(scale), portfolio_mw=PORTFOLIO_MW)
-    (out / "cost.json").write_text(json.dumps(
-        {"by_method_level": cost.to_dict(orient="records"), **spread_note}, indent=1), encoding="utf-8")
+    write_lf(out / "cost.json",
+             json.dumps({"by_method_level": cost.to_dict(orient="records"), **spread_note}, indent=1))
     head = cost[(cost.level == 0.90)].set_index("method")["eur"]
     print()
     print(f"cost @90%: gaussian EUR {head['gaussian']:,.0f}  conformal EUR "
@@ -447,13 +462,13 @@ def main() -> None:
             action=ACTION[method],
             limit=LIMIT[method]))
 
-    (out / "findings.json").write_text(
-        json.dumps([asdict(f) for f in findings], indent=1), encoding="utf-8")
+    write_lf(out / "findings.json", json.dumps([asdict(f) for f in findings], indent=1))
 
     # The CSV is the full matrix: one row per construction per level, so nothing
     # the register summarises is hidden from someone who wants to check it.
-    with (out / "findings.csv").open("w", newline="", encoding="utf-8") as fh:
-        w = csv.writer(fh)
+    buf = io.StringIO()
+    if True:
+        w = csv.writer(buf, lineterminator=chr(10))
         w.writerow(["finding_id", "method", "level", "n_scored", "coverage",
                     "coverage_lo", "coverage_hi", "nominal_inside_ci",
                     "concentration", "concentration_lo", "concentration_hi",
@@ -469,20 +484,21 @@ def main() -> None:
                             r["severity_reason"], eur_of(r["level"], method),
                             round(r["mean_width"], 1), round(r["p95_width"], 1),
                             round(r["max_width"], 1)])
+    write_lf(out / "findings.csv", buf.getvalue())
 
     for f in findings:
         print(f"  {f.id}  {f.severity:<12} {f.title}")
 
     # --- bias by slot (the bias clock, this zone)
     bias = (p.groupby("slot")["err"].mean() * -1).round(1)   # sign: + = over-forecast
-    (out / "bias_slot.json").write_text(
-        json.dumps({"slot": [int(i) for i in bias.index], "over_forecast_mw": [float(v) for v in bias]},
-                   indent=1), encoding="utf-8")
+    write_lf(out / "bias_slot.json",
+             json.dumps({"slot": [int(i) for i in bias.index],
+                         "over_forecast_mw": [float(v) for v in bias]}, indent=1))
 
     # --- monthly coverage, for the regime cut
     monthly = (s.groupby(["month", "level", "method"])["inside"].mean().reset_index()
                  .rename(columns={"inside": "coverage"}))
-    monthly.to_json(out / "monthly.json", orient="records", indent=1)
+    write_lf(out / "monthly.json", monthly.to_json(orient="records", indent=1))
 
     # Lineage by content, not by commit. The commit that adds a run cannot be
     # known while the run is happening, so a hash written here always names the
@@ -517,7 +533,7 @@ def main() -> None:
                 script='src/audit_specimen.py',
                 script_sha256=script_sha,
                 months=sorted(p["month"].unique().tolist()))
-    (out / "meta.json").write_text(json.dumps(meta, indent=1), encoding="utf-8")
+    write_lf(out / "meta.json", json.dumps(meta, indent=1))
 
     if args.publish_to:
         dest = Path(args.publish_to)
