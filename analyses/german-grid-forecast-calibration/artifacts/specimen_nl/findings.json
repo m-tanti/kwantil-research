@@ -7,7 +7,7 @@
   "measurement": "Headline 90%: coverage 0.842, day-block bootstrap 95% interval [0.815, 0.868] over 32,252 scored intervals. Every audited level: 80%: covered 74.4% [71.4%, 77.4%], concentration 1.29x [1.13, 1.46], Material; 90%: covered 84.2% [81.5%, 86.8%], concentration 1.36x [1.15, 1.60], Material; 95%: covered 89.6% [87.2%, 91.9%], concentration 1.43x [1.14, 1.75], Material",
   "evidence": "coverage.json, findings.csv; Fig. Coverage ladder, Fig. Concentration",
   "consequence": "EUR 362,495 of un-reserved adverse exposure per 100 MW mean load over the audited period at the 90% level",
-  "action": "Re-state the band at its measured coverage, or replace the parametric step. The failure is the Gaussian assumption itself: a symmetric two-sigma interval cannot track an error distribution whose shape moves, and widening it uniformly buys coverage in the calm hours it already had.",
+  "action": "Re-state the band at its measured coverage, or replace the parametric step. The failure is the Gaussian assumption itself: a symmetric interval at a fixed multiple of sigma (1.645 at 90%) cannot track an error distribution whose shape moves, and widening it uniformly buys coverage in the calm hours it already had.",
   "limit": "Measured on this series over this period. The interval is block-bootstrapped by day and so carries within-day dependence; it does not carry uncertainty in the price series used to value the misses."
  },
  {
@@ -29,7 +29,7 @@
   "measurement": "Headline 90%: coverage 0.886, day-block bootstrap 95% interval [0.865, 0.904] over 32,252 scored intervals. Every audited level: 80%: covered 77.6% [74.9%, 80.3%], concentration 1.19x [1.03, 1.36], Observation; 90%: covered 88.6% [86.5%, 90.4%], concentration 1.26x [1.04, 1.54], Observation; 95%: covered 93.6% [91.9%, 95.0%], concentration 1.15x [0.88, 1.49], Observation",
   "evidence": "coverage.json, findings.csv; Fig. Coverage ladder, Fig. Concentration",
   "consequence": "EUR 158,145 of un-reserved adverse exposure per 100 MW mean load over the audited period at the 90% level",
-  "action": "Nothing to remediate on coverage. Two things to watch instead: the band pays for its coverage in width, so read this row against the width line before reserving against it; and the method is reactive, so a regime break costs a stretch of under-coverage before it recovers. If either matters, the question is how much width the desk can carry, not whether to recalibrate.",
+  "action": "Nothing to remediate on coverage. Three things to watch instead. Its misses are the most price-concentrated of any construction audited, which the severity rule does not grade because concentration only enters once coverage has failed: the band holds its promise and still misses disproportionately when a miss is expensive, and the exposure column is where that shows. Beyond that: the band pays for its coverage in width, so read this row against the width line before reserving against it; and it is reactive, so a regime break costs a stretch of under-coverage before it recovers. If either matters, the question is how much width the desk can carry, not whether to recalibrate.",
   "limit": "An Observation is not a pass in general. It says the stated level sits inside the bootstrap interval on this series and period, at a sample size this audit reports rather than hides. It does not establish that the band holds through a regime change, which this period contains only in part."
  }
 ]

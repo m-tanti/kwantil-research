@@ -21,7 +21,7 @@
   "month":"2025-08",
   "level":0.8,
   "method":"oracle",
-  "coverage":0.5520833333
+  "coverage":0.5625
  },
  {
   "month":"2025-08",
@@ -45,7 +45,7 @@
   "month":"2025-08",
   "level":0.9,
   "method":"oracle",
-  "coverage":0.8229166667
+  "coverage":0.8385416667
  },
  {
   "month":"2025-08",
@@ -93,7 +93,7 @@
   "month":"2025-09",
   "level":0.8,
   "method":"oracle",
-  "coverage":0.884375
+  "coverage":0.8923611111
  },
  {
   "month":"2025-09",
@@ -117,7 +117,7 @@
   "month":"2025-09",
   "level":0.9,
   "method":"oracle",
-  "coverage":0.9555555556
+  "coverage":0.9607638889
  },
  {
   "month":"2025-09",
@@ -141,7 +141,7 @@
   "month":"2025-09",
   "level":0.95,
   "method":"oracle",
-  "coverage":0.9847222222
+  "coverage":0.9864583333
  },
  {
   "month":"2025-10",
@@ -165,7 +165,7 @@
   "month":"2025-10",
   "level":0.8,
   "method":"oracle",
-  "coverage":0.8887768817
+  "coverage":0.9059139785
  },
  {
   "month":"2025-10",
@@ -189,7 +189,7 @@
   "month":"2025-10",
   "level":0.9,
   "method":"oracle",
-  "coverage":0.9758064516
+  "coverage":0.9801747312
  },
  {
   "month":"2025-10",
@@ -213,7 +213,7 @@
   "month":"2025-10",
   "level":0.95,
   "method":"oracle",
-  "coverage":0.9952956989
+  "coverage":0.9956317204
  },
  {
   "month":"2025-11",
@@ -237,7 +237,7 @@
   "month":"2025-11",
   "level":0.8,
   "method":"oracle",
-  "coverage":0.8149305556
+  "coverage":0.8357638889
  },
  {
   "month":"2025-11",
@@ -261,7 +261,7 @@
   "month":"2025-11",
   "level":0.9,
   "method":"oracle",
-  "coverage":0.9170138889
+  "coverage":0.928125
  },
  {
   "month":"2025-11",
@@ -285,7 +285,7 @@
   "month":"2025-11",
   "level":0.95,
   "method":"oracle",
-  "coverage":0.9576388889
+  "coverage":0.9670138889
  },
  {
   "month":"2025-12",
@@ -309,7 +309,7 @@
   "month":"2025-12",
   "level":0.8,
   "method":"oracle",
-  "coverage":0.7768817204
+  "coverage":0.8004032258
  },
  {
   "month":"2025-12",
@@ -333,7 +333,7 @@
   "month":"2025-12",
   "level":0.9,
   "method":"oracle",
-  "coverage":0.8924731183
+  "coverage":0.904233871
  },
  {
   "month":"2025-12",
@@ -357,7 +357,7 @@
   "month":"2025-12",
   "level":0.95,
   "method":"oracle",
-  "coverage":0.9495967742
+  "coverage":0.9522849462
  },
  {
   "month":"2026-01",
@@ -381,7 +381,7 @@
   "month":"2026-01",
   "level":0.8,
   "method":"oracle",
-  "coverage":0.5786290323
+  "coverage":0.6058467742
  },
  {
   "month":"2026-01",
@@ -405,7 +405,7 @@
   "month":"2026-01",
   "level":0.9,
   "method":"oracle",
-  "coverage":0.716061828
+  "coverage":0.7429435484
  },
  {
   "month":"2026-01",
@@ -429,7 +429,7 @@
   "month":"2026-01",
   "level":0.95,
   "method":"oracle",
-  "coverage":0.811155914
+  "coverage":0.8205645161
  },
  {
   "month":"2026-02",
@@ -453,7 +453,7 @@
   "month":"2026-02",
   "level":0.8,
   "method":"oracle",
-  "coverage":0.771577381
+  "coverage":0.7961309524
  },
  {
   "month":"2026-02",
@@ -477,7 +477,7 @@
   "month":"2026-02",
   "level":0.9,
   "method":"oracle",
-  "coverage":0.8865327381
+  "coverage":0.9055059524
  },
  {
   "month":"2026-02",
@@ -501,7 +501,7 @@
   "month":"2026-02",
   "level":0.95,
   "method":"oracle",
-  "coverage":0.96875
+  "coverage":0.9735863095
  },
  {
   "month":"2026-03",
@@ -525,7 +525,7 @@
   "month":"2026-03",
   "level":0.8,
   "method":"oracle",
-  "coverage":0.8055181696
+  "coverage":0.8189771198
  },
  {
   "month":"2026-03",
@@ -549,7 +549,7 @@
   "month":"2026-03",
   "level":0.9,
   "method":"oracle",
-  "coverage":0.8943472409
+  "coverage":0.9061238223
  },
  {
   "month":"2026-03",
@@ -573,7 +573,7 @@
   "month":"2026-03",
   "level":0.95,
   "method":"oracle",
-  "coverage":0.947846568
+  "coverage":0.9535666218
  },
  {
   "month":"2026-04",
@@ -597,7 +597,7 @@
   "month":"2026-04",
   "level":0.8,
   "method":"oracle",
-  "coverage":0.7295138889
+  "coverage":0.7364583333
  },
  {
   "month":"2026-04",
@@ -621,7 +621,7 @@
   "month":"2026-04",
   "level":0.9,
   "method":"oracle",
-  "coverage":0.8489583333
+  "coverage":0.8548611111
  },
  {
   "month":"2026-04",
@@ -645,7 +645,7 @@
   "month":"2026-04",
   "level":0.95,
   "method":"oracle",
-  "coverage":0.9142361111
+  "coverage":0.9190972222
  },
  {
   "month":"2026-05",
@@ -669,7 +669,7 @@
   "month":"2026-05",
   "level":0.8,
   "method":"oracle",
-  "coverage":0.7876344086
+  "coverage":0.7886424731
  },
  {
   "month":"2026-05",
@@ -693,7 +693,7 @@
   "month":"2026-05",
   "level":0.9,
   "method":"oracle",
-  "coverage":0.8733198925
+  "coverage":0.8813844086
  },
  {
   "month":"2026-05",
@@ -717,7 +717,7 @@
   "month":"2026-05",
   "level":0.95,
   "method":"oracle",
-  "coverage":0.9250672043
+  "coverage":0.9307795699
  },
  {
   "month":"2026-06",
@@ -741,7 +741,7 @@
   "month":"2026-06",
   "level":0.8,
   "method":"oracle",
-  "coverage":0.7295138889
+  "coverage":0.7541666667
  },
  {
   "month":"2026-06",
@@ -765,7 +765,7 @@
   "month":"2026-06",
   "level":0.9,
   "method":"oracle",
-  "coverage":0.859375
+  "coverage":0.8819444444
  },
  {
   "month":"2026-06",
@@ -789,7 +789,7 @@
   "month":"2026-06",
   "level":0.95,
   "method":"oracle",
-  "coverage":0.934375
+  "coverage":0.9402777778
  },
  {
   "month":"2026-07",
@@ -813,7 +813,7 @@
   "month":"2026-07",
   "level":0.8,
   "method":"oracle",
-  "coverage":0.8333333333
+  "coverage":0.8548387097
  },
  {
   "month":"2026-07",
@@ -837,7 +837,7 @@
   "month":"2026-07",
   "level":0.9,
   "method":"oracle",
-  "coverage":0.9398521505
+  "coverage":0.9462365591
  },
  {
   "month":"2026-07",
@@ -861,6 +861,6 @@
   "month":"2026-07",
   "level":0.95,
   "method":"oracle",
-  "coverage":0.9731182796
+  "coverage":0.9751344086
  }
 ]

@@ -112,7 +112,8 @@ def severity(nominal_inside_ci: bool, conc: float, conc_lo: float) -> tuple[str,
 # templated, and in this one the passing row was being told to recalibrate.
 ACTION = {
     "gaussian": ("Re-state the band at its measured coverage, or replace the parametric step. "
-                 "The failure is the Gaussian assumption itself: a symmetric two-sigma interval "
+                 "The failure is the Gaussian assumption itself: a symmetric interval at a fixed "
+                 "multiple of sigma (1.645 at 90%) "
                  "cannot track an error distribution whose shape moves, and widening it uniformly "
                  "buys coverage in the calm hours it already had."),
     "conformal": ("Do not read the conformal guarantee as insurance here. It is conditional on "
@@ -120,9 +121,13 @@ ACTION = {
                   "condition, which is why this construction covers no better than the parametric "
                   "one it was meant to replace. Either recalibrate adaptively or widen on a "
                   "measured schedule."),
-    "aci": ("Nothing to remediate on coverage. Two things to watch instead: the band pays for "
+    "aci": ("Nothing to remediate on coverage. Three things to watch instead. Its misses are "
+            "the most price-concentrated of any construction audited, which the severity rule "
+            "does not grade because concentration only enters once coverage has failed: the band "
+            "holds its promise and still misses disproportionately when a miss is expensive, and "
+            "the exposure column is where that shows. Beyond that: the band pays for "
             "its coverage in width, so read this row against the width line before reserving "
-            "against it; and the method is reactive, so a regime break costs a stretch of "
+            "against it; and it is reactive, so a regime break costs a stretch of "
             "under-coverage before it recovers. If either matters, the question is how much "
             "width the desk can carry, not whether to recalibrate."),
 }
@@ -236,7 +241,12 @@ def score(p: pd.DataFrame) -> pd.DataFrame:
                 # A perfectly calibrated 90% band still misses 10% of the time
                 # and those misses still cost money, and without this line a
                 # reader cannot tell how much of the exposure was avoidable.
-                full = E[:, s][~np.isnan(E[:, s])]
+                # Fitted on the SCORED rows only. Fitting on all days and
+                # scoring the post-warm-up subset left the oracle about a point
+                # below nominal (0.887 against 0.899 in-sample) identically in
+                # both zones, which is a property of the subset rather than of
+                # either series and read as a broken reference.
+                full = E[MINP:, s][~np.isnan(E[MINP:, s])]
                 bands["oracle"] = (np.quantile(full, alpha / 2), np.quantile(full, 1 - alpha / 2))
                 a_t[s] = a_t[s] + GAMMA * (alpha - (0.0 if bands["aci"][0] <= y <= bands["aci"][1] else 1.0))
 

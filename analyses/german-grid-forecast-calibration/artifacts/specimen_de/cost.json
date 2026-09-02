@@ -18,7 +18,7 @@
   {
    "level": 0.8,
    "method": "oracle",
-   "eur": 148069.0
+   "eur": 134350.0
   },
   {
    "level": 0.9,
@@ -38,7 +38,7 @@
   {
    "level": 0.9,
    "method": "oracle",
-   "eur": 74714.0
+   "eur": 64266.0
   },
   {
    "level": 0.95,
@@ -58,7 +58,7 @@
   {
    "level": 0.95,
    "method": "oracle",
-   "eur": 35687.0
+   "eur": 30863.0
   }
  ],
  "mean_adverse_all": 24.57702778122287,
