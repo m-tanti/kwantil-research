@@ -510,6 +510,42 @@ def main() -> None:
                  .rename(columns={"inside": "coverage"}))
     write_lf(out / "monthly.json", monthly.to_json(orient="records", indent=1))
 
+    # --- coverage by delivery slot: when in the day the band fails. The method
+    # note says everything is scored per slot; this is the artifact that lets a
+    # reader see it rather than take it on trust. One row per slot per method per
+    # level, the same shape as monthly.json with the month swapped for the slot.
+    by_slot = (s.groupby(["slot", "level", "method"])
+                 .agg(coverage=("inside", "mean"), n=("inside", "size")).reset_index())
+    by_slot["slot"] = by_slot["slot"].astype(int)
+    write_lf(out / "coverage_slot.json", by_slot.to_json(orient="records", indent=1))
+
+    # --- width and misses by day. The width table reports a mean, a 95th
+    # percentile and a maximum; none of them shows WHEN a band went wide or
+    # whether it was wide on the days it missed. Daily is the coarsest cut that
+    # keeps that visible and the finest that ships at a sensible size.
+    daily = (s.groupby(["date", "level", "method"])
+               .agg(mean_width=("width", "mean"), max_width=("width", "max"),
+                    misses=("inside", lambda x: int((~x).sum())), n=("inside", "size"))
+               .reset_index())
+    daily["mean_width"] = daily["mean_width"].round(1)
+    daily["max_width"] = daily["max_width"].round(1)
+    write_lf(out / "width_daily.json", daily.to_json(orient="records", indent=1))
+
+    # --- exposure by month: when the money accrued. Sums to cost.json by
+    # construction, which a reader (or a test) can check.
+    cost_m = (s.groupby(["month", "level", "method"])["cost"].sum().round(0).reset_index()
+                .rename(columns={"cost": "eur"}))
+    write_lf(out / "cost_monthly.json", cost_m.to_json(orient="records", indent=1))
+
+    # --- slot means: the forecast against the outcome, one point per slot, so the
+    # integrity check can be drawn as well as tabled. The control's failure is a
+    # shape (forecast below actual at every slot), and a scatter shows a shape.
+    slot_means = p.groupby("slot")[["fc", "act"]].mean().round(1)
+    write_lf(out / "slot_means.json",
+             json.dumps({"slot": [int(i) for i in slot_means.index],
+                         "mean_forecast_mw": [float(v) for v in slot_means["fc"]],
+                         "mean_actual_mw": [float(v) for v in slot_means["act"]]}, indent=1))
+
     # Lineage by content, not by commit. The commit that adds a run cannot be
     # known while the run is happening, so a hash written here always names the
     # parent and sends a reader to a tree without the script in it. A digest over
