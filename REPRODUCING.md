@@ -109,17 +109,30 @@ python scripts/run_backtest.py --copula gaussian --no-dashboard \
 ### The six-null sweep
 
 ```bash
-python scripts/as_null_sensitivity.py --details experiments/factorial/t/details.csv
-python scripts/as_null_sensitivity.py --details experiments/factorial/gaussian/details.csv
+python scripts/as_null_sensitivity.py --details experiments/factorial/t/details.csv \
+    --label t_copula
+python scripts/as_null_sensitivity.py --details experiments/factorial/gaussian/details.csv \
+    --label gaussian_copula
 ```
 
 Re-scores every model against six reference distributions with the model, the
 data, the VaR and the ES all held fixed. Only the acceptance threshold moves.
+Both Acerbi-Székely statistics are scored on the same simulated paths: the
+conditional Z1 (the article's statistic) and the unconditional Z2. Two
+known-broken models built from Conformal-PID are added (VaR × 0.8, and a
+Gaussian with the same VaR but a thin tail).
 
-Expected: **0 green under a Gaussian null, 10 green under a df-5 null**, with
-the moment-matched t at 6. The result files
+Expected for Z1: **0 green under a Gaussian null, 10 green under a df-5 null**,
+with the moment-matched t at 6. Expected for Z2: **6 green under each of the 5
+parametric nulls**, 10 under the empirical one. The result files
 `experiments/factorial/*/as_null_sensitivity.csv` are shipped, so you can check
 your run against them without rebuilding anything.
+
+The article's figure data is reshaped from those files, not recomputed:
+
+```bash
+python scripts/export_article_figures.py --out <article>/figures/data
+```
 
 Reading the two arms together isolates the two effects. Down a column, changing
 only the copula moves the statistic by +0.0096. Across a row, changing only the

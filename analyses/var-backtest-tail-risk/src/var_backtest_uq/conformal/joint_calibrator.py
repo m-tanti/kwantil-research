@@ -32,7 +32,7 @@ class EsCorrector:
     Residual e_t = realised/|ES_base| + 1, which is 0 when realised matches
     predicted ES and < 0 when realised is more extreme. PID drives a
     log-space scale, bounded to [s_min, s_max]. Update is gated on breach,
-    matching the AS Z2 conditioning.
+    matching the AS Z1 conditioning.
     """
 
     def __init__(

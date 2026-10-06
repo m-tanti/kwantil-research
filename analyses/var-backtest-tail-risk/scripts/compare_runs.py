@@ -29,8 +29,31 @@ ALPHA = 0.01
 line = "=" * 100
 
 
+def normalise_as_labels(s: pd.DataFrame) -> pd.DataFrame:
+    """Relabel a summary written before the Z1/Z2 naming fix.
+
+    Up to package 0.1.x, `as_z1_*` held A&S's unconditional Z2 and `as_z2_*`
+    the conditional Z1. The two are tied exactly by
+    Z2 = 1 + N_breach / (T * alpha) * (Z1 - 1), so a file's labelling can be
+    read off its own numbers instead of trusted.
+    """
+    if not {"as_z1_statistic", "as_z2_statistic"}.issubset(s.columns):
+        return s
+    k = s["n_breaches"] / (s["n_obs"] * s["alpha"])
+    ok = s["as_z1_statistic"].notna() & s["as_z2_statistic"].notna()
+    legacy = (1 + k * (s["as_z2_statistic"] - 1) - s["as_z1_statistic"]).abs()[ok]
+    current = (1 + k * (s["as_z1_statistic"] - 1) - s["as_z2_statistic"]).abs()[ok]
+    if len(legacy) and legacy.max() < 1e-9 and current.max() > 1e-9:
+        swap = {}
+        for suffix in ("statistic", "zone", "pvalue"):
+            swap[f"as_z1_{suffix}"] = f"as_z2_{suffix}"
+            swap[f"as_z2_{suffix}"] = f"as_z1_{suffix}"
+        s = s.rename(columns=swap)
+    return s
+
+
 def load(d: Path):
-    return (pd.read_csv(d / "summary.csv"),
+    return (normalise_as_labels(pd.read_csv(d / "summary.csv")),
             pd.read_csv(d / "details.csv", parse_dates=["date"]))
 
 
@@ -55,20 +78,20 @@ def main(base_dir: str, new_dir: str) -> None:
     bs = base_s[base_s["alpha"] == ALPHA].set_index("method")
     ns = new_s[new_s["alpha"] == ALPHA].set_index("method")
     print(f"  {'method':<18}{'rate was':>10}{'rate now':>10}{'Kupiec was':>12}{'Kupiec now':>12}"
-          f"{'zone was':>11}{'zone now':>11}{'AS Z2 was':>11}{'AS Z2 now':>11}")
+          f"{'zone was':>11}{'zone now':>11}{'AS Z1 was':>11}{'AS Z1 now':>11}")
     for m in ns.index:
         if m not in bs.index:
             continue
         b, n = bs.loc[m], ns.loc[m]
         flag = ""
-        if b["basel_zone"] != n["basel_zone"] or b["as_z2_zone"] != n["as_z2_zone"]:
+        if b["basel_zone"] != n["basel_zone"] or b["as_z1_zone"] != n["as_z1_zone"]:
             flag = "  <-- ZONE CHANGED"
         if (b["kupiec_pvalue"] >= 0.05) != (n["kupiec_pvalue"] >= 0.05):
             flag += "  <-- KUPIEC VERDICT FLIPPED"
         print(f"  {m:<18}{100*b['observed_rate']:>9.2f}%{100*n['observed_rate']:>9.2f}%"
               f"{b['kupiec_pvalue']:>12.4f}{n['kupiec_pvalue']:>12.4f}"
               f"{b['basel_zone']:>11}{n['basel_zone']:>11}"
-              f"{b['as_z2_zone']:>11}{n['as_z2_zone']:>11}{flag}")
+              f"{b['as_z1_zone']:>11}{n['as_z1_zone']:>11}{flag}")
 
     # ---------------------------------------------------------------- new window only
     print(f"\n{line}\nTHE NEW WINDOW ALONE - {n_added_steps} unseen days\n{line}")

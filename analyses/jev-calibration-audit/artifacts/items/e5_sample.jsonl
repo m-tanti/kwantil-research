@@ -1,0 +1,300 @@
+{"id": "b77-2061", "state": "How long is the wait for a US transfer?", "truth": "transfer_timing"}
+{"id": "b77-220", "state": "Why do I have a pending cash withdrawal?", "truth": "pending_cash_withdrawal"}
+{"id": "b77-567", "state": "Do you know why my contactless won't work?", "truth": "contactless_not_working"}
+{"id": "b77-1178", "state": "May I use my account now, even though the identity verification has not gone through yet?", "truth": "why_verify_identity"}
+{"id": "b77-2317", "state": "I've attempted to do a very standard transfer and have tried 5 times at this point. Can you tell me what the issue is? Is the system down?", "truth": "failed_transfer"}
+{"id": "b77-1689", "state": "I wasn't charged the correct amount for an item I purchased, how can I fix this?", "truth": "request_refund"}
+{"id": "b77-2385", "state": "Where do I find the top-up verification code?", "truth": "verify_top_up"}
+{"id": "b77-235", "state": "Where's accounting for my cash withdrawal?", "truth": "pending_cash_withdrawal"}
+{"id": "b77-1756", "state": "My card is being declined online. Could you tell me what might be broken or wrong with the account?", "truth": "declined_transfer"}
+{"id": "b77-2909", "state": "I thought cash withdrawals were free? Why have I been charged a fee? Also, how much is this fee?", "truth": "cash_withdrawal_charge"}
+{"id": "b77-1843", "state": "I have a pending transfer", "truth": "pending_transfer"}
+{"id": "b77-139", "state": "I purchased an item and the exchange rate I was given was incorrect.", "truth": "card_payment_wrong_exchange_rate"}
+{"id": "b77-818", "state": "What is the fee on my card payment?", "truth": "card_payment_fee_charged"}
+{"id": "b77-1148", "state": "I need to change my name since I got married", "truth": "edit_personal_details"}
+{"id": "b77-1674", "state": "Is there anything I need to do since my phone was stolen?", "truth": "lost_or_stolen_phone"}
+{"id": "b77-12", "state": "I still don't have my card after 2 weeks.  What should I do?", "truth": "card_arrival"}
+{"id": "b77-177", "state": "Why is there an extra 1 pound charge on my card?", "truth": "extra_charge_on_statement"}
+{"id": "b77-1838", "state": "How do you fix  my card payment?", "truth": "declined_card_payment"}
+{"id": "b77-1755", "state": "I tried to buy something online yesterday but it wouldn't stop saying declined. Tried again today but same thing happened. What's Broken?", "truth": "declined_transfer"}
+{"id": "b77-1368", "state": "How many disposable cards can I have?", "truth": "disposable_card_limits"}
+{"id": "b77-694", "state": "This is URGENT, I typed the wrong payment information for a payment I needed to make and have clicked send, I need to reverse the transaction immediately.", "truth": "cancel_transfer"}
+{"id": "b77-33", "state": "I'm still waiting on my card to be delivered.", "truth": "card_arrival"}
+{"id": "b77-1939", "state": "ATM still has my card", "truth": "card_swallowed"}
+{"id": "b77-2343", "state": "How can I perform a dual money transferring from one account to another?", "truth": "transfer_into_account"}
+{"id": "b77-617", "state": "Will I be charged if someone needs to send me money?", "truth": "top_up_by_bank_transfer_charge"}
+{"id": "b77-1680", "state": "Hello- It is urgent I get a refund on this product. The merchant has not been helpful, what can I do now to get this resolved ASAP?", "truth": "request_refund"}
+{"id": "b77-1313", "state": "Please give me both a visa and a master card.", "truth": "visa_or_mastercard"}
+{"id": "b77-1280", "state": "I like to Mastercard rather than Visa.", "truth": "visa_or_mastercard"}
+{"id": "b77-1118", "state": "What is the payment in my account that I did not do?", "truth": "card_payment_not_recognised"}
+{"id": "b77-1340", "state": "Is there a way to transfer funds directly from my card?", "truth": "topping_up_by_card"}
+{"id": "b77-942", "state": "I want one of those virtual cards!", "truth": "getting_virtual_card"}
+{"id": "b77-436", "state": "How do I exchange currency?", "truth": "exchange_via_app"}
+{"id": "b77-1872", "state": "For how long will my transfer be pending?", "truth": "pending_transfer"}
+{"id": "b77-1211", "state": "I can't verify my ID.", "truth": "unable_to_verify_identity"}
+{"id": "b77-920", "state": "Where can I obtain my virtual card?", "truth": "getting_virtual_card"}
+{"id": "b77-228", "state": "Why does my account have a pending cash withdrawal?", "truth": "pending_cash_withdrawal"}
+{"id": "b77-1198", "state": "Why do you need to know so much about me", "truth": "why_verify_identity"}
+{"id": "b77-1024", "state": "What happened to where my top-up was canceled?", "truth": "top_up_reverted"}
+{"id": "b77-892", "state": "What is accepted in regards to cards and currencies?", "truth": "supported_cards_and_currencies"}
+{"id": "b77-2900", "state": "Why was my account charged for using an ATM?", "truth": "cash_withdrawal_charge"}
+{"id": "b77-2008", "state": "Why do you need all this information about my Source of Funds?", "truth": "verify_source_of_funds"}
+{"id": "b77-2717", "state": "Why doesn't my balance reflect my transfer", "truth": "balance_not_updated_after_bank_transfer"}
+{"id": "b77-2394", "state": "How do I verify a top-up?", "truth": "verify_top_up"}
+{"id": "b77-270", "state": "What kind of currency can I hold money in?", "truth": "fiat_currency_support"}
+{"id": "b77-1976", "state": "Why is there a transaction that shows multiple times?", "truth": "transaction_charged_twice"}
+{"id": "b77-980", "state": "What stores will take my credit card as payment?", "truth": "card_acceptance"}
+{"id": "b77-2411", "state": "Do you offer multiple cards for the same account?", "truth": "getting_spare_card"}
+{"id": "b77-1229", "state": "I a having trouble proving my identity", "truth": "unable_to_verify_identity"}
+{"id": "b77-376", "state": "My card isn't working anymore.", "truth": "card_not_working"}
+{"id": "b77-1088", "state": "there is a transaction on my account that i didnt make", "truth": "card_payment_not_recognised"}
+{"id": "b77-1599", "state": "atm would not give me cash", "truth": "declined_cash_withdrawal"}
+{"id": "b77-1547", "state": "I have forgotten my password.", "truth": "passcode_forgotten"}
+{"id": "b77-686", "state": "I need to cancel my recent transfer immediately, I made a mistake there, please help quickly before it goes through", "truth": "cancel_transfer"}
+{"id": "b77-1190", "state": "Why do I have to verify my identity?", "truth": "why_verify_identity"}
+{"id": "b77-26", "state": "I think something went wrong with my card delivery as I haven't received it yet.", "truth": "card_arrival"}
+{"id": "b77-1184", "state": "Why do I have to give you all of my identification details?", "truth": "why_verify_identity"}
+{"id": "b77-18", "state": "Where is my new card? I have been waiting a week!", "truth": "card_arrival"}
+{"id": "b77-338", "state": "How can I top up automatically?", "truth": "automatic_top_up"}
+{"id": "b77-1506", "state": "I don't think I made this charge on my debit statement.", "truth": "direct_debit_payment_not_recognised"}
+{"id": "b77-1135", "state": "I relocated and need to change my personal details.", "truth": "edit_personal_details"}
+{"id": "b77-1463", "state": "Are there any ATM machines near me?", "truth": "atm_support"}
+{"id": "b77-1374", "state": "Are you able to explain the restrictions of the disposable cards?", "truth": "disposable_card_limits"}
+{"id": "b77-496", "state": "Can I open a bank account for my newborn baby?", "truth": "age_limit"}
+{"id": "b77-1134", "state": "I moved.  Where do I update my details?", "truth": "edit_personal_details"}
+{"id": "b77-2467", "state": "Is cash good to top up with?", "truth": "top_up_by_cash_or_cheque"}
+{"id": "b77-824", "state": "So what items  actually come  with  extra  fees", "truth": "card_payment_fee_charged"}
+{"id": "b77-292", "state": "Can I have my card delivered on a specific day?", "truth": "card_delivery_estimate"}
+{"id": "b77-123", "state": "The exchange rate was wrong when I bought something outside the country.", "truth": "card_payment_wrong_exchange_rate"}
+{"id": "b77-2292", "state": "I transferred my funds, why did it not go through?", "truth": "failed_transfer"}
+{"id": "b77-1627", "state": "I have waited 15 days, but my payment still hasn't cleared.", "truth": "pending_card_payment"}
+{"id": "b77-1908", "state": "Your service is terrible,.  Delete my account,", "truth": "terminate_account"}
+{"id": "b77-371", "state": "Can someone assist me by explaining why my card is not working?", "truth": "card_not_working"}
+{"id": "b77-1114", "state": "Some of my card payments look different than where I purchased products from. Why is that?", "truth": "card_payment_not_recognised"}
+{"id": "b77-1284", "state": "Are both Visa and Mastercard accepted?", "truth": "visa_or_mastercard"}
+{"id": "b77-934", "state": "Is it possible for me to get a virtual card?", "truth": "getting_virtual_card"}
+{"id": "b77-208", "state": "Why is my withdrawal still pending?", "truth": "pending_cash_withdrawal"}
+{"id": "b77-2679", "state": "Can you tell me why my top up didn't work?", "truth": "top_up_failed"}
+{"id": "b77-2554", "state": "My virtual card won't work.", "truth": "virtual_card_not_working"}
+{"id": "b77-268", "state": "I want to make a currency exchange to EU.", "truth": "fiat_currency_support"}
+{"id": "b77-98", "state": "What currencies is an exchange rate calculated in?", "truth": "exchange_rate"}
+{"id": "b77-2369", "state": "Why do you need code verification for my top up?", "truth": "verify_top_up"}
+{"id": "b77-3027", "state": "do I need anything for the identity check?", "truth": "verify_my_identity"}
+{"id": "b77-253", "state": "Can someone assist me with the details explaining which fiat currencies that you support?", "truth": "fiat_currency_support"}
+{"id": "b77-820", "state": "Will I always be charged a fee for using my card?", "truth": "card_payment_fee_charged"}
+{"id": "b77-979", "state": "I am traveling to Germany, Will I be able to use my card there?", "truth": "card_acceptance"}
+{"id": "b77-2165", "state": "Can you please help me with this exchange?  I am trying to get crypto and the app won't let me.", "truth": "beneficiary_not_allowed"}
+{"id": "b77-3020", "state": "How does my identity get verified?", "truth": "verify_my_identity"}
+{"id": "b77-2004", "state": "where to funds come from", "truth": "verify_source_of_funds"}
+{"id": "b77-175", "state": "There is an extra $1 charge", "truth": "extra_charge_on_statement"}
+{"id": "b77-2102", "state": "I am attempting to make a purchase online, but my card is not working.  I know there are funds available, is this an issue on the banks end?", "truth": "reverted_card_payment?"}
+{"id": "b77-1636", "state": "What does a pending transaction mean?", "truth": "pending_card_payment"}
+{"id": "b77-3005", "state": "What do you need for my identity check?", "truth": "verify_my_identity"}
+{"id": "b77-1248", "state": "I don't know where to look to find my PIN.", "truth": "get_physical_card"}
+{"id": "b77-461", "state": "Someone stole my wallet earlier today, not sure exactly when, probably on Piccadilly circus. Can you check if there were any attempts to use the card and obviously block it?", "truth": "lost_or_stolen_card"}
+{"id": "b77-2252", "state": "Is GBP a supported currency?", "truth": "receiving_money"}
+{"id": "b77-1839", "state": "Why do you keep declining my payment? I tried several times already with this card and it's just not working", "truth": "declined_card_payment"}
+{"id": "b77-2035", "state": "How can I check the source of my fund?", "truth": "verify_source_of_funds"}
+{"id": "b77-891", "state": "Will you accept my other card from the U.S.?", "truth": "supported_cards_and_currencies"}
+{"id": "b77-272", "state": "Do you work with all fiat currencies?", "truth": "fiat_currency_support"}
+{"id": "b77-1791", "state": "Where is my refund? I have been checking my account all day.", "truth": "Refund_not_showing_up"}
+{"id": "b77-1083", "state": "There is a payment that is not mine in the app.  Please advise/", "truth": "card_payment_not_recognised"}
+{"id": "b77-2559", "state": "virtual card is not working for me", "truth": "virtual_card_not_working"}
+{"id": "b77-1034", "state": "The app reverted what I topped up.", "truth": "top_up_reverted"}
+{"id": "b77-3045", "state": "Can I get a card outside the UK?", "truth": "country_support"}
+{"id": "b77-1609", "state": "When will my card payment be done pending?", "truth": "pending_card_payment"}
+{"id": "b77-2823", "state": "What do you charge for top ups?", "truth": "top_up_by_card_charge"}
+{"id": "b77-1115", "state": "There is a strange payment on my statement. What should I do?", "truth": "card_payment_not_recognised"}
+{"id": "b77-547", "state": "My pins seems to be blocked, can you unblock it please", "truth": "pin_blocked"}
+{"id": "b77-757", "state": "Do you have any restrictions to my top-up?", "truth": "top_up_limits"}
+{"id": "b77-709", "state": "How do i cancel my transaction?", "truth": "cancel_transfer"}
+{"id": "b77-1973", "state": "It looks like this week I was double charged for a couple things. Is there any way that you can look into this for me and return the double charged items back to my card?", "truth": "transaction_charged_twice"}
+{"id": "b77-2434", "state": "If you send me more cards, are there any charges?", "truth": "getting_spare_card"}
+{"id": "b77-2937", "state": "My card is about to expire. How much does it cost to order a new one and how fast will I get it?", "truth": "card_about_to_expire"}
+{"id": "b77-897", "state": "What cards and currencies do you support?", "truth": "supported_cards_and_currencies"}
+{"id": "b77-160", "state": "My statement has a dollar I have been charged showing up on it.", "truth": "extra_charge_on_statement"}
+{"id": "b77-484", "state": "How old do we have to be?", "truth": "age_limit"}
+{"id": "b77-2240", "state": "Will salary be received through this?", "truth": "receiving_money"}
+{"id": "b77-2370", "state": "Where can I find the verification code on a top-up card?", "truth": "verify_top_up"}
+{"id": "b77-2197", "state": "I want to buy cryptocurrency, but your app doesn't let me. Why?", "truth": "beneficiary_not_allowed"}
+{"id": "b77-1861", "state": "I double checked that I have the correct account details , they're right for sure. Transfer is still pending since forever. What should be done now?", "truth": "pending_transfer"}
+{"id": "b77-2680", "state": "I made a transfer a few hours ago from a UK banking account.  I do not yet see the transfer.  Please check on this for me.", "truth": "balance_not_updated_after_bank_transfer"}
+{"id": "b77-303", "state": "Whats the delivery time to the United States?", "truth": "card_delivery_estimate"}
+{"id": "b77-2971", "state": "Does Google Play have an app to Top up?", "truth": "apple_pay_or_google_pay"}
+{"id": "b77-1460", "state": "Can I get cash with this card anywhere?", "truth": "atm_support"}
+{"id": "b77-506", "state": "Do my kids have to be a certain age to use this service?", "truth": "age_limit"}
+{"id": "b77-4", "state": "My card has not arrived yet.", "truth": "card_arrival"}
+{"id": "b77-347", "state": "Can I have it add money automatically in certain intervals?", "truth": "automatic_top_up"}
+{"id": "b77-807", "state": "There is an unauthorized fee.", "truth": "card_payment_fee_charged"}
+{"id": "b77-201", "state": "My card was denied at an ATM earlier today but the transaction is pending. Please cancel it as I did not receive my money.", "truth": "pending_cash_withdrawal"}
+{"id": "b77-2474", "state": "I want to do a cash top-up", "truth": "top_up_by_cash_or_cheque"}
+{"id": "b77-366", "state": "Why is my card not working?", "truth": "card_not_working"}
+{"id": "b77-2284", "state": "Tell me why my transfer failed!", "truth": "failed_transfer"}
+{"id": "b77-2871", "state": "What is the process for activating my card?", "truth": "activate_my_card"}
+{"id": "b77-1960", "state": "I got double charged for a payment so how do I fix that?", "truth": "transaction_charged_twice"}
+{"id": "b77-481", "state": "How young can I be to open my own account?", "truth": "age_limit"}
+{"id": "b77-67", "state": "how do I link a card I already have?", "truth": "card_linking"}
+{"id": "b77-800", "state": "I payed with a card and was charged an extra fee", "truth": "card_payment_fee_charged"}
+{"id": "b77-2010", "state": "How can I tell where my funds came from?", "truth": "verify_source_of_funds"}
+{"id": "b77-729", "state": "Do you have a limit to top ups?", "truth": "top_up_limits"}
+{"id": "b77-836", "state": "Why do you charge fees on card payments?", "truth": "card_payment_fee_charged"}
+{"id": "b77-2641", "state": "Heyy I tried to top up with my card today but it failed! I just got the couple days before but it has worked last time. What's going on, can you double check please?", "truth": "top_up_failed"}
+{"id": "b77-1149", "state": "I want to change my address.", "truth": "edit_personal_details"}
+{"id": "b77-560", "state": "Are contactless payments enabled on my new card?", "truth": "contactless_not_working"}
+{"id": "b77-1673", "state": "My phone is lost.  What do I do to prevent someone from using the app?", "truth": "lost_or_stolen_phone"}
+{"id": "b77-2099", "state": "I think my card payment had been return", "truth": "reverted_card_payment?"}
+{"id": "b77-1683", "state": "Would I be able to get a refund for something I bought?", "truth": "request_refund"}
+{"id": "b77-2121", "state": "Where do I change my PIN?", "truth": "change_pin"}
+{"id": "b77-1231", "state": "Why am I not able to verify my id?", "truth": "unable_to_verify_identity"}
+{"id": "b77-1859", "state": "When will the transfer go through?", "truth": "pending_transfer"}
+{"id": "b77-1352", "state": "How do i transfer money using my credit card?", "truth": "topping_up_by_card"}
+{"id": "b77-1492", "state": "Even though it's late, I wanted to see about disputing a charge. I was just looking through my transactions over the past couple of months and noticed a pretty large amount that was not completed by me. Is this possibly something I can still do.", "truth": "direct_debit_payment_not_recognised"}
+{"id": "b77-1672", "state": "Someone stole my cards!", "truth": "lost_or_stolen_phone"}
+{"id": "b77-763", "state": "Why did I not get my cash back after I withdrew?", "truth": "wrong_amount_of_cash_received"}
+{"id": "b77-1332", "state": "how can i top up?", "truth": "topping_up_by_card"}
+{"id": "b77-1227", "state": "How do I show this stupid system that this is really my identity?", "truth": "unable_to_verify_identity"}
+{"id": "b77-2613", "state": "how secure is a disposable virtual card", "truth": "get_disposable_virtual_card"}
+{"id": "b77-1517", "state": "I was charged on my account that shouldn't be there.", "truth": "direct_debit_payment_not_recognised"}
+{"id": "b77-1573", "state": "I can't get money out of the ATM", "truth": "declined_cash_withdrawal"}
+{"id": "b77-2229", "state": "Why was my transfer charged fees?", "truth": "transfer_fee_charged"}
+{"id": "b77-602", "state": "I need to make a transfer, what will the fee be?", "truth": "top_up_by_bank_transfer_charge"}
+{"id": "b77-2262", "state": "Is it possible to deposit money in GBP?", "truth": "receiving_money"}
+{"id": "b77-2794", "state": "What is the cost for an exchange fee?", "truth": "exchange_charge"}
+{"id": "b77-2073", "state": "How long is it going to take for my funds to show in my account?", "truth": "transfer_timing"}
+{"id": "b77-417", "state": "If I receive foreign currencies, am I able to exchange them on the app?", "truth": "exchange_via_app"}
+{"id": "b77-1218", "state": "My ID won't be verified!", "truth": "unable_to_verify_identity"}
+{"id": "b77-453", "state": "Is a copy of the police report necessary for completing the report process?", "truth": "lost_or_stolen_card"}
+{"id": "b77-1950", "state": "I was getting cash and can't get my card back.", "truth": "card_swallowed"}
+{"id": "b77-84", "state": "How do I find the exchange rate?", "truth": "exchange_rate"}
+{"id": "b77-2580", "state": "I took out a foreign currency and the exchange rate is wrong.", "truth": "wrong_exchange_rate_for_cash_withdrawal"}
+{"id": "b77-1348", "state": "Are my friends able to add funds to my account?", "truth": "topping_up_by_card"}
+{"id": "b77-1987", "state": "My card has been charged two separate times for a single transaction.", "truth": "transaction_charged_twice"}
+{"id": "b77-1907", "state": "Please delete my account.", "truth": "terminate_account"}
+{"id": "b77-2511", "state": "Where do you deliver cards by mail?", "truth": "order_physical_card"}
+{"id": "b77-2846", "state": "What's the right way to activate my card?", "truth": "activate_my_card"}
+{"id": "b77-1953", "state": "I was taking out funds and was unable to regain my card.", "truth": "card_swallowed"}
+{"id": "b77-2886", "state": "It looks like I was charged a withdrawal fee for going to my ATM. Why is that because I haven't been charged previously for doing so?", "truth": "cash_withdrawal_charge"}
+{"id": "b77-2164", "state": "I had a transfer blocked", "truth": "beneficiary_not_allowed"}
+{"id": "b77-2558", "state": "How do I make my virtual card work?", "truth": "virtual_card_not_working"}
+{"id": "b77-2899", "state": "I've notice I was charged for withdrawing cash, can you explain why?", "truth": "cash_withdrawal_charge"}
+{"id": "b77-1072", "state": "I sent a cheque  a few days ago and nothing has happened to my account yet. Can you please check on this for me?", "truth": "balance_not_updated_after_cheque_or_cash_deposit"}
+{"id": "b77-1070", "state": "A cheque deposit hasn't posted to my account, when will my balance update?", "truth": "balance_not_updated_after_cheque_or_cash_deposit"}
+{"id": "b77-1635", "state": "I had a payment that I made and it's been some amount of time and would like to know when it's suppose to go though.", "truth": "pending_card_payment"}
+{"id": "b77-8", "state": "still waiting on that card", "truth": "card_arrival"}
+{"id": "b77-2730", "state": "How do I freeze my bank card, as there has been a strange withdrawal?", "truth": "cash_withdrawal_not_recognised"}
+{"id": "b77-999", "state": "Who accepts my card?", "truth": "card_acceptance"}
+{"id": "b77-1266", "state": "I still don't have my pin.", "truth": "get_physical_card"}
+{"id": "b77-2432", "state": "Where do I request another card?", "truth": "getting_spare_card"}
+{"id": "b77-1192", "state": "What other methods are there to verify my identity?", "truth": "why_verify_identity"}
+{"id": "b77-354", "state": "Can you explain where I can find the auto-top option?", "truth": "automatic_top_up"}
+{"id": "b77-3056", "state": "Is my country supported", "truth": "country_support"}
+{"id": "b77-403", "state": "How do I change GBP to AUD?", "truth": "exchange_via_app"}
+{"id": "b77-649", "state": "I  do not see a top-up processed.", "truth": "pending_top_up"}
+{"id": "b77-2843", "state": "Tell me how to go about activating my new card?", "truth": "activate_my_card"}
+{"id": "b77-2676", "state": "How do I know if my top up was unsuccessful?", "truth": "top_up_failed"}
+{"id": "b77-1272", "state": "Help me find my card pin!", "truth": "get_physical_card"}
+{"id": "b77-128", "state": "I bought something in a foreign currency but the rate applied is wrong!", "truth": "card_payment_wrong_exchange_rate"}
+{"id": "b77-2246", "state": "Do I need to choose GBP to get my salary deposited properly?", "truth": "receiving_money"}
+{"id": "b77-970", "state": "What are the rules to where I can use my card?", "truth": "card_acceptance"}
+{"id": "b77-1621", "state": "I made a purchase and it says it's pending. What does that mean?", "truth": "pending_card_payment"}
+{"id": "b77-1457", "state": "Which ATM's will accept my card?", "truth": "atm_support"}
+{"id": "b77-30", "state": "My card hasn't arrived yet.", "truth": "card_arrival"}
+{"id": "b77-1222", "state": "I am having difficulties to verify my identity.", "truth": "unable_to_verify_identity"}
+{"id": "b77-100", "state": "What is the base of the exchange rates?", "truth": "exchange_rate"}
+{"id": "b77-806", "state": "Why was I charged for card payment?", "truth": "card_payment_fee_charged"}
+{"id": "b77-2001", "state": "I want information about the source of funds.", "truth": "verify_source_of_funds"}
+{"id": "b77-2182", "state": "A transfer to an account was not allowed", "truth": "beneficiary_not_allowed"}
+{"id": "b77-422", "state": "I was wondering whether exchanging currencies can be done on this app.", "truth": "exchange_via_app"}
+{"id": "b77-1947", "state": "The stupid machine just swallowed my card!! I need a new one ASAP", "truth": "card_swallowed"}
+{"id": "b77-3002", "state": "I need to verify my identity, but how do I do that?", "truth": "verify_my_identity"}
+{"id": "b77-904", "state": "why wouldn't you support american express? its a card i like and use often and i don't want to get a different one", "truth": "supported_cards_and_currencies"}
+{"id": "b77-2216", "state": "Why were there additional charges when transferring?", "truth": "transfer_fee_charged"}
+{"id": "b77-819", "state": "Why would I be charged a fee for card payment?", "truth": "card_payment_fee_charged"}
+{"id": "b77-1538", "state": "Help me reset the passcode.", "truth": "passcode_forgotten"}
+{"id": "b77-728", "state": "I need to find out what is the limit for top-ups.", "truth": "top_up_limits"}
+{"id": "b77-70", "state": "Where do I go if I want to link my new card?", "truth": "card_linking"}
+{"id": "b77-1887", "state": "I want to close my account", "truth": "terminate_account"}
+{"id": "b77-2649", "state": "Why didn`t my topup go through?", "truth": "top_up_failed"}
+{"id": "b77-2003", "state": "I would like to verify the source of my money", "truth": "verify_source_of_funds"}
+{"id": "b77-2082", "state": "the app reverted my payment", "truth": "reverted_card_payment?"}
+{"id": "b77-266", "state": "Which fiat currencies do you support?", "truth": "fiat_currency_support"}
+{"id": "b77-1630", "state": "Why are my payments showing pending?", "truth": "pending_card_payment"}
+{"id": "b77-2733", "state": "I have a strange cash withdrawal in my statement", "truth": "cash_withdrawal_not_recognised"}
+{"id": "b77-2975", "state": "how do i add money with my apple watch", "truth": "apple_pay_or_google_pay"}
+{"id": "b77-2331", "state": "I would like to transfer some money from my other bank account into this one.", "truth": "transfer_into_account"}
+{"id": "b77-2403", "state": "How can I get additional cards?", "truth": "getting_spare_card"}
+{"id": "b77-504", "state": "Can my children have their own account?", "truth": "age_limit"}
+{"id": "b77-233", "state": "Why does it say pending cash withdrawal on my statement?", "truth": "pending_cash_withdrawal"}
+{"id": "b77-549", "state": "What can you do to unblock my pin?", "truth": "pin_blocked"}
+{"id": "b77-1237", "state": "Why can't I verify my identity?", "truth": "unable_to_verify_identity"}
+{"id": "b77-2830", "state": "Any fee for topping up?", "truth": "top_up_by_card_charge"}
+{"id": "b77-1525", "state": "My password isn't being accepted and I need to reset it.", "truth": "passcode_forgotten"}
+{"id": "b77-2176", "state": "I have tried transferring money numerous times.  All I keep getting is an error message.  Can you tell me what is going on and how this van be fixed?", "truth": "beneficiary_not_allowed"}
+{"id": "b77-1546", "state": "I forgot my code to get into the app.", "truth": "passcode_forgotten"}
+{"id": "b77-500", "state": "Can my 19 year old daughter open a savings account at the bank?", "truth": "age_limit"}
+{"id": "b77-938", "state": "Where is the virtual card located?", "truth": "getting_virtual_card"}
+{"id": "b77-954", "state": "I would like a virtual card- where can I purchase one?", "truth": "getting_virtual_card"}
+{"id": "b77-2034", "state": "Where do my funds come from?", "truth": "verify_source_of_funds"}
+{"id": "b77-2945", "state": "My card is very close to expiring. When can I order a new one and how do I do so?", "truth": "card_about_to_expire"}
+{"id": "b77-1993", "state": "Looks like my card payment was duplicated. I went to pay at the store earlier, got declined once,second time it works. App still stays pending for one of the payments. Can you please remove one of them as it's wrong and clearly was declined?", "truth": "transaction_charged_twice"}
+{"id": "b77-2256", "state": "What are the ways for others to transfer me money?", "truth": "receiving_money"}
+{"id": "b77-2701", "state": "I transferred some money but it is yet to arrive.", "truth": "balance_not_updated_after_bank_transfer"}
+{"id": "b77-432", "state": "Can I exchange between GBP and USD on the app?", "truth": "exchange_via_app"}
+{"id": "b77-1270", "state": "Where can I find my PIN?", "truth": "get_physical_card"}
+{"id": "b77-2573", "state": "Why was the exchange rate different when I withdrew my cash?", "truth": "wrong_exchange_rate_for_cash_withdrawal"}
+{"id": "b77-724", "state": "How much money can i top up?", "truth": "top_up_limits"}
+{"id": "b77-1645", "state": "I can't find my phone.", "truth": "lost_or_stolen_phone"}
+{"id": "b77-648", "state": "What is going on? My top-up is still pending. I use your system all the time but now it is just showing as pending.", "truth": "pending_top_up"}
+{"id": "b77-2876", "state": "How do I activate a new card?", "truth": "activate_my_card"}
+{"id": "b77-1360", "state": "How can i get multiple disposble cards.", "truth": "disposable_card_limits"}
+{"id": "b77-68", "state": "I would like to link my card. How do I do it?", "truth": "card_linking"}
+{"id": "b77-2629", "state": "I need a disposable virtual card, how do I get one?", "truth": "get_disposable_virtual_card"}
+{"id": "b77-972", "state": "What places can I use my card?", "truth": "card_acceptance"}
+{"id": "b77-974", "state": "What places will accept my card for payment?", "truth": "card_acceptance"}
+{"id": "b77-1597", "state": "Is there a reason that the ATM declined my transaction?", "truth": "declined_cash_withdrawal"}
+{"id": "b77-905", "state": "Tell me which cards and what currency is supported.", "truth": "supported_cards_and_currencies"}
+{"id": "b77-2137", "state": "My new pin needs to be set.", "truth": "change_pin"}
+{"id": "b77-1049", "state": "Where is the cash from my cheque I recently deposited?", "truth": "balance_not_updated_after_cheque_or_cash_deposit"}
+{"id": "b77-1308", "state": "Do you have Visa or Matercard?", "truth": "visa_or_mastercard"}
+{"id": "b77-2470", "state": "How do I deposit cash into my account?", "truth": "top_up_by_cash_or_cheque"}
+{"id": "b77-1045", "state": "Where is my cash deposit?", "truth": "balance_not_updated_after_cheque_or_cash_deposit"}
+{"id": "b77-2993", "state": "can google pay be used to make a top-up", "truth": "apple_pay_or_google_pay"}
+{"id": "b77-278", "state": "Do you support the exchange of EUR from my currency.", "truth": "fiat_currency_support"}
+{"id": "b77-914", "state": "Is my currency okay to add money with?", "truth": "supported_cards_and_currencies"}
+{"id": "b77-2683", "state": "Why didn't my balance change after I transferred some money?", "truth": "balance_not_updated_after_bank_transfer"}
+{"id": "b77-203", "state": "Hey I tried to get some money out earlier but the machine didn't work. Now just saw the transaction still seems in progress! Can you please check what's going there, seems something is broken, I don't want to be charged for money that I haven't actually received!", "truth": "pending_cash_withdrawal"}
+{"id": "b77-2708", "state": "How long until my transfer will be available to me", "truth": "balance_not_updated_after_bank_transfer"}
+{"id": "b77-2765", "state": "My work sends me all over the world, can I get a discount for all the money I have to exchange?", "truth": "exchange_charge"}
+{"id": "b77-1992", "state": "I have multiple charges on the same transaction.", "truth": "transaction_charged_twice"}
+{"id": "b77-1286", "state": "Are both Visa and Mastercard offered?", "truth": "visa_or_mastercard"}
+{"id": "b77-959", "state": "Can I have one of the virtual cards?", "truth": "getting_virtual_card"}
+{"id": "b77-2553", "state": "My disposable virtual card was rejected by the merchant, please help?", "truth": "virtual_card_not_working"}
+{"id": "b77-2854", "state": "Would like to use my card and need to activate it first.  Can you help me do this?", "truth": "activate_my_card"}
+{"id": "b77-533", "state": "How can I unblock a blocked pin number for my account?", "truth": "pin_blocked"}
+{"id": "b77-2784", "state": "Does it cost to exchange currencies with this card?", "truth": "exchange_charge"}
+{"id": "b77-1502", "state": "This Direct Debit payment may not be right.", "truth": "direct_debit_payment_not_recognised"}
+{"id": "b77-735", "state": "What is the limit to a top-up?", "truth": "top_up_limits"}
+{"id": "b77-190", "state": "For some reason my account's been charged an extra dollar.", "truth": "extra_charge_on_statement"}
+{"id": "b77-1438", "state": "Can I use app to freeze my card and dispute fraud?", "truth": "compromised_card"}
+{"id": "b77-2724", "state": "My app shows some cash I didn't get.", "truth": "cash_withdrawal_not_recognised"}
+{"id": "b77-2946", "state": "I need to order a  new card, mine is about to expire and I need to know how much it will cost and how long until I receive it.", "truth": "card_about_to_expire"}
+{"id": "b77-2089", "state": "Why has my card payment been cancelled?", "truth": "reverted_card_payment?"}
+{"id": "b77-495", "state": "How do I open up an account for my child?", "truth": "age_limit"}
+{"id": "b77-774", "state": "Why did I not get all the cash I asked for?", "truth": "wrong_amount_of_cash_received"}
+{"id": "b77-531", "state": "What should I do if I've tried to enter my PIN too often?", "truth": "pin_blocked"}
+{"id": "b77-10", "state": "How do I track my card?", "truth": "card_arrival"}
+{"id": "b77-2245", "state": "Is there a problem with receiving my salary in GBP?", "truth": "receiving_money"}
+{"id": "b77-2729", "state": "My app says that I received cash from an ATM and I didn't.", "truth": "cash_withdrawal_not_recognised"}
+{"id": "b77-947", "state": "why do i not have a virtual card", "truth": "getting_virtual_card"}
+{"id": "b77-2915", "state": "Was charged an ATM fee despite it being a small withdrawal on the 1st day of the month. I thought I was allowed 200 per month?", "truth": "cash_withdrawal_charge"}
+{"id": "b77-3063", "state": "What countries are you currently in?", "truth": "country_support"}
+{"id": "b77-1990", "state": "I see that I have been charged multiple times for the same transaction.", "truth": "transaction_charged_twice"}
+{"id": "b77-1129", "state": "I need to edit the personal details section of my account", "truth": "edit_personal_details"}
+{"id": "b77-460", "state": "I think my card was stolen.", "truth": "lost_or_stolen_card"}
+{"id": "b77-2261", "state": "Can this be used to receive my salary?", "truth": "receiving_money"}
+{"id": "b77-243", "state": "Does your system support multiple currency.", "truth": "fiat_currency_support"}
+{"id": "b77-219", "state": "Hey, my card was declined at an ATM in the city centre theatre. My account says the transaction is pending, though. I didn't get the money, though, so what does that mean?", "truth": "pending_cash_withdrawal"}
+{"id": "b77-1856", "state": "How long does a transfer stay pending?", "truth": "pending_transfer"}
+{"id": "b77-445", "state": "I lost my card", "truth": "lost_or_stolen_card"}
+{"id": "b77-1081", "state": "There is a charge on my card that I did not make", "truth": "card_payment_not_recognised"}
+{"id": "b77-2969", "state": "Can I use Apple Pay to top up?", "truth": "apple_pay_or_google_pay"}

@@ -167,8 +167,8 @@ def build_summary(
                 "as_z2_zone": row.get("as_z2_zone"),
                 "as_z2_pvalue": float(row.get("as_z2_pvalue", float("nan"))),
                 # Pre-v0.2 dashboard aliases; drop once types.ts is updated.
-                "es_zone": row.get("as_z2_zone"),
-                "es_mean_shortfall_ratio": float(row.get("as_z2_statistic", float("nan"))),
+                "es_zone": row.get("as_z1_zone"),
+                "es_mean_shortfall_ratio": float(row.get("as_z1_statistic", float("nan"))),
                 "mean_var_abs": float(row.get("mean_var_abs", float("nan"))),
                 "mean_ima_capital": float(row.get("mean_ima_capital", float("nan"))),
                 "median_ima_capital": float(row.get("median_ima_capital", float("nan"))),
@@ -246,8 +246,8 @@ def write_dashboard_payload(result: BacktestResult, out_dir: Path) -> dict[str, 
 
     # Pre-v0.2 dashboard aliases; drop once types.ts is updated.
     comparison_with_aliases = comparison.assign(
-        es_zone=comparison["as_z2_zone"],
-        es_mean_shortfall_ratio=comparison["as_z2_statistic"],
+        es_zone=comparison["as_z1_zone"],
+        es_mean_shortfall_ratio=comparison["as_z1_statistic"],
         es_n_exceedances=comparison["as_n_breaches"],
     )
     _write_table(comparison_with_aliases, out_dir / "methods_comparison")

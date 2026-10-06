@@ -1,4 +1,9 @@
-"""OCC 2026-13 / FRTB IMA validation PDF via Typst (table-driven, no charts)."""
+"""Model-validation PDF via Typst (table-driven, no charts).
+
+VaR backtesting follows the CRR Article 366 exception regime (multiplier 3 plus
+a plus-factor of up to 1.0). There is no FRTB (MAR32) mode: FRTB uses a
+different multiplier table and desk-level tests, and does not backtest ES.
+"""
 
 from __future__ import annotations
 
@@ -86,7 +91,7 @@ def _render_header(summary: dict) -> str:
 #align(center)[
   #text(size: 18pt, weight: "semibold")[VaR/ES Backtest Validation Report]
   #v(0.3em)
-  #text(size: 11pt, fill: muted)[OCC 2026-13 lifecycle · FRTB IMA Article 366 backtesting]
+  #text(size: 11pt, fill: muted)[Model validation · CRR Article 366 VaR backtesting]
 ]
 
 #v(1em)
@@ -185,7 +190,7 @@ regimes; ES tests use bootstrap critical values per method.
 
 #v(0.5em)
 A Kupiec p-value below 0.05 indicates the empirical breach rate is statistically
-inconsistent with the target, a regulatory finding under FRTB IMA. Basel III
+inconsistent with the target. The CRR Article 366 traffic light
 classifies 0-4 breaches per 250 trading days as green (no add-on), 5-9 as
 yellow (graduated add-on of 0.40-0.85), and 10+ as red (1.00 add-on). Mean IMA
 capital combines both the multiplier and the calibrated VaR magnitude, it is
@@ -324,7 +329,7 @@ def _render_validation_section(comparison: pd.DataFrame) -> str:
         )
     table = "\n".join(rows)
 
-    return f'''== Independent Validation (FRTB IMA / CRR Art. 366)
+    return f'''== Independent Validation (CRR Art. 366)
 
 === Coverage tests
 
@@ -346,7 +351,7 @@ def _render_validation_section(comparison: pd.DataFrame) -> str:
 (LR ~ #raw("chi^2(1)")). Christoffersen independence tests
 #raw("H_0: P(b_t = 1 | b_{{t-1}} = 0) = P(b_t = 1 | b_{{t-1}} = 1)"), i.e.
 breaches are not autocorrelated. Conditional coverage combines the two
-(LR ~ #raw("chi^2(2)")). A method passes IMA validation when neither test
+(LR ~ #raw("chi^2(2)")). A method passes coverage validation when neither test
 rejects at the 5% level.
 
 #v(0.5em)
@@ -396,12 +401,18 @@ breaches: yellow (0.40). 6: yellow (0.50). 7: yellow (0.65). 8: yellow (0.75).
 def _render_es_section(comparison: pd.DataFrame) -> str:
     rows: list[str] = []
     for _, r in comparison[comparison["alpha"] == 0.025].sort_values("method").iterrows():
-        z2_zone = r.get("as_z2_zone") or r["es_zone"]
-        z2_stat = r.get("as_z2_statistic", r["es_mean_shortfall_ratio"])
+        z1_zone = r.get("as_z1_zone") or r["es_zone"]
+        z1_stat = r.get("as_z1_statistic", r["es_mean_shortfall_ratio"])
+        z1_p = r.get("as_z1_pvalue", float("nan"))
+        z2_zone = r.get("as_z2_zone")
+        z2_stat = r.get("as_z2_statistic", float("nan"))
         z2_p = r.get("as_z2_pvalue", float("nan"))
         rows.append(
             f'  [{_esc(_METHOD_LABELS.get(r["method"], r["method"]))}], '
             f'[{int(r["n_breaches"])}], '
+            f'[{z1_stat:.3f}], '
+            f'[{z1_p:.3f}], '
+            f'[{_esc(_zone_text(z1_zone))} {_zone_emoji(z1_zone)}], '
             f'[{z2_stat:.3f}], '
             f'[{z2_p:.3f}], '
             f'[{_esc(_zone_text(z2_zone))} {_zone_emoji(z2_zone)}],'
@@ -410,35 +421,43 @@ def _render_es_section(comparison: pd.DataFrame) -> str:
 
     return f'''=== Expected-Shortfall validation (Acerbi & Szekely, 2014)
 
-ES backtested at alpha = 0.025 (FRTB IMA capital tail). On each VaR-breach day,
-the standardised excess shortfall X_t / |ES_t| is averaged; the test statistic
+ES evaluated at alpha = 0.025. This section is a model-validation diagnostic,
+not a regulatory test: neither CRR Article 366 nor the FRTB backtesting
+framework backtests ES for capital. Two statistics are reported, named as in
+Acerbi & Szekely (2014):
 
-#raw("Z2 = (1 / N_breach) · Σ_breach (X_t / |ES_t|) + 1")
+#raw("Z1 = (1 / N_breach) · Σ_breach (X_t / |ES_t|) + 1")
 
-has expected value 0 under correct ES specification (Acerbi & Szekely 2014,
-Test 2). Negative Z2 means realised tail-mean magnitude exceeds prediction,
-i.e. under-estimated tail risk. Zone classification uses bootstrap critical
-values from each method's per-step predicted marginal under H0 (5th percentile
-of the null distribution = green/yellow boundary; 0.1th percentile = yellow/red).
+#raw("Z2 = (1 / (T · alpha)) · Σ_breach (X_t / |ES_t|) + 1")
+
+Both have expected value 0 under correct specification; negative values mean
+realised tail losses ran deeper than predicted. Z1 averages over breach days
+only, so it cannot detect an excess number of breaches and must be read
+together with the exception count above. Z2 divides by the expected number of
+breaches instead, so it responds to both breach frequency and breach depth.
+Critical values are bootstrapped from each method's per-step predicted
+marginal under H0.
 
 #v(0.4em)
 #table(
-  columns: (auto, auto, auto, auto, auto),
-  inset: 6pt,
-  align: (left, right, right, right, left),
+  columns: (auto, auto, auto, auto, auto, auto, auto, auto),
+  inset: 5pt,
+  align: (left, right, right, right, left, right, right, left),
   stroke: 0.4pt + luma(210),
   fill: (col, row) => if row == 0 {{ luma(245) }} else {{ none }},
   table.header(
-    [*Method*], [*VaR breaches*], [*Z2 statistic*], [*Z2 p-value*], [*Zone*],
+    [*Method*], [*VaR breaches*], [*Z1*], [*Z1 p*], [*Z1 zone*],
+    [*Z2*], [*Z2 p*], [*Z2 zone*],
   ),
 {table}
 )
 
 #v(0.4em)
-*Zones.* Bootstrap-anchored: green = Z2 above 5th percentile of null; yellow =
-between 5th and 0.1th percentile; red = below 0.1th percentile. A persistently
-red zone signals tail-shape misspecification (the model under-
-estimates how bad bad days are).
+*Zones.* These are this report's own bootstrap bands for an ES statistic, not
+the Basel VaR traffic light: green = statistic above the 5th percentile of the
+null; yellow = between the 5th and 0.1th percentile; red = below the 0.1th
+percentile. The bands depend on the null specification, which is itself a
+modelling choice.
 
 #v(0.5em)
 '''
@@ -566,8 +585,23 @@ in Basel green at the 99% VaR. Recommended actions for ongoing operation:
    in the current regime.],
   [Re-evaluate the GARCH refit cadence (currently 20 trading days) if
    correlation regimes shift faster than parameters can track.],
-  [Treat the 97.5%-tail ES shortfall ratio as the primary FRTB ES validation
-   signal; investigate any sustained ratio worse than -0.20.],
+  [Read the 97.5% ES statistics as a consistency check alongside the exception
+   count, never on their own: Z1 cannot see breach frequency, and both zones
+   move with the choice of null.],
+)
+
+== Supervisory references
+
+This report is organised as a model-validation record. Section headings are
+not a compliance mapping to any one regime. Relevant guidance, by audience:
+
+#list(
+  [*EU banks.* CRR Article 366 (VaR backtesting and plus-factor), and the ECB
+   guide to internal models.],
+  [*UK banks.* PRA SS1/23, model risk management principles.],
+  [*US banks.* OCC 2026-13 on model risk management.],
+  [*UCITS funds.* CESR/10-788, guidelines on risk measurement and global
+   exposure, including VaR backtesting.],
 )
 '''
 

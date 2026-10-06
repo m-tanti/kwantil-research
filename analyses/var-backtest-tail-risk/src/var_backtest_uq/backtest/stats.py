@@ -1,4 +1,4 @@
-"""Per-(method, alpha) summary stats: Kupiec/Christoffersen + Basel TL + AS Z1/Z2."""
+"""Per-(method, alpha) summary stats: Kupiec/Christoffersen + Basel TL + AS Z1/Z2 (A&S 2014 naming)."""
 
 from __future__ import annotations
 
@@ -69,13 +69,15 @@ def compute_stats(
         else:
             sampler = None
 
+        # Seeds are tied to the statistic, not the name, so outputs from
+        # releases that had Z1/Z2 swapped reproduce under the corrected labels.
         as_z1 = acerbi_szekely_test_1(
-            realized_arr, var_arr, es_arr, alpha=alpha,
-            sample_under_h0=sampler, n_simulations=es_n_simulations, seed=seed + 3,
-        )
-        as_z2 = acerbi_szekely_test_2(
             realized_arr, var_arr, es_arr,
             sample_under_h0=sampler, n_simulations=es_n_simulations, seed=seed + 4,
+        )
+        as_z2 = acerbi_szekely_test_2(
+            realized_arr, var_arr, es_arr, alpha=alpha,
+            sample_under_h0=sampler, n_simulations=es_n_simulations, seed=seed + 3,
         )
 
         ima_path = ima_capital_path(var_arr, breach_arr, window=basel_window)
@@ -111,7 +113,7 @@ def compute_stats(
             "as_z2_statistic": as_z2["statistic"],
             "as_z2_zone": as_z2.get("zone"),
             "as_z2_pvalue": as_z2["p_value"],
-            "as_n_breaches": as_z2["n_breaches"],
+            "as_n_breaches": as_z1["n_breaches"],
             "mean_var_abs": mean_var_abs,
             "mean_ima_capital": mean_capital,
             "median_ima_capital": median_capital,

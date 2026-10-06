@@ -74,7 +74,7 @@ The null sweep is about a minute.
 ## Determinism
 
 Every Monte-Carlo step is seeded in the calling script. A clean re-run
-reproduces published breach counts and Z2 statistics bit-for-bit, which has been
+reproduces published breach counts and Z1 statistics bit-for-bit, which has been
 verified.
 
 The exception is upstream: Yahoo restates history for splits and dividends, so a

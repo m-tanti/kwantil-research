@@ -107,7 +107,7 @@ def details_long(result: BacktestResult) -> pd.DataFrame:
     cols = ["date", "method", "alpha", "var", "es", "breached", "realized_pnl"]
     # Carry the predicted-marginal moments when the forecaster supplies them.
     # Without these the AS null cannot be re-specified after the fact, which
-    # makes the Z2 sensitivity in manual section 8 impossible to reproduce.
+    # makes the Z1 sensitivity in manual section 8 impossible to reproduce.
     cols += [c for c in ("pnl_mu", "pnl_sigma", "pnl_kurt_excess") if c in fc.columns]
     return fc[cols]
 
@@ -253,5 +253,5 @@ SUMMARY_PRINT_COLUMNS: tuple[str, ...] = (
     "method", "alpha", "n_obs", "n_breaches", "observed_rate",
     "kupiec_pvalue", "christoffersen_cc_pvalue",
     "basel_zone", "basel_n_breaches_window", "basel_total_multiplier",
-    "as_z2_zone", "as_z2_statistic",
+    "as_z1_zone", "as_z1_statistic",
 )

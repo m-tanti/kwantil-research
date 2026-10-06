@@ -506,8 +506,11 @@ def main() -> None:
                          "over_forecast_mw": [float(v) for v in bias]}, indent=1))
 
     # --- monthly coverage, for the regime cut
-    monthly = (s.groupby(["month", "level", "method"])["inside"].mean().reset_index()
-                 .rename(columns={"inside": "coverage"}))
+    # n travels with the coverage so a reader can tell a full month from the stub
+    # the warm-up leaves at the start (two scored days in the first calendar month),
+    # which no coverage figure should be quoted from without that count beside it.
+    monthly = (s.groupby(["month", "level", "method"])
+                 .agg(coverage=("inside", "mean"), n=("inside", "size")).reset_index())
     write_lf(out / "monthly.json", monthly.to_json(orient="records", indent=1))
 
     # --- coverage by delivery slot: when in the day the band fails. The method

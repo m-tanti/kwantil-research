@@ -3,864 +3,1008 @@
   "month":"2025-08",
   "level":0.8,
   "method":"aci",
-  "coverage":0.484375
+  "coverage":0.484375,
+  "n":192
  },
  {
   "month":"2025-08",
   "level":0.8,
   "method":"conformal",
-  "coverage":0.4791666667
+  "coverage":0.4791666667,
+  "n":192
  },
  {
   "month":"2025-08",
   "level":0.8,
   "method":"gaussian",
-  "coverage":0.5052083333
+  "coverage":0.5052083333,
+  "n":192
  },
  {
   "month":"2025-08",
   "level":0.8,
   "method":"oracle",
-  "coverage":0.5625
+  "coverage":0.5625,
+  "n":192
  },
  {
   "month":"2025-08",
   "level":0.9,
   "method":"aci",
-  "coverage":0.640625
+  "coverage":0.640625,
+  "n":192
  },
  {
   "month":"2025-08",
   "level":0.9,
   "method":"conformal",
-  "coverage":0.640625
+  "coverage":0.640625,
+  "n":192
  },
  {
   "month":"2025-08",
   "level":0.9,
   "method":"gaussian",
-  "coverage":0.7447916667
+  "coverage":0.7447916667,
+  "n":192
  },
  {
   "month":"2025-08",
   "level":0.9,
   "method":"oracle",
-  "coverage":0.8385416667
+  "coverage":0.8385416667,
+  "n":192
  },
  {
   "month":"2025-08",
   "level":0.95,
   "method":"aci",
-  "coverage":0.7552083333
+  "coverage":0.7552083333,
+  "n":192
  },
  {
   "month":"2025-08",
   "level":0.95,
   "method":"conformal",
-  "coverage":0.7552083333
+  "coverage":0.7552083333,
+  "n":192
  },
  {
   "month":"2025-08",
   "level":0.95,
   "method":"gaussian",
-  "coverage":0.921875
+  "coverage":0.921875,
+  "n":192
  },
  {
   "month":"2025-08",
   "level":0.95,
   "method":"oracle",
-  "coverage":0.9427083333
+  "coverage":0.9427083333,
+  "n":192
  },
  {
   "month":"2025-09",
   "level":0.8,
   "method":"aci",
-  "coverage":0.7503472222
+  "coverage":0.7503472222,
+  "n":2880
  },
  {
   "month":"2025-09",
   "level":0.8,
   "method":"conformal",
-  "coverage":0.7225694444
+  "coverage":0.7225694444,
+  "n":2880
  },
  {
   "month":"2025-09",
   "level":0.8,
   "method":"gaussian",
-  "coverage":0.7357638889
+  "coverage":0.7357638889,
+  "n":2880
  },
  {
   "month":"2025-09",
   "level":0.8,
   "method":"oracle",
-  "coverage":0.8923611111
+  "coverage":0.8923611111,
+  "n":2880
  },
  {
   "month":"2025-09",
   "level":0.9,
   "method":"aci",
-  "coverage":0.8545138889
+  "coverage":0.8545138889,
+  "n":2880
  },
  {
   "month":"2025-09",
   "level":0.9,
   "method":"conformal",
-  "coverage":0.8368055556
+  "coverage":0.8368055556,
+  "n":2880
  },
  {
   "month":"2025-09",
   "level":0.9,
   "method":"gaussian",
-  "coverage":0.8503472222
+  "coverage":0.8503472222,
+  "n":2880
  },
  {
   "month":"2025-09",
   "level":0.9,
   "method":"oracle",
-  "coverage":0.9607638889
+  "coverage":0.9607638889,
+  "n":2880
  },
  {
   "month":"2025-09",
   "level":0.95,
   "method":"aci",
-  "coverage":0.9152777778
+  "coverage":0.9152777778,
+  "n":2880
  },
  {
   "month":"2025-09",
   "level":0.95,
   "method":"conformal",
-  "coverage":0.8993055556
+  "coverage":0.8993055556,
+  "n":2880
  },
  {
   "month":"2025-09",
   "level":0.95,
   "method":"gaussian",
-  "coverage":0.9149305556
+  "coverage":0.9149305556,
+  "n":2880
  },
  {
   "month":"2025-09",
   "level":0.95,
   "method":"oracle",
-  "coverage":0.9864583333
+  "coverage":0.9864583333,
+  "n":2880
  },
  {
   "month":"2025-10",
   "level":0.8,
   "method":"aci",
-  "coverage":0.720094086
+  "coverage":0.720094086,
+  "n":2976
  },
  {
   "month":"2025-10",
   "level":0.8,
   "method":"conformal",
-  "coverage":0.6444892473
+  "coverage":0.6444892473,
+  "n":2976
  },
  {
   "month":"2025-10",
   "level":0.8,
   "method":"gaussian",
-  "coverage":0.6135752688
+  "coverage":0.6135752688,
+  "n":2976
  },
  {
   "month":"2025-10",
   "level":0.8,
   "method":"oracle",
-  "coverage":0.9059139785
+  "coverage":0.9059139785,
+  "n":2976
  },
  {
   "month":"2025-10",
   "level":0.9,
   "method":"aci",
-  "coverage":0.8434139785
+  "coverage":0.8434139785,
+  "n":2976
  },
  {
   "month":"2025-10",
   "level":0.9,
   "method":"conformal",
-  "coverage":0.7741935484
+  "coverage":0.7741935484,
+  "n":2976
  },
  {
   "month":"2025-10",
   "level":0.9,
   "method":"gaussian",
-  "coverage":0.7627688172
+  "coverage":0.7627688172,
+  "n":2976
  },
  {
   "month":"2025-10",
   "level":0.9,
   "method":"oracle",
-  "coverage":0.9801747312
+  "coverage":0.9801747312,
+  "n":2976
  },
  {
   "month":"2025-10",
   "level":0.95,
   "method":"aci",
-  "coverage":0.9038978495
+  "coverage":0.9038978495,
+  "n":2976
  },
  {
   "month":"2025-10",
   "level":0.95,
   "method":"conformal",
-  "coverage":0.8471102151
+  "coverage":0.8471102151,
+  "n":2976
  },
  {
   "month":"2025-10",
   "level":0.95,
   "method":"gaussian",
-  "coverage":0.8592069892
+  "coverage":0.8592069892,
+  "n":2976
  },
  {
   "month":"2025-10",
   "level":0.95,
   "method":"oracle",
-  "coverage":0.9956317204
+  "coverage":0.9956317204,
+  "n":2976
  },
  {
   "month":"2025-11",
   "level":0.8,
   "method":"aci",
-  "coverage":0.7826388889
+  "coverage":0.7826388889,
+  "n":2880
  },
  {
   "month":"2025-11",
   "level":0.8,
   "method":"conformal",
-  "coverage":0.6989583333
+  "coverage":0.6989583333,
+  "n":2880
  },
  {
   "month":"2025-11",
   "level":0.8,
   "method":"gaussian",
-  "coverage":0.6947916667
+  "coverage":0.6947916667,
+  "n":2880
  },
  {
   "month":"2025-11",
   "level":0.8,
   "method":"oracle",
-  "coverage":0.8357638889
+  "coverage":0.8357638889,
+  "n":2880
  },
  {
   "month":"2025-11",
   "level":0.9,
   "method":"aci",
-  "coverage":0.8913194444
+  "coverage":0.8913194444,
+  "n":2880
  },
  {
   "month":"2025-11",
   "level":0.9,
   "method":"conformal",
-  "coverage":0.7920138889
+  "coverage":0.7920138889,
+  "n":2880
  },
  {
   "month":"2025-11",
   "level":0.9,
   "method":"gaussian",
-  "coverage":0.8034722222
+  "coverage":0.8034722222,
+  "n":2880
  },
  {
   "month":"2025-11",
   "level":0.9,
   "method":"oracle",
-  "coverage":0.928125
+  "coverage":0.928125,
+  "n":2880
  },
  {
   "month":"2025-11",
   "level":0.95,
   "method":"aci",
-  "coverage":0.9340277778
+  "coverage":0.9340277778,
+  "n":2880
  },
  {
   "month":"2025-11",
   "level":0.95,
   "method":"conformal",
-  "coverage":0.8538194444
+  "coverage":0.8538194444,
+  "n":2880
  },
  {
   "month":"2025-11",
   "level":0.95,
   "method":"gaussian",
-  "coverage":0.8798611111
+  "coverage":0.8798611111,
+  "n":2880
  },
  {
   "month":"2025-11",
   "level":0.95,
   "method":"oracle",
-  "coverage":0.9670138889
+  "coverage":0.9670138889,
+  "n":2880
  },
  {
   "month":"2025-12",
   "level":0.8,
   "method":"aci",
-  "coverage":0.7879704301
+  "coverage":0.7879704301,
+  "n":2976
  },
  {
   "month":"2025-12",
   "level":0.8,
   "method":"conformal",
-  "coverage":0.6969086022
+  "coverage":0.6969086022,
+  "n":2976
  },
  {
   "month":"2025-12",
   "level":0.8,
   "method":"gaussian",
-  "coverage":0.7022849462
+  "coverage":0.7022849462,
+  "n":2976
  },
  {
   "month":"2025-12",
   "level":0.8,
   "method":"oracle",
-  "coverage":0.8004032258
+  "coverage":0.8004032258,
+  "n":2976
  },
  {
   "month":"2025-12",
   "level":0.9,
   "method":"aci",
-  "coverage":0.8941532258
+  "coverage":0.8941532258,
+  "n":2976
  },
  {
   "month":"2025-12",
   "level":0.9,
   "method":"conformal",
-  "coverage":0.7980510753
+  "coverage":0.7980510753,
+  "n":2976
  },
  {
   "month":"2025-12",
   "level":0.9,
   "method":"gaussian",
-  "coverage":0.8185483871
+  "coverage":0.8185483871,
+  "n":2976
  },
  {
   "month":"2025-12",
   "level":0.9,
   "method":"oracle",
-  "coverage":0.904233871
+  "coverage":0.904233871,
+  "n":2976
  },
  {
   "month":"2025-12",
   "level":0.95,
   "method":"aci",
-  "coverage":0.9321236559
+  "coverage":0.9321236559,
+  "n":2976
  },
  {
   "month":"2025-12",
   "level":0.95,
   "method":"conformal",
-  "coverage":0.8608870968
+  "coverage":0.8608870968,
+  "n":2976
  },
  {
   "month":"2025-12",
   "level":0.95,
   "method":"gaussian",
-  "coverage":0.8877688172
+  "coverage":0.8877688172,
+  "n":2976
  },
  {
   "month":"2025-12",
   "level":0.95,
   "method":"oracle",
-  "coverage":0.9522849462
+  "coverage":0.9522849462,
+  "n":2976
  },
  {
   "month":"2026-01",
   "level":0.8,
   "method":"aci",
-  "coverage":0.8185483871
+  "coverage":0.8185483871,
+  "n":2976
  },
  {
   "month":"2026-01",
   "level":0.8,
   "method":"conformal",
-  "coverage":0.6767473118
+  "coverage":0.6767473118,
+  "n":2976
  },
  {
   "month":"2026-01",
   "level":0.8,
   "method":"gaussian",
-  "coverage":0.6942204301
+  "coverage":0.6942204301,
+  "n":2976
  },
  {
   "month":"2026-01",
   "level":0.8,
   "method":"oracle",
-  "coverage":0.6058467742
+  "coverage":0.6058467742,
+  "n":2976
  },
  {
   "month":"2026-01",
   "level":0.9,
   "method":"aci",
-  "coverage":0.9038978495
+  "coverage":0.9038978495,
+  "n":2976
  },
  {
   "month":"2026-01",
   "level":0.9,
   "method":"conformal",
-  "coverage":0.7755376344
+  "coverage":0.7755376344,
+  "n":2976
  },
  {
   "month":"2026-01",
   "level":0.9,
   "method":"gaussian",
-  "coverage":0.7795698925
+  "coverage":0.7795698925,
+  "n":2976
  },
  {
   "month":"2026-01",
   "level":0.9,
   "method":"oracle",
-  "coverage":0.7429435484
+  "coverage":0.7429435484,
+  "n":2976
  },
  {
   "month":"2026-01",
   "level":0.95,
   "method":"aci",
-  "coverage":0.9270833333
+  "coverage":0.9270833333,
+  "n":2976
  },
  {
   "month":"2026-01",
   "level":0.95,
   "method":"conformal",
-  "coverage":0.8400537634
+  "coverage":0.8400537634,
+  "n":2976
  },
  {
   "month":"2026-01",
   "level":0.95,
   "method":"gaussian",
-  "coverage":0.8397177419
+  "coverage":0.8397177419,
+  "n":2976
  },
  {
   "month":"2026-01",
   "level":0.95,
   "method":"oracle",
-  "coverage":0.8205645161
+  "coverage":0.8205645161,
+  "n":2976
  },
  {
   "month":"2026-02",
   "level":0.8,
   "method":"aci",
-  "coverage":0.8735119048
+  "coverage":0.8735119048,
+  "n":2688
  },
  {
   "month":"2026-02",
   "level":0.8,
   "method":"conformal",
-  "coverage":0.8050595238
+  "coverage":0.8050595238,
+  "n":2688
  },
  {
   "month":"2026-02",
   "level":0.8,
   "method":"gaussian",
-  "coverage":0.8210565476
+  "coverage":0.8210565476,
+  "n":2688
  },
  {
   "month":"2026-02",
   "level":0.8,
   "method":"oracle",
-  "coverage":0.7961309524
+  "coverage":0.7961309524,
+  "n":2688
  },
  {
   "month":"2026-02",
   "level":0.9,
   "method":"aci",
-  "coverage":0.9538690476
+  "coverage":0.9538690476,
+  "n":2688
  },
  {
   "month":"2026-02",
   "level":0.9,
   "method":"conformal",
-  "coverage":0.9136904762
+  "coverage":0.9136904762,
+  "n":2688
  },
  {
   "month":"2026-02",
   "level":0.9,
   "method":"gaussian",
-  "coverage":0.9192708333
+  "coverage":0.9192708333,
+  "n":2688
  },
  {
   "month":"2026-02",
   "level":0.9,
   "method":"oracle",
-  "coverage":0.9055059524
+  "coverage":0.9055059524,
+  "n":2688
  },
  {
   "month":"2026-02",
   "level":0.95,
   "method":"aci",
-  "coverage":0.9810267857
+  "coverage":0.9810267857,
+  "n":2688
  },
  {
   "month":"2026-02",
   "level":0.95,
   "method":"conformal",
-  "coverage":0.9579613095
+  "coverage":0.9579613095,
+  "n":2688
  },
  {
   "month":"2026-02",
   "level":0.95,
   "method":"gaussian",
-  "coverage":0.9698660714
+  "coverage":0.9698660714,
+  "n":2688
  },
  {
   "month":"2026-02",
   "level":0.95,
   "method":"oracle",
-  "coverage":0.9735863095
+  "coverage":0.9735863095,
+  "n":2688
  },
  {
   "month":"2026-03",
   "level":0.8,
   "method":"aci",
-  "coverage":0.8539703903
+  "coverage":0.8539703903,
+  "n":2972
  },
  {
   "month":"2026-03",
   "level":0.8,
   "method":"conformal",
-  "coverage":0.8115746972
+  "coverage":0.8115746972,
+  "n":2972
  },
  {
   "month":"2026-03",
   "level":0.8,
   "method":"gaussian",
-  "coverage":0.8088829071
+  "coverage":0.8088829071,
+  "n":2972
  },
  {
   "month":"2026-03",
   "level":0.8,
   "method":"oracle",
-  "coverage":0.8189771198
+  "coverage":0.8189771198,
+  "n":2972
  },
  {
   "month":"2026-03",
   "level":0.9,
   "method":"aci",
-  "coverage":0.9404441454
+  "coverage":0.9404441454,
+  "n":2972
  },
  {
   "month":"2026-03",
   "level":0.9,
   "method":"conformal",
-  "coverage":0.9064602961
+  "coverage":0.9064602961,
+  "n":2972
  },
  {
   "month":"2026-03",
   "level":0.9,
   "method":"gaussian",
-  "coverage":0.9145356662
+  "coverage":0.9145356662,
+  "n":2972
  },
  {
   "month":"2026-03",
   "level":0.9,
   "method":"oracle",
-  "coverage":0.9061238223
+  "coverage":0.9061238223,
+  "n":2972
  },
  {
   "month":"2026-03",
   "level":0.95,
   "method":"aci",
-  "coverage":0.9761103634
+  "coverage":0.9761103634,
+  "n":2972
  },
  {
   "month":"2026-03",
   "level":0.95,
   "method":"conformal",
-  "coverage":0.949192463
+  "coverage":0.949192463,
+  "n":2972
  },
  {
   "month":"2026-03",
   "level":0.95,
   "method":"gaussian",
-  "coverage":0.9636608345
+  "coverage":0.9636608345,
+  "n":2972
  },
  {
   "month":"2026-03",
   "level":0.95,
   "method":"oracle",
-  "coverage":0.9535666218
+  "coverage":0.9535666218,
+  "n":2972
  },
  {
   "month":"2026-04",
   "level":0.8,
   "method":"aci",
-  "coverage":0.7520833333
+  "coverage":0.7520833333,
+  "n":2880
  },
  {
   "month":"2026-04",
   "level":0.8,
   "method":"conformal",
-  "coverage":0.6972222222
+  "coverage":0.6972222222,
+  "n":2880
  },
  {
   "month":"2026-04",
   "level":0.8,
   "method":"gaussian",
-  "coverage":0.7211805556
+  "coverage":0.7211805556,
+  "n":2880
  },
  {
   "month":"2026-04",
   "level":0.8,
   "method":"oracle",
-  "coverage":0.7364583333
+  "coverage":0.7364583333,
+  "n":2880
  },
  {
   "month":"2026-04",
   "level":0.9,
   "method":"aci",
-  "coverage":0.8694444444
+  "coverage":0.8694444444,
+  "n":2880
  },
  {
   "month":"2026-04",
   "level":0.9,
   "method":"conformal",
-  "coverage":0.8225694444
+  "coverage":0.8225694444,
+  "n":2880
  },
  {
   "month":"2026-04",
   "level":0.9,
   "method":"gaussian",
-  "coverage":0.8836805556
+  "coverage":0.8836805556,
+  "n":2880
  },
  {
   "month":"2026-04",
   "level":0.9,
   "method":"oracle",
-  "coverage":0.8548611111
+  "coverage":0.8548611111,
+  "n":2880
  },
  {
   "month":"2026-04",
   "level":0.95,
   "method":"aci",
-  "coverage":0.9357638889
+  "coverage":0.9357638889,
+  "n":2880
  },
  {
   "month":"2026-04",
   "level":0.95,
   "method":"conformal",
-  "coverage":0.878125
+  "coverage":0.878125,
+  "n":2880
  },
  {
   "month":"2026-04",
   "level":0.95,
   "method":"gaussian",
-  "coverage":0.9503472222
+  "coverage":0.9503472222,
+  "n":2880
  },
  {
   "month":"2026-04",
   "level":0.95,
   "method":"oracle",
-  "coverage":0.9190972222
+  "coverage":0.9190972222,
+  "n":2880
  },
  {
   "month":"2026-05",
   "level":0.8,
   "method":"aci",
-  "coverage":0.8524865591
+  "coverage":0.8524865591,
+  "n":2976
  },
  {
   "month":"2026-05",
   "level":0.8,
   "method":"conformal",
-  "coverage":0.8071236559
+  "coverage":0.8071236559,
+  "n":2976
  },
  {
   "month":"2026-05",
   "level":0.8,
   "method":"gaussian",
-  "coverage":0.8235887097
+  "coverage":0.8235887097,
+  "n":2976
  },
  {
   "month":"2026-05",
   "level":0.8,
   "method":"oracle",
-  "coverage":0.7886424731
+  "coverage":0.7886424731,
+  "n":2976
  },
  {
   "month":"2026-05",
   "level":0.9,
   "method":"aci",
-  "coverage":0.9287634409
+  "coverage":0.9287634409,
+  "n":2976
  },
  {
   "month":"2026-05",
   "level":0.9,
   "method":"conformal",
-  "coverage":0.8870967742
+  "coverage":0.8870967742,
+  "n":2976
  },
  {
   "month":"2026-05",
   "level":0.9,
   "method":"gaussian",
-  "coverage":0.9186827957
+  "coverage":0.9186827957,
+  "n":2976
  },
  {
   "month":"2026-05",
   "level":0.9,
   "method":"oracle",
-  "coverage":0.8813844086
+  "coverage":0.8813844086,
+  "n":2976
  },
  {
   "month":"2026-05",
   "level":0.95,
   "method":"aci",
-  "coverage":0.9744623656
+  "coverage":0.9744623656,
+  "n":2976
  },
  {
   "month":"2026-05",
   "level":0.95,
   "method":"conformal",
-  "coverage":0.9378360215
+  "coverage":0.9378360215,
+  "n":2976
  },
  {
   "month":"2026-05",
   "level":0.95,
   "method":"gaussian",
-  "coverage":0.9650537634
+  "coverage":0.9650537634,
+  "n":2976
  },
  {
   "month":"2026-05",
   "level":0.95,
   "method":"oracle",
-  "coverage":0.9307795699
+  "coverage":0.9307795699,
+  "n":2976
  },
  {
   "month":"2026-06",
   "level":0.8,
   "method":"aci",
-  "coverage":0.6951388889
+  "coverage":0.6951388889,
+  "n":2880
  },
  {
   "month":"2026-06",
   "level":0.8,
   "method":"conformal",
-  "coverage":0.6642361111
+  "coverage":0.6642361111,
+  "n":2880
  },
  {
   "month":"2026-06",
   "level":0.8,
   "method":"gaussian",
-  "coverage":0.6802083333
+  "coverage":0.6802083333,
+  "n":2880
  },
  {
   "month":"2026-06",
   "level":0.8,
   "method":"oracle",
-  "coverage":0.7541666667
+  "coverage":0.7541666667,
+  "n":2880
  },
  {
   "month":"2026-06",
   "level":0.9,
   "method":"aci",
-  "coverage":0.828125
+  "coverage":0.828125,
+  "n":2880
  },
  {
   "month":"2026-06",
   "level":0.9,
   "method":"conformal",
-  "coverage":0.775
+  "coverage":0.775,
+  "n":2880
  },
  {
   "month":"2026-06",
   "level":0.9,
   "method":"gaussian",
-  "coverage":0.7746527778
+  "coverage":0.7746527778,
+  "n":2880
  },
  {
   "month":"2026-06",
   "level":0.9,
   "method":"oracle",
-  "coverage":0.8819444444
+  "coverage":0.8819444444,
+  "n":2880
  },
  {
   "month":"2026-06",
   "level":0.95,
   "method":"aci",
-  "coverage":0.9267361111
+  "coverage":0.9267361111,
+  "n":2880
  },
  {
   "month":"2026-06",
   "level":0.95,
   "method":"conformal",
-  "coverage":0.8527777778
+  "coverage":0.8527777778,
+  "n":2880
  },
  {
   "month":"2026-06",
   "level":0.95,
   "method":"gaussian",
-  "coverage":0.8440972222
+  "coverage":0.8440972222,
+  "n":2880
  },
  {
   "month":"2026-06",
   "level":0.95,
   "method":"oracle",
-  "coverage":0.9402777778
+  "coverage":0.9402777778,
+  "n":2880
  },
  {
   "month":"2026-07",
   "level":0.8,
   "method":"aci",
-  "coverage":0.8739919355
+  "coverage":0.8739919355,
+  "n":2976
  },
  {
   "month":"2026-07",
   "level":0.8,
   "method":"conformal",
-  "coverage":0.7936827957
+  "coverage":0.7936827957,
+  "n":2976
  },
  {
   "month":"2026-07",
   "level":0.8,
   "method":"gaussian",
-  "coverage":0.7916666667
+  "coverage":0.7916666667,
+  "n":2976
  },
  {
   "month":"2026-07",
   "level":0.8,
   "method":"oracle",
-  "coverage":0.8548387097
+  "coverage":0.8548387097,
+  "n":2976
  },
  {
   "month":"2026-07",
   "level":0.9,
   "method":"aci",
-  "coverage":0.9643817204
+  "coverage":0.9643817204,
+  "n":2976
  },
  {
   "month":"2026-07",
   "level":0.9,
   "method":"conformal",
-  "coverage":0.9206989247
+  "coverage":0.9206989247,
+  "n":2976
  },
  {
   "month":"2026-07",
   "level":0.9,
   "method":"gaussian",
-  "coverage":0.9099462366
+  "coverage":0.9099462366,
+  "n":2976
  },
  {
   "month":"2026-07",
   "level":0.9,
   "method":"oracle",
-  "coverage":0.9462365591
+  "coverage":0.9462365591,
+  "n":2976
  },
  {
   "month":"2026-07",
   "level":0.95,
   "method":"aci",
-  "coverage":0.9828629032
+  "coverage":0.9828629032,
+  "n":2976
  },
  {
   "month":"2026-07",
   "level":0.95,
   "method":"conformal",
-  "coverage":0.9630376344
+  "coverage":0.9630376344,
+  "n":2976
  },
  {
   "month":"2026-07",
   "level":0.95,
   "method":"gaussian",
-  "coverage":0.9616935484
+  "coverage":0.9616935484,
+  "n":2976
  },
  {
   "month":"2026-07",
   "level":0.95,
   "method":"oracle",
-  "coverage":0.9751344086
+  "coverage":0.9751344086,
+  "n":2976
  }
 ]

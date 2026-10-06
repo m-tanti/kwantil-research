@@ -1,6 +1,17 @@
 """Acerbi & Szekely (2014) Z1 / Z2 ES backtests with bootstrap zones.
 
+Names follow the paper. Z1 is the conditional statistic: the mean of X_t/|ES_t|
+over breach days, plus 1. It is blind to the number of breaches by
+construction and is meant to be paired with a count test. Z2 is the
+unconditional statistic: the same sum divided by T*alpha, so it responds to
+both breach frequency and breach depth. Releases up to 0.1.x had the two names
+swapped; see CHANGELOG.
+
 P&L sign: positive=gain, negative=loss. VaR_alpha / ES_alpha are negative.
+
+The green/yellow/red zones here are this package's own bootstrap-percentile
+bands for an ES statistic. They are not the Basel VaR traffic light (see
+`basel_tl`).
 """
 
 from __future__ import annotations
@@ -29,24 +40,8 @@ def _z1_statistic(
     realized: np.ndarray,
     var_pred: np.ndarray,
     es_pred: np.ndarray,
-    alpha: float,
 ) -> float:
-    # Z1 = (1/(N*alpha)) * sum_t (X_t * 1[X_t<VaR] / |ES_t|) + 1.
-    # Divide by |ES| (P&L sign convention) so the A&S derivation lines up.
-    n = realized.size
-    breach = realized < var_pred
-    es_mag = np.abs(es_pred)
-    es_safe = np.where(es_mag < 1e-12, 1e-12, es_mag)
-    contributions = np.where(breach, realized / es_safe, 0.0)
-    return float(contributions.sum() / (n * alpha) + 1.0)
-
-
-def _z2_statistic(
-    realized: np.ndarray,
-    var_pred: np.ndarray,
-    es_pred: np.ndarray,
-) -> float:
-    """Z2, conditional on breach. NaN when no breaches occurred."""
+    """Z1, conditional on breach. NaN when no breaches occurred."""
     breach = realized < var_pred
     n_breach = int(breach.sum())
     if n_breach == 0:
@@ -56,42 +51,62 @@ def _z2_statistic(
     return float((realized[breach] / es_safe[breach]).mean() + 1.0)
 
 
-def acerbi_szekely_test_1(
+def _z2_statistic(
     realized: np.ndarray,
     var_pred: np.ndarray,
     es_pred: np.ndarray,
     alpha: float,
+) -> float:
+    # Z2 = (1/(T*alpha)) * sum_t (X_t * 1[X_t<VaR] / |ES_t|) + 1.
+    # Divide by |ES| (P&L sign convention) so the A&S derivation lines up.
+    n = realized.size
+    breach = realized < var_pred
+    es_mag = np.abs(es_pred)
+    es_safe = np.where(es_mag < 1e-12, 1e-12, es_mag)
+    contributions = np.where(breach, realized / es_safe, 0.0)
+    return float(contributions.sum() / (n * alpha) + 1.0)
+
+
+def acerbi_szekely_test_1(
+    realized: np.ndarray,
+    var_pred: np.ndarray,
+    es_pred: np.ndarray,
     sample_under_h0: Callable[[np.random.Generator, int], np.ndarray] | None = None,
     n_simulations: int = 5_000,
     seed: int = 42,
 ) -> AcerbiSzekelyResult:
-    """A&S Test 1 (unconditional). Without `sample_under_h0`, returns the statistic only."""
+    """A&S Test 1 (conditional Z1). Blind to breach frequency; pair with a count test."""
     realized = np.asarray(realized, dtype=float).ravel()
     var_pred = np.asarray(var_pred, dtype=float).ravel()
     es_pred = np.asarray(es_pred, dtype=float).ravel()
     if not (realized.size == var_pred.size == es_pred.size):
         raise ValueError("realized / var_pred / es_pred must align in length")
 
-    z1 = _z1_statistic(realized, var_pred, es_pred, alpha)
+    z1 = _z1_statistic(realized, var_pred, es_pred)
     out: dict = {
         "statistic": z1,
         "n_obs": realized.size,
         "n_breaches": int((realized < var_pred).sum()),
     }
-    if sample_under_h0 is None:
+    if sample_under_h0 is None or np.isnan(z1):
         out.update({"zone": None, "p_value": float("nan"),
                     "green_threshold": float("nan"), "yellow_threshold": float("nan")})
         return out
 
     rng = np.random.default_rng(seed)
-    null_z1s = np.empty(n_simulations)
-    for i in range(n_simulations):
+    null_z1s = []
+    for _ in range(n_simulations):
         x_sim = sample_under_h0(rng, realized.size)
-        null_z1s[i] = _z1_statistic(x_sim, var_pred, es_pred, alpha)
-    # Lower-tail: reject when Z1 falls below the 5th-percentile null.
-    p_value = float(np.mean(null_z1s <= z1))
-    green_threshold = float(np.percentile(null_z1s, 5.0))
-    yellow_threshold = float(np.percentile(null_z1s, 0.1))
+        z = _z1_statistic(x_sim, var_pred, es_pred)
+        if not np.isnan(z):
+            null_z1s.append(z)
+    if not null_z1s:
+        out.update({"zone": None, "p_value": float("nan")})
+        return out
+    null_arr = np.array(null_z1s)
+    p_value = float(np.mean(null_arr <= z1))
+    green_threshold = float(np.percentile(null_arr, 5.0))
+    yellow_threshold = float(np.percentile(null_arr, 0.1))
     if z1 >= green_threshold:
         zone = "green"
     elif z1 >= yellow_threshold:
@@ -103,7 +118,7 @@ def acerbi_szekely_test_1(
         "p_value": p_value,
         "green_threshold": green_threshold,
         "yellow_threshold": yellow_threshold,
-        "n_simulations": n_simulations,
+        "n_simulations": len(null_arr),
     })
     return out
 
@@ -112,42 +127,38 @@ def acerbi_szekely_test_2(
     realized: np.ndarray,
     var_pred: np.ndarray,
     es_pred: np.ndarray,
+    alpha: float,
     sample_under_h0: Callable[[np.random.Generator, int], np.ndarray] | None = None,
     n_simulations: int = 5_000,
     seed: int = 42,
 ) -> AcerbiSzekelyResult:
-    """A&S Test 2 (conditional on breach)."""
+    """A&S Test 2 (unconditional Z2). Without `sample_under_h0`, returns the statistic only."""
     realized = np.asarray(realized, dtype=float).ravel()
     var_pred = np.asarray(var_pred, dtype=float).ravel()
     es_pred = np.asarray(es_pred, dtype=float).ravel()
     if not (realized.size == var_pred.size == es_pred.size):
         raise ValueError("realized / var_pred / es_pred must align in length")
 
-    z2 = _z2_statistic(realized, var_pred, es_pred)
+    z2 = _z2_statistic(realized, var_pred, es_pred, alpha)
     out: dict = {
         "statistic": z2,
         "n_obs": realized.size,
         "n_breaches": int((realized < var_pred).sum()),
     }
-    if sample_under_h0 is None or np.isnan(z2):
+    if sample_under_h0 is None:
         out.update({"zone": None, "p_value": float("nan"),
                     "green_threshold": float("nan"), "yellow_threshold": float("nan")})
         return out
 
     rng = np.random.default_rng(seed)
-    null_z2s = []
-    for _ in range(n_simulations):
+    null_z2s = np.empty(n_simulations)
+    for i in range(n_simulations):
         x_sim = sample_under_h0(rng, realized.size)
-        z = _z2_statistic(x_sim, var_pred, es_pred)
-        if not np.isnan(z):
-            null_z2s.append(z)
-    if not null_z2s:
-        out.update({"zone": None, "p_value": float("nan")})
-        return out
-    null_arr = np.array(null_z2s)
-    p_value = float(np.mean(null_arr <= z2))
-    green_threshold = float(np.percentile(null_arr, 5.0))
-    yellow_threshold = float(np.percentile(null_arr, 0.1))
+        null_z2s[i] = _z2_statistic(x_sim, var_pred, es_pred, alpha)
+    # Lower-tail: reject when Z2 falls below the 5th-percentile null.
+    p_value = float(np.mean(null_z2s <= z2))
+    green_threshold = float(np.percentile(null_z2s, 5.0))
+    yellow_threshold = float(np.percentile(null_z2s, 0.1))
     if z2 >= green_threshold:
         zone = "green"
     elif z2 >= yellow_threshold:
@@ -159,7 +170,7 @@ def acerbi_szekely_test_2(
         "p_value": p_value,
         "green_threshold": green_threshold,
         "yellow_threshold": yellow_threshold,
-        "n_simulations": len(null_arr),
+        "n_simulations": n_simulations,
     })
     return out
 

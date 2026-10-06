@@ -20,8 +20,8 @@ nothing if the reader has to take it on trust.
 | [`var-backtest-tail-risk`](analyses/var-backtest-tail-risk/) | [Tail Risk Backtesting: When the Test Improves and the Model Does Not](https://kwantil.com/papers/did-the-model-get-better/) | Yahoo Finance via `yfinance` |
 | [`tool-wear-calibration`](analyses/tool-wear-calibration/) | [Tool Change Intervals, Audited Against Measured Wear](https://kwantil.com/papers/tool-wear-calibration-audit/) | NASA Milling Data Set |
 
-The live scoreboard for the tail-risk study, with its full methodology manual,
-is at [var-backtest.mtanti.com](https://var-backtest.mtanti.com).
+The scoreboard for the tail-risk study, a snapshot with its full methodology
+manual and tuning register, is at [kwantil.com/var-backtest](https://kwantil.com/var-backtest/).
 
 Each analysis directory carries four things:
 

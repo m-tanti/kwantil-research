@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "var-backtest-uq"
 version = "0.1.0"
-description = "Live VaR/ES backtester with Conformal-PID calibration on a 3-asset cross-asset book. Companion code for var-backtest.mtanti.com."
+description = "Walk-forward VaR/ES backtester with Conformal-PID calibration on a 3-asset cross-asset book. Companion code for kwantil.com/var-backtest."
 requires-python = ">=3.10"
 license = { text = "Apache-2.0" }
 authors = [{ name = "Matthew Tanti", email = "matthew@mtanti.com" }]
@@ -26,8 +26,8 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://var-backtest.mtanti.com"
-Documentation = "https://var-backtest.mtanti.com/manual"
+Homepage = "https://kwantil.com/var-backtest/"
+Documentation = "https://kwantil.com/var-backtest/manual"
 # Repository/Changelog URLs return when the var-backtest repo is published
 # (planned under github.com/m-tanti). Do not point at github.com/mtanti: that
 # username belongs to someone else.

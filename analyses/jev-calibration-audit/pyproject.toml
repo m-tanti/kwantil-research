@@ -1,0 +1,23 @@
+[project]
+name = "kwantil-jev-calibration-audit"
+version = "1.0.0"
+description = "Calibration audit of TypeSafe's Jev (jev-1.13.0) against labelled outcomes and a sealed forecasting set"
+requires-python = ">=3.11"
+
+# Pinned rather than bounded, as in the other analyses. The bootstrap and the recalibration
+# draws are seeded; a numpy minor version has not changed default_rng streams, but the pin
+# is what makes that claim checkable.
+dependencies = [
+    "numpy==2.2.6",
+    "scipy==1.17.1",
+    "scikit-learn==1.8.0",
+    "requests==2.32.3",
+    "datasets==3.6.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest==8.3.5"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
