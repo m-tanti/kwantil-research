@@ -2,9 +2,21 @@
 
 Decoupled from a strict Fissler-Ziegel (2016) joint update: VaR runs the
 unchanged ConformalPIDController; ES applies a per-alpha multiplicative
-scale driven by a clipped PID on the realised tail-mean residual on
-breach days. Interface-compatible with a strict FZ updater if swapped
-in later.
+scale to the EXCESS of the base ES over the calibrated VaR, driven by a
+clipped PID on the realised tail-mean residual on breach days.
+Interface-compatible with a strict FZ updater if swapped in later.
+
+Two defects in releases up to 0.1.x, both fixed in 0.2.0:
+
+  1. The scale multiplied the whole ES. With a scale below 1 the stated ES
+     could be a smaller loss than the stated VaR, which is impossible: ES is
+     the mean loss beyond the VaR. It happened on 21% of graded days at the
+     99% level and 87% at 97.5%. The scale now multiplies only the excess
+     beyond the VaR, so ES is at least as deep as VaR for any positive scale.
+  2. The corrector's error was computed against the UNCORRECTED ES, so the
+     correction never fed back into its own error and the scale drifted to a
+     bound whenever the base ES was biased. The error is now computed against
+     the ES the model actually stated.
 """
 
 from __future__ import annotations
@@ -29,10 +41,11 @@ from .calibrator import (
 class EsCorrector:
     """Per-alpha multiplicative ES scale, updated on breach days only.
 
-    Residual e_t = realised/|ES_base| + 1, which is 0 when realised matches
-    predicted ES and < 0 when realised is more extreme. PID drives a
-    log-space scale, bounded to [s_min, s_max]. Update is gated on breach,
-    matching the AS Z1 conditioning.
+    Residual e_t = realised/|ES_stated| + 1, which is 0 when realised matches
+    the ES the model stated and < 0 when realised is more extreme. PID drives
+    a log-space scale, bounded to [s_min, s_max]. Update is gated on breach,
+    matching the AS Z1 conditioning. The caller passes the STATED (corrected)
+    ES, so the loop is closed: a correction changes the next error.
     """
 
     def __init__(
@@ -63,10 +76,10 @@ class EsCorrector:
     def scale(self) -> float:
         return float(np.clip(math.exp(self._log_scale), self._lo, self._hi))
 
-    def update(self, realised: float, base_es: float, breached: bool) -> None:
+    def update(self, realised: float, stated_es: float, breached: bool) -> None:
         if not breached:
             return
-        es_mag = abs(base_es)
+        es_mag = abs(stated_es)
         if es_mag < 1e-12:
             return
         # error < 0 (realised more extreme than predicted ES) grows the scale.
@@ -111,11 +124,14 @@ class JointCalibratedDistribution(CalibratedDistribution):
         self._es_correctors: dict[float, EsCorrector] = dict(es_correctors)
 
     def es(self, p: float) -> float:
-        base_es = _es_from_base_below(self._base, self.quantile(p))
+        var = self.quantile(p)
+        base_es = _es_from_base_below(self._base, var)
         corrector = self._es_correctors.get(p)
         if corrector is None:
             return base_es
-        return corrector.scale * base_es
+        # Scale the excess beyond the VaR, never the whole ES: for any positive
+        # scale the stated ES is then at least as deep as the stated VaR.
+        return var + corrector.scale * min(base_es - var, 0.0)
 
     def base_es(self, p: float) -> float:
         """Uncorrected ES at the calibrated VaR. Lets the corrector see the same number as the runner."""
@@ -223,9 +239,9 @@ class JointVarEsCalibrator:
         joint_pnl: JointCalibratedDistribution = self._last_forecast.portfolio_pnl()  # type: ignore[assignment]
         for alpha_f, corrector in self._es_correctors.items():
             var_now = joint_pnl.quantile(alpha_f)
-            base_es_now = joint_pnl.base_es(alpha_f)
+            stated_es_now = joint_pnl.es(alpha_f)
             breached = realized < var_now
-            corrector.update(realized, base_es_now, breached)
+            corrector.update(realized, stated_es_now, breached)
 
         self._var_calibrator.observe_realized(realized, realized_per_asset)
 

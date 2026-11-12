@@ -30,7 +30,7 @@ pin it.
 
 ```bash
 pip install -e .
-pytest -q                                        # 31 tests, ~26 s
+pytest -q                                        # 54 tests, ~27 s
 
 python scripts/run_backtest.py --method all      # ~6 min
 ```

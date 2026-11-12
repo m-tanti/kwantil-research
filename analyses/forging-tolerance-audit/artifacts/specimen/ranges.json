@@ -1,0 +1,103 @@
+{
+ "model": {
+  "target": "longest of the 4 measured lengths, mm",
+  "n_features": 14,
+  "features": [
+   "temp_peak_u1",
+   "temp_peak_f",
+   "temp_at_forge_start",
+   "transfer_s",
+   "forge_duration_s",
+   "force_mean",
+   "force_p95",
+   "power_mean",
+   "chuck_force_mean_abs",
+   "mandrel_force_mean_abs",
+   "a_pos_min",
+   "l_pos_min",
+   "r_pos_min",
+   "box_temp_mean"
+  ],
+  "ridge_penalty": 1.0,
+  "mae_mm": 0.8639331114420523,
+  "mae_no_features_mm": 0.9912011285903134,
+  "sd_target_mm": 1.1078359106556657,
+  "pred_min": 233.61393363993488,
+  "pred_max": 237.29590090378213,
+  "target_min": 232.18,
+  "target_max": 237.947,
+  "upper_limit_mm": 237.0,
+  "n_over_limit": 9
+ },
+ "constructions": [
+  {
+   "construction": "hw_insample",
+   "label": "From errors on its own training data",
+   "stated": 0.9,
+   "coverage": 0.7283950617283951,
+   "lo": 0.6228457676019475,
+   "hi": 0.8132617736202826,
+   "coverage_long": 0.6666666666666666,
+   "long_lo": 0.4537345197425524,
+   "long_hi": 0.8280524739491653,
+   "n": 81,
+   "n_long": 21,
+   "median_width_mm": 2.622606899385028,
+   "coverage_by_day": {
+    "2017-10-31": 0.7,
+    "2017-11-01": 0.64,
+    "2017-11-02": 0.9259259259259259,
+    "2017-11-03": 0.38461538461538464,
+    "2017-11-06": 1.0
+   },
+   "severity": "Material",
+   "severity_reason": "the stated 90% lies outside the interval of delivered coverage [62%, 81%], and on the longest parts coverage is 67% with an upper bound of 83%"
+  },
+  {
+   "construction": "hw_day",
+   "label": "From errors on held-out days",
+   "stated": 0.9,
+   "coverage": 0.9382716049382716,
+   "lo": 0.8635075236315787,
+   "hi": 0.9733474879029708,
+   "coverage_long": 1.0,
+   "long_lo": 0.8453609810751531,
+   "long_hi": 1.0,
+   "n": 81,
+   "n_long": 21,
+   "median_width_mm": 6.3823687546008046,
+   "coverage_by_day": {
+    "2017-10-31": 1.0,
+    "2017-11-01": 1.0,
+    "2017-11-02": 1.0,
+    "2017-11-03": 0.6153846153846154,
+    "2017-11-06": 1.0
+   },
+   "severity": "Observation",
+   "severity_reason": "the stated 90% lies inside the interval of delivered coverage [86%, 97%]"
+  },
+  {
+   "construction": "hw_row",
+   "label": "From errors on held-out rows",
+   "stated": 0.9,
+   "coverage": 0.8765432098765432,
+   "lo": 0.787449267620232,
+   "hi": 0.9315388408812824,
+   "coverage_long": 0.8095238095238095,
+   "long_lo": 0.5999943530979508,
+   "long_hi": 0.9233243494723822,
+   "n": 81,
+   "n_long": 21,
+   "median_width_mm": 3.3734794463615025,
+   "coverage_by_day": {
+    "2017-10-31": 1.0,
+    "2017-11-01": 0.8,
+    "2017-11-02": 1.0,
+    "2017-11-03": 0.6153846153846154,
+    "2017-11-06": 1.0
+   },
+   "severity": "Observation",
+   "severity_reason": "the stated 90% lies inside the interval of delivered coverage [79%, 93%]"
+  }
+ ]
+}

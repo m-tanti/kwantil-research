@@ -77,7 +77,7 @@ a local Parquet cache on first run.
 ```bash
 cd analyses/var-backtest-tail-risk
 pip install -e .
-pytest -q                          # 31 tests, ~26 s
+pytest -q                          # 54 tests, ~27 s
 ```
 
 ### The full backtest

@@ -1,0 +1,254 @@
+[
+ {
+  "method": "parametric",
+  "year": 2018,
+  "breaches": 5,
+  "n_days": 251,
+  "expected": 2.51
+ },
+ {
+  "method": "parametric",
+  "year": 2019,
+  "breaches": 0,
+  "n_days": 252,
+  "expected": 2.52
+ },
+ {
+  "method": "parametric",
+  "year": 2020,
+  "breaches": 9,
+  "n_days": 253,
+  "expected": 2.53
+ },
+ {
+  "method": "parametric",
+  "year": 2021,
+  "breaches": 7,
+  "n_days": 252,
+  "expected": 2.52
+ },
+ {
+  "method": "parametric",
+  "year": 2022,
+  "breaches": 7,
+  "n_days": 251,
+  "expected": 2.51
+ },
+ {
+  "method": "parametric",
+  "year": 2023,
+  "breaches": 2,
+  "n_days": 250,
+  "expected": 2.5
+ },
+ {
+  "method": "parametric",
+  "year": 2024,
+  "breaches": 5,
+  "n_days": 252,
+  "expected": 2.52
+ },
+ {
+  "method": "parametric",
+  "year": 2025,
+  "breaches": 4,
+  "n_days": 250,
+  "expected": 2.5
+ },
+ {
+  "method": "parametric",
+  "year": 2026,
+  "breaches": 6,
+  "n_days": 161,
+  "expected": 1.61
+ },
+ {
+  "method": "historical",
+  "year": 2018,
+  "breaches": 4,
+  "n_days": 251,
+  "expected": 2.51
+ },
+ {
+  "method": "historical",
+  "year": 2019,
+  "breaches": 6,
+  "n_days": 252,
+  "expected": 2.52
+ },
+ {
+  "method": "historical",
+  "year": 2020,
+  "breaches": 7,
+  "n_days": 253,
+  "expected": 2.53
+ },
+ {
+  "method": "historical",
+  "year": 2021,
+  "breaches": 0,
+  "n_days": 252,
+  "expected": 2.52
+ },
+ {
+  "method": "historical",
+  "year": 2022,
+  "breaches": 7,
+  "n_days": 251,
+  "expected": 2.51
+ },
+ {
+  "method": "historical",
+  "year": 2023,
+  "breaches": 1,
+  "n_days": 250,
+  "expected": 2.5
+ },
+ {
+  "method": "historical",
+  "year": 2024,
+  "breaches": 5,
+  "n_days": 252,
+  "expected": 2.52
+ },
+ {
+  "method": "historical",
+  "year": 2025,
+  "breaches": 4,
+  "n_days": 250,
+  "expected": 2.5
+ },
+ {
+  "method": "historical",
+  "year": 2026,
+  "breaches": 4,
+  "n_days": 161,
+  "expected": 1.61
+ },
+ {
+  "method": "distributional",
+  "year": 2018,
+  "breaches": 3,
+  "n_days": 251,
+  "expected": 2.51
+ },
+ {
+  "method": "distributional",
+  "year": 2019,
+  "breaches": 0,
+  "n_days": 252,
+  "expected": 2.52
+ },
+ {
+  "method": "distributional",
+  "year": 2020,
+  "breaches": 2,
+  "n_days": 253,
+  "expected": 2.53
+ },
+ {
+  "method": "distributional",
+  "year": 2021,
+  "breaches": 2,
+  "n_days": 252,
+  "expected": 2.52
+ },
+ {
+  "method": "distributional",
+  "year": 2022,
+  "breaches": 1,
+  "n_days": 251,
+  "expected": 2.51
+ },
+ {
+  "method": "distributional",
+  "year": 2023,
+  "breaches": 1,
+  "n_days": 250,
+  "expected": 2.5
+ },
+ {
+  "method": "distributional",
+  "year": 2024,
+  "breaches": 3,
+  "n_days": 252,
+  "expected": 2.52
+ },
+ {
+  "method": "distributional",
+  "year": 2025,
+  "breaches": 3,
+  "n_days": 250,
+  "expected": 2.5
+ },
+ {
+  "method": "distributional",
+  "year": 2026,
+  "breaches": 2,
+  "n_days": 161,
+  "expected": 1.61
+ },
+ {
+  "method": "conformal_pid",
+  "year": 2018,
+  "breaches": 2,
+  "n_days": 251,
+  "expected": 2.51
+ },
+ {
+  "method": "conformal_pid",
+  "year": 2019,
+  "breaches": 2,
+  "n_days": 252,
+  "expected": 2.52
+ },
+ {
+  "method": "conformal_pid",
+  "year": 2020,
+  "breaches": 3,
+  "n_days": 253,
+  "expected": 2.53
+ },
+ {
+  "method": "conformal_pid",
+  "year": 2021,
+  "breaches": 2,
+  "n_days": 252,
+  "expected": 2.52
+ },
+ {
+  "method": "conformal_pid",
+  "year": 2022,
+  "breaches": 1,
+  "n_days": 251,
+  "expected": 2.51
+ },
+ {
+  "method": "conformal_pid",
+  "year": 2023,
+  "breaches": 3,
+  "n_days": 250,
+  "expected": 2.5
+ },
+ {
+  "method": "conformal_pid",
+  "year": 2024,
+  "breaches": 6,
+  "n_days": 252,
+  "expected": 2.52
+ },
+ {
+  "method": "conformal_pid",
+  "year": 2025,
+  "breaches": 3,
+  "n_days": 250,
+  "expected": 2.5
+ },
+ {
+  "method": "conformal_pid",
+  "year": 2026,
+  "breaches": 2,
+  "n_days": 161,
+  "expected": 1.61
+ }
+]

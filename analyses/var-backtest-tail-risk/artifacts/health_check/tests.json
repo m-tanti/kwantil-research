@@ -1,0 +1,98 @@
+[
+ {
+  "statistic": "z1",
+  "n_cells": 10,
+  "cells_changed": 10,
+  "share_changed": 1.0,
+  "green_by_null": {
+   "gaussian": 0,
+   "t_df15": 5,
+   "t_moment": 6,
+   "t_df8": 7,
+   "t_df5": 10,
+   "empirical": 10
+  },
+  "controls": [
+   {
+    "control": "broken_gauss_matched",
+    "kind": "depth",
+    "alpha": 0.01,
+    "zone_as_used": "yellow",
+    "p_value": 0.008,
+    "kupiec_p": 0.6726,
+    "n_breaches": 24,
+    "caught": true
+   },
+   {
+    "control": "broken_gauss_matched",
+    "kind": "depth",
+    "alpha": 0.025,
+    "zone_as_used": "red",
+    "p_value": 0.0,
+    "kupiec_p": 0.8878,
+    "n_breaches": 53,
+    "caught": true
+   }
+  ],
+  "severity": "Material",
+  "severity_reason": "100% of its verdicts change zone when only the reference distribution changes"
+ },
+ {
+  "statistic": "z2",
+  "n_cells": 10,
+  "cells_changed": 4,
+  "share_changed": 0.4,
+  "green_by_null": {
+   "gaussian": 6,
+   "t_df15": 6,
+   "t_moment": 6,
+   "t_df8": 6,
+   "t_df5": 6,
+   "empirical": 10
+  },
+  "controls": [
+   {
+    "control": "broken_gauss_matched",
+    "kind": "depth",
+    "alpha": 0.01,
+    "zone_as_used": "green",
+    "p_value": 0.182,
+    "kupiec_p": 0.6726,
+    "n_breaches": 24,
+    "caught": false
+   },
+   {
+    "control": "broken_gauss_matched",
+    "kind": "depth",
+    "alpha": 0.025,
+    "zone_as_used": "green",
+    "p_value": 0.2405,
+    "kupiec_p": 0.8878,
+    "n_breaches": 53,
+    "caught": false
+   },
+   {
+    "control": "broken_scaled_0.8",
+    "kind": "frequency",
+    "alpha": 0.01,
+    "zone_as_used": "red",
+    "p_value": 0.0,
+    "kupiec_p": 0.0,
+    "n_breaches": 54,
+    "caught": true
+   },
+   {
+    "control": "broken_scaled_0.8",
+    "kind": "frequency",
+    "alpha": 0.025,
+    "zone_as_used": "red",
+    "p_value": 0.0,
+    "kupiec_p": 0.0,
+    "n_breaches": 100,
+    "caught": true
+   }
+  ],
+  "severity": "Material",
+  "severity_reason": "it passes a model built to be broken (right breach count, thin tail, green at the 99.0% level, p = 0.182; right breach count, thin tail, green at the 97.5% level, p = 0.240)"
+ }
+]

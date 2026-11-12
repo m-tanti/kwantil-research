@@ -1,0 +1,86 @@
+[
+ {
+  "id": "F-01",
+  "kind": "model",
+  "title": "Parametric EWMA VaR at the stated 99.0% level was breached on 2.07% of days, against 1.0% stated",
+  "severity": "Material",
+  "severity_reason": "the stated breach rate lies outside the interval (more breaches than stated) and breaches arrive in clusters (independence rejected, p = 0.040), and the model sat outside the green zone in 54% of 250-day windows (interval lower bound 27.6%, against 10.8% for a correctly stated model)",
+  "measurement": "99.0% level: 45 breaches against 21.7 stated, rate 2.07% [1.43%, 2.77%], Material; 97.5% level: 79 breaches against 54.3 stated, rate 3.64% [2.80%, 4.57%], Significant. Intervals are 95% month-block bootstrap over 104 calendar months, 2,172 trading days. At the 99% level the trailing 250-day count reached 11 and stood at 8 on the last day; the model sat outside the green zone in 54% of 1,923 complete windows [28%, 86%], against 10.8% for a correctly stated model.",
+  "evidence": "coverage.json, rolling.json, yearly.json, findings.csv",
+  "consequence": "Illustration on an assumed EUR 100,000,000 book: the addend raised the VaR component of the own funds requirement by EUR 1,621,308 on average over the period [EUR 629,407, EUR 2,643,462], and by EUR 5,936,423 at its peak. With the addend the component averaged EUR 15,549,595 (a multiplication factor 11.2% higher on average; under the add-on table that applies from 1 January 2027 the same counts give 11.2%), which is still EUR 3,522,014 below the EUR 19,071,609 of Conformal-PID, the model that held its level. The addend did not close the gap the understated VaR opened.",
+  "action": "Do not quote this VaR at its stated level. Either re-state it at the level it delivered, or replace the step that sets its width: the breach count is too high for too long to be a bad year. Read the row below it in the table before choosing a replacement, because the model that holds its level is also the one that quotes the larger VaR.",
+  "limit": "One three-asset book over one period. The interval resamples calendar months, so it carries clustering within a month and not dependence across months. The zone shares come from overlapping 250-day windows, of which this period holds fewer than 9 that do not overlap. The euro figures assume an illustrative book of EUR 100 million, cover the VaR component only, and scale a one-day VaR to ten days by the square root of time."
+ },
+ {
+  "id": "F-02",
+  "kind": "model",
+  "title": "Historical simulation VaR at the stated 99.0% level was breached on 1.75% of days, against 1.0% stated",
+  "severity": "Material",
+  "severity_reason": "breaches arrive in clusters (independence rejected, p = 0.001), and the model sat outside the green zone in 45% of 250-day windows (interval lower bound 12.6%, against 10.8% for a correctly stated model)",
+  "measurement": "99.0% level: 38 breaches against 21.7 stated, rate 1.75% [0.98%, 2.57%], Material; 97.5% level: 73 breaches against 54.3 stated, rate 3.36% [2.35%, 4.56%], Significant. Intervals are 95% month-block bootstrap over 104 calendar months, 2,172 trading days. At the 99% level the trailing 250-day count reached 13 and stood at 5 on the last day; the model sat outside the green zone in 45% of 1,923 complete windows [13%, 72%], against 10.8% for a correctly stated model.",
+  "evidence": "coverage.json, rolling.json, yearly.json, findings.csv",
+  "consequence": "Illustration on an assumed EUR 100,000,000 book: the addend raised the VaR component of the own funds requirement by EUR 1,623,130 on average over the period [EUR 295,728, EUR 2,576,061], and by EUR 8,418,245 at its peak. With the addend the component averaged EUR 17,328,194 (a multiplication factor 8.9% higher on average; under the add-on table that applies from 1 January 2027 the same counts give 9.0%), which is still EUR 1,743,415 below the EUR 19,071,609 of Conformal-PID, the model that held its level. The addend did not close the gap the understated VaR opened.",
+  "action": "Do not quote this VaR at its stated level. Either re-state it at the level it delivered, or replace the step that sets its width: the breach count is too high for too long to be a bad year. Read the row below it in the table before choosing a replacement, because the model that holds its level is also the one that quotes the larger VaR.",
+  "limit": "One three-asset book over one period. The interval resamples calendar months, so it carries clustering within a month and not dependence across months. The zone shares come from overlapping 250-day windows, of which this period holds fewer than 9 that do not overlap. The euro figures assume an illustrative book of EUR 100 million, cover the VaR component only, and scale a one-day VaR to ten days by the square root of time."
+ },
+ {
+  "id": "F-03",
+  "kind": "test",
+  "title": "The conditional ES test passes 0 of 10 model-and-level cells under one reference and 10 under another",
+  "severity": "Material",
+  "severity_reason": "100% of its verdicts change zone when only the reference distribution changes",
+  "measurement": "Models, data, VaR and ES held fixed; only the reference distribution changes. Cells passing by reference: Gaussian 0, Student-t, df 15 5, Moment-matched t (as used) 6, Student-t, df 8 7, Student-t, df 5 10, Vol-adjusted empirical 10, of 10 (5 models at 2 levels). 10 of 10 verdicts change zone across the 5 parametric references. Known-broken models under the reference as used: right breach count, thin tail at 99.0%: yellow; right breach count, thin tail at 97.5%: red. Each reference is 2,000 simulated paths, seeded, the same paths for both statistics.",
+  "evidence": "tests.json, null_sweep.json",
+  "consequence": "A verdict that moves with a modelling choice nobody recorded cannot be defended as a finding about the model. No euro figure is attached: an ES zone has no supervisory multiplier in the rule this report applies.",
+  "action": "Do not report this zone as evidence that the expected shortfall is adequate. Report the reference distribution beside every verdict, and read the statistic with an exceedance-count test, which it is designed to be paired with.",
+  "limit": "One implementation on one dataset. The references here are moment-matched approximations, not each model's exact predictive distribution; with an exact reference the threshold moves less. With 17 to 79 breach days per cell the statistic is an average over a few dozen numbers."
+ },
+ {
+  "id": "F-04",
+  "kind": "test",
+  "title": "The unconditional ES test holds its verdicts across references and passes a thin-tailed model with the right breach count",
+  "severity": "Material",
+  "severity_reason": "it passes a model built to be broken (right breach count, thin tail, green at the 99.0% level, p = 0.182; right breach count, thin tail, green at the 97.5% level, p = 0.240)",
+  "measurement": "Models, data, VaR and ES held fixed; only the reference distribution changes. Cells passing by reference: Gaussian 6, Student-t, df 15 6, Moment-matched t (as used) 6, Student-t, df 8 6, Student-t, df 5 6, Vol-adjusted empirical 10, of 10 (5 models at 2 levels). 4 of 10 verdicts change zone across the 5 parametric references. Known-broken models under the reference as used: right breach count, thin tail at 99.0%: green; right breach count, thin tail at 97.5%: green; VaR and ES scaled by 0.8 at 99.0%: red; VaR and ES scaled by 0.8 at 97.5%: red. Each reference is 2,000 simulated paths, seeded, the same paths for both statistics.",
+  "evidence": "tests.json, null_sweep.json",
+  "consequence": "A pass from this test says the breach count and depth together are not alarming. It does not say the tail is as deep as the model claims.",
+  "action": "Keep this statistic as the working ES check, paired with an exceedance-count test, and do not read a pass as evidence about tail depth. Add a known-broken model of each kind to the validation pack so the blind side stays visible.",
+  "limit": "The verdicts are stable here because the models it rejects breach too often by a wide margin. That is a property of these models on this data, not of the statistic in general."
+ },
+ {
+  "id": "F-05",
+  "kind": "process",
+  "title": "The reference distribution was changed in the same revision as the model",
+  "severity": "Material",
+  "severity_reason": "the reference and the model changed in one revision; the reference moved the threshold 11 times as far as the model moved the statistic, and against the original reference the changed model still does not pass",
+  "measurement": "Conformal-PID at the 99% level, 2 backtest runs and 2 references. The model change moved Z1 by +0.0096 (from -0.0004 to +0.0092). The reference change moved the pass threshold by -0.104 (from +0.019 to -0.085). Against the original reference the changed model is yellow; with both changes it is green.",
+  "evidence": "process.json",
+  "consequence": "The recorded reason for the improvement was wrong. A validation pack that credits a model change for a result the test change produced will not survive a second reader who separates the two.",
+  "action": "Record the reference as a model with its own change log. When a reference and a model change together, run the 2-by-2 that separates them before attributing the result; the reference is applied after the fact, so it costs 2 runs.",
+  "limit": "One model at one level. The 2 effects are point values from seeded runs with 2,000 reference draws each; no interval is attached to their ratio."
+ },
+ {
+  "id": "F-06",
+  "kind": "model",
+  "title": "GARCH with a t-copula VaR at the stated 97.5% level was breached on 1.84% of days, against 2.5% stated",
+  "severity": "Significant",
+  "severity_reason": "the stated breach rate lies outside the interval (fewer breaches than stated); the supervisory count is defined at the 99% level only, so no zone consequence is scored at this level",
+  "measurement": "99.0% level: 17 breaches against 21.7 stated, rate 0.78% [0.42%, 1.20%], Observation; 97.5% level: 40 breaches against 54.3 stated, rate 1.84% [1.33%, 2.39%], Significant. Intervals are 95% month-block bootstrap over 104 calendar months, 2,172 trading days. At the 99% level the trailing 250-day count reached 4 and stood at 3 on the last day; the model sat outside the green zone in 0% of 1,923 complete windows [0%, 19%], against 10.8% for a correctly stated model.",
+  "evidence": "coverage.json, rolling.json, yearly.json, findings.csv",
+  "consequence": "Illustration on an assumed EUR 100,000,000 book: no addend applied in any complete window. The VaR component averaged EUR 17,313,536.",
+  "action": "The VaR at this level is wider than its stated level requires: it was breached less often than it says. That is the cheaper direction to be wrong in, and it is still a misstatement. Re-state the level, or accept the width as a deliberate margin and record it as one.",
+  "limit": "One three-asset book over one period. The interval resamples calendar months, so it carries clustering within a month and not dependence across months. The zone shares come from overlapping 250-day windows, of which this period holds fewer than 9 that do not overlap. The euro figures assume an illustrative book of EUR 100 million, cover the VaR component only, and scale a one-day VaR to ten days by the square root of time."
+ },
+ {
+  "id": "F-07",
+  "kind": "model",
+  "title": "Conformal-PID VaR at the stated 99.0% level was breached on 1.10% of days, against 1.0% stated",
+  "severity": "Observation",
+  "severity_reason": "the stated breach rate lies inside the month-block bootstrap interval of the observed rate, and independence of breaches is not rejected (p = 0.573); this evidence does not show the VaR failing at this level",
+  "measurement": "99.0% level: 24 breaches against 21.7 stated, rate 1.10% [0.69%, 1.58%], Observation; 97.5% level: 53 breaches against 54.3 stated, rate 2.44% [1.84%, 3.10%], Observation. Intervals are 95% month-block bootstrap over 104 calendar months, 2,172 trading days. At the 99% level the trailing 250-day count reached 7 and stood at 4 on the last day; the model sat outside the green zone in 16% of 1,923 complete windows [0%, 38%], against 10.8% for a correctly stated model.",
+  "evidence": "coverage.json, rolling.json, yearly.json, findings.csv",
+  "consequence": "Illustration on an assumed EUR 100,000,000 book: the addend raised the VaR component of the own funds requirement by EUR 381,831 on average over the period [EUR 0, EUR 1,138,492], and by EUR 3,741,986 at its peak. With the addend the component averaged EUR 19,071,609 (a multiplication factor 2.4% higher on average; under the add-on table that applies from 1 January 2027 the same counts give 2.4%).",
+  "action": "Nothing to remediate on breach frequency. Keep the count under review: an Observation is a statement about this window, and the interval beside it says how much a window of this length can show.",
+  "limit": "One three-asset book over one period. The interval resamples calendar months, so it carries clustering within a month and not dependence across months. The zone shares come from overlapping 250-day windows, of which this period holds fewer than 9 that do not overlap. The euro figures assume an illustrative book of EUR 100 million, cover the VaR component only, and scale a one-day VaR to ten days by the square root of time."
+ }
+]

@@ -10,19 +10,21 @@ requires-python = ">=3.10"
 license = { text = "Apache-2.0" }
 authors = [{ name = "Matthew Tanti", email = "matthew@mtanti.com" }]
 readme = "README.md"
+# Pinned rather than bounded, to the versions that reproduced the published
+# summary, row-level output and both reference sweeps byte for byte on 2026-11-11.
 dependencies = [
-    "numpy>=1.24",
-    "scipy>=1.10",
-    "pandas>=2.0",
-    "pyarrow>=14.0",
-    "yfinance>=0.2.40",
-    "arch>=7.0",
-    "pydantic>=2.0",
+    "numpy==1.26.4",
+    "scipy==1.17.1",
+    "pandas==2.2.3",
+    "pyarrow==19.0.1",
+    "yfinance==1.2.0",
+    "arch==7.2.0",
+    "pydantic==2.13.4",
 ]
 
 [project.optional-dependencies]
 dev = [
-    "pytest>=7.0",
+    "pytest==8.3.5",
 ]
 
 [project.urls]

@@ -92,6 +92,9 @@ MANIFEST: list[tuple[str, str, list[str]]] = [
             # so it is rebuilt rather than shipped.
             "output/summary.csv",
             "experiments/factorial/*/as_null_sensitivity.csv",
+            # The specimen Model Health Check: aggregates, the findings register
+            # and the lineage block. No row-level series.
+            "artifacts/health_check/*",
         ],
     ),
     (
@@ -120,7 +123,7 @@ SKIP_PARTS = {"__pycache__", ".git", ".ipynb_checkpoints", "node_modules", ".ven
 # is stale: usually something vendored under a rule that was later narrowed or
 # removed, which would otherwise stay published forever with no signal.
 # fnmatch semantics, so `*` crosses path separators.
-AUTHORED_HERE = ["README.md", "DATA.md", "notebooks/*", "report/*.pdf"]
+AUTHORED_HERE = ["README.md", "DATA.md", "FACTS.md", "notebooks/*", "report/*.pdf"]
 
 
 def scan(path: Path) -> str | None:

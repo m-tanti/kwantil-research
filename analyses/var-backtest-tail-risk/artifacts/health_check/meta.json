@@ -1,0 +1,309 @@
+{
+ "subject": "Five VaR and expected-shortfall models on an equal-weight SPY, TLT, GLD book",
+ "first_day": "2018-01-02",
+ "last_day": "2026-08-24",
+ "n_days": 2172,
+ "n_months": 104,
+ "n_windows": 1923,
+ "n_windows_non_overlapping": 8,
+ "headline_level": 0.99,
+ "levels": [
+  0.99,
+  0.975
+ ],
+ "window": 250,
+ "avg_days": 60,
+ "holding_days": 10,
+ "base_factor": 3.0,
+ "addend_table": {
+  "fewer than 5": 0.0,
+  "5": 0.4,
+  "6": 0.5,
+  "7": 0.65,
+  "8": 0.75,
+  "9": 0.85,
+  "10 or more": 1.0
+ },
+ "addon_table_2027": {
+  "fewer than 5": 0.0,
+  "5": 0.2,
+  "6": 0.26,
+  "7": 0.33,
+  "8": 0.38,
+  "9": 0.42,
+  "more than 9": 0.5
+ },
+ "base_factor_2027": 1.5,
+ "expected_share_outside_green": 0.10781237309637492,
+ "zone_share_trigger": 0.25,
+ "null_change_trigger": 0.5,
+ "independence_p": 0.05,
+ "rule_revision": "The model rule was revised once, after the first run of this script and before anything was published. The first version tested breach frequency only. Under it Historical simulation scored Observation at both levels, because its breaches cluster and the clustering widens the month-block interval until it contains the stated rate (1.75% [0.98%, 2.57%] at the 99% level). A VaR also states that breaches do not cluster, so an independence limb was added. That is a change made after seeing a result, and it is recorded here for that reason.",
+ "book_eur_illustrative": 100000000.0,
+ "n_boot": 2000,
+ "boot_seed": 20261111,
+ "mc_seed": 4242,
+ "integrity": {
+  "parametric": {
+   "0.990": {
+    "n_days": 2172,
+    "es_shallower_days": 0,
+    "es_shallower_share": 0.0,
+    "es_shallower_median_gap": 0.0,
+    "es_shallower_on_breach_days": 0,
+    "breach_flag_matches_series": true,
+    "es_at_least_as_deep_as_var": true,
+    "var_is_a_loss_level": true,
+    "no_repeated_dates": true,
+    "scale_ratio": 0.34057007571913744,
+    "scale_ratio_bounds": [
+     0.1,
+     0.7
+    ],
+    "scale_plausible": true,
+    "passes": true
+   },
+   "0.975": {
+    "n_days": 2172,
+    "es_shallower_days": 0,
+    "es_shallower_share": 0.0,
+    "es_shallower_median_gap": 0.0,
+    "es_shallower_on_breach_days": 0,
+    "breach_flag_matches_series": true,
+    "es_at_least_as_deep_as_var": true,
+    "var_is_a_loss_level": true,
+    "no_repeated_dates": true,
+    "scale_ratio": 0.4042341991284446,
+    "scale_ratio_bounds": [
+     0.1,
+     0.7
+    ],
+    "scale_plausible": true,
+    "passes": true
+   }
+  },
+  "historical": {
+   "0.990": {
+    "n_days": 2172,
+    "es_shallower_days": 0,
+    "es_shallower_share": 0.0,
+    "es_shallower_median_gap": 0.0,
+    "es_shallower_on_breach_days": 0,
+    "breach_flag_matches_series": true,
+    "es_at_least_as_deep_as_var": true,
+    "var_is_a_loss_level": true,
+    "no_repeated_dates": true,
+    "scale_ratio": 0.3022339021656585,
+    "scale_ratio_bounds": [
+     0.1,
+     0.7
+    ],
+    "scale_plausible": true,
+    "passes": true
+   },
+   "0.975": {
+    "n_days": 2172,
+    "es_shallower_days": 0,
+    "es_shallower_share": 0.0,
+    "es_shallower_median_gap": 0.0,
+    "es_shallower_on_breach_days": 0,
+    "breach_flag_matches_series": true,
+    "es_at_least_as_deep_as_var": true,
+    "var_is_a_loss_level": true,
+    "no_repeated_dates": true,
+    "scale_ratio": 0.39723608529249654,
+    "scale_ratio_bounds": [
+     0.1,
+     0.7
+    ],
+    "scale_plausible": true,
+    "passes": true
+   }
+  },
+  "distributional": {
+   "0.990": {
+    "n_days": 2172,
+    "es_shallower_days": 0,
+    "es_shallower_share": 0.0,
+    "es_shallower_median_gap": 0.0,
+    "es_shallower_on_breach_days": 0,
+    "breach_flag_matches_series": true,
+    "es_at_least_as_deep_as_var": true,
+    "var_is_a_loss_level": true,
+    "no_repeated_dates": true,
+    "scale_ratio": 0.2714739741007646,
+    "scale_ratio_bounds": [
+     0.1,
+     0.7
+    ],
+    "scale_plausible": true,
+    "passes": true
+   },
+   "0.975": {
+    "n_days": 2172,
+    "es_shallower_days": 0,
+    "es_shallower_share": 0.0,
+    "es_shallower_median_gap": 0.0,
+    "es_shallower_on_breach_days": 0,
+    "breach_flag_matches_series": true,
+    "es_at_least_as_deep_as_var": true,
+    "var_is_a_loss_level": true,
+    "no_repeated_dates": true,
+    "scale_ratio": 0.3386958175686904,
+    "scale_ratio_bounds": [
+     0.1,
+     0.7
+    ],
+    "scale_plausible": true,
+    "passes": true
+   }
+  },
+  "conformal_pid": {
+   "0.990": {
+    "n_days": 2172,
+    "es_shallower_days": 0,
+    "es_shallower_share": 0.0,
+    "es_shallower_median_gap": 0.0,
+    "es_shallower_on_breach_days": 0,
+    "breach_flag_matches_series": true,
+    "es_at_least_as_deep_as_var": true,
+    "var_is_a_loss_level": true,
+    "no_repeated_dates": true,
+    "scale_ratio": 0.25470956203122563,
+    "scale_ratio_bounds": [
+     0.1,
+     0.7
+    ],
+    "scale_plausible": true,
+    "passes": true
+   },
+   "0.975": {
+    "n_days": 2172,
+    "es_shallower_days": 0,
+    "es_shallower_share": 0.0,
+    "es_shallower_median_gap": 0.0,
+    "es_shallower_on_breach_days": 0,
+    "breach_flag_matches_series": true,
+    "es_at_least_as_deep_as_var": true,
+    "var_is_a_loss_level": true,
+    "no_repeated_dates": true,
+    "scale_ratio": 0.3262635964385559,
+    "scale_ratio_bounds": [
+     0.1,
+     0.7
+    ],
+    "scale_plausible": true,
+    "passes": true
+   }
+  },
+  "conformal_pid_es": {
+   "0.990": {
+    "n_days": 2172,
+    "es_shallower_days": 0,
+    "es_shallower_share": 0.0,
+    "es_shallower_median_gap": 0.0,
+    "es_shallower_on_breach_days": 0,
+    "breach_flag_matches_series": true,
+    "es_at_least_as_deep_as_var": true,
+    "var_is_a_loss_level": true,
+    "no_repeated_dates": true,
+    "scale_ratio": 0.25470956203122563,
+    "scale_ratio_bounds": [
+     0.1,
+     0.7
+    ],
+    "scale_plausible": true,
+    "passes": true
+   },
+   "0.975": {
+    "n_days": 2172,
+    "es_shallower_days": 0,
+    "es_shallower_share": 0.0,
+    "es_shallower_median_gap": 0.0,
+    "es_shallower_on_breach_days": 0,
+    "breach_flag_matches_series": true,
+    "es_at_least_as_deep_as_var": true,
+    "var_is_a_loss_level": true,
+    "no_repeated_dates": true,
+    "scale_ratio": 0.3262635964385559,
+    "scale_ratio_bounds": [
+     0.1,
+     0.7
+    ],
+    "scale_plausible": true,
+    "passes": true
+   }
+  }
+ },
+ "integrity_passes": {
+  "parametric": true,
+  "historical": true,
+  "distributional": true,
+  "conformal_pid": true,
+  "conformal_pid_es": true
+ },
+ "integrity_floor": 0.01,
+ "integrity_control": {
+  "label": "Conformal-PID, joint VaR and ES, as released in 0.1.x",
+  "levels": {
+   "0.990": {
+    "n_days": 2172,
+    "es_shallower_days": 463,
+    "es_shallower_share": 0.21316758747697975,
+    "es_shallower_median_gap": 0.02003899430532205,
+    "es_shallower_on_breach_days": 5,
+    "breach_flag_matches_series": true,
+    "es_at_least_as_deep_as_var": false,
+    "var_is_a_loss_level": true,
+    "no_repeated_dates": true,
+    "scale_ratio": 0.25470956203122563,
+    "scale_ratio_bounds": [
+     0.1,
+     0.7
+    ],
+    "scale_plausible": true,
+    "passes": false
+   },
+   "0.975": {
+    "n_days": 2172,
+    "es_shallower_days": 1880,
+    "es_shallower_share": 0.8655616942909761,
+    "es_shallower_median_gap": 0.31918949213750214,
+    "es_shallower_on_breach_days": 46,
+    "breach_flag_matches_series": true,
+    "es_at_least_as_deep_as_var": false,
+    "var_is_a_loss_level": true,
+    "no_repeated_dates": true,
+    "scale_ratio": 0.3262635964385559,
+    "scale_ratio_bounds": [
+     0.1,
+     0.7
+    ],
+    "scale_plausible": true,
+    "passes": false
+   }
+  },
+  "passes": false,
+  "severity_if_reported": "Material",
+  "source": "experiments/control_v0.1/details.csv (the published run of 2026-08-24, rebuilt by checking out release 0.1.x; not shipped)"
+ },
+ "sources": {
+  "rule_applied": "Regulation (EU) No 575/2013, Article 364(1)(a), Article 365(1) and Article 366(2) and (3) with Table 1, consolidated version of 9 January 2024 (CELEX 02013R0575-20240109). That is the text in force on 8 July 2024.",
+  "why_that_version": "Regulation (EU) 2024/1623 deleted Part Three, Title IV, Chapter 5. Article 520a, as replaced by Commission Delegated Regulation (EU) 2025/1496 of 12 June 2025, reads: 'Until 1 January 2027, institutions shall continue to apply Part Three, Title IV, and the market risk requirements of Articles 430, 430b, 445 and 455 of this Regulation in the version in force on 8 July 2024.'",
+  "successor_rule": "From 1 January 2027: Article 325bf(6) with Table 3, consolidated version of 26 June 2026 (CELEX 02013R0575-20260626). Same count (overshootings of a one-day 99% VaR over the most recent 250 business days), a base of 1,5 and an add-on of 0,20 to 0,50.",
+  "basel": "Zone names (green, yellow, red) and the probability a correct model lands in each: Basle Committee on Banking Supervision, Supervisory framework for the use of 'backtesting' in conjunction with the internal models approach to market risk capital requirements, January 1996, Table 2. The Regulation's table carries addends only.",
+  "retrieved": "2026-11-11, from the Publications Office of the European Union and bis.org",
+  "scope": "The multiplication factor applies to institutions granted permission to use internal models under Article 363. It does not apply to a firm on the standardised approach."
+ },
+ "artifact_digest_sha256": "22c0150d835c8baffa864586c4a3203979d12126caa2042aea37b9490385c600",
+ "digest_rule": "sha256 over every file in artifacts/health_check except meta.json, in filename order, feeding each file's name as UTF-8 followed by its bytes. meta.json is excluded because it carries the digest and cannot hash itself.",
+ "script": "scripts/audit_health_check.py",
+ "script_sha256": "490b86355b799bb1424d240b37caa181737195bed01715ff03c7e3620cc05db5",
+ "inputs": {
+  "details": "experiments/factorial/t/details.csv (rebuilt by run_backtest.py, not shipped)",
+  "sweep": "experiments/factorial/t/as_null_sensitivity.csv",
+  "sweep_sha256": "f13241a56f0a3e77f61081f85131f1dbfd59c37b7e104aab3b4b079e05bfa6ec",
+  "sweep_control_arm": "experiments/factorial/gaussian/as_null_sensitivity.csv",
+  "sweep_control_arm_sha256": "ab639f62a53815b5f7b8cc8fa89a54f2ddfa60c282cfe7ebdb60ca20de643a35"
+ }
+}

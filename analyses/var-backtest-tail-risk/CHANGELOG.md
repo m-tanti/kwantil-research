@@ -11,6 +11,35 @@ This file tracks the package's API and packaging changes only.
 
 ## [Unreleased]
 
+### Fixed
+
+- `JointVarEsCalibrator` could state an expected shortfall shallower than its
+  own VaR. The ES correction multiplied the whole ES, so a scale below 1 pulled
+  it inside the VaR: 463 of 2,172 graded days at the 99% level and 1,880 of
+  2,172 at 97.5% in the run of 2026-08-24. The scale now multiplies only the
+  excess of the base ES beyond the calibrated VaR, so the stated ES is at
+  least as deep as the stated VaR for any positive scale.
+- `EsCorrector` computed its error against the uncorrected ES, so a correction
+  never changed the next error and the scale drifted to a bound whenever the
+  base ES was biased. `update()` now takes the ES the model stated
+  (`stated_es`, previously `base_es`).
+
+Both change every ES number for `conformal_pid_es`; its VaR and the other 4
+methods are unchanged to the last digit. Its zone is the same in all 12 cells
+of the reference sweep, so no count in the article moves. `output/summary.csv`
+and both sweep files are regenerated. Found by the integrity check in
+`scripts/audit_health_check.py`.
+
+### Added
+
+- `scripts/audit_health_check.py` and `tests/test_health_check.py`: the
+  specimen Model Health Check, with severities derived by rule and a lineage
+  block.
+
+### Changed
+
+- Dependencies are pinned to the versions that reproduce the shipped results.
+
 ### Changed (breaking)
 
 - **Acerbi-Szekely statistics renamed to match the paper.** Up to 0.1.x the

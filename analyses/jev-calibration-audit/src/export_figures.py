@@ -1,12 +1,13 @@
 """Write the three figure JSONs and the numbers table the article quotes.
 
-Outputs to artifacts/figures/ and, if the BLOG checkout is present, copies to the article's
-figures/data folder. Every number in the article comes from summary.json.
+Outputs to artifacts/figures/ and, if JEV_ARTICLE_FIGURES names a folder, copies to that
+folder as well (the article's figures/data). Every number in the article comes from summary.json.
 """
 from __future__ import annotations
 
 import json
 import shutil
+import os
 import sys
 from pathlib import Path
 
@@ -19,7 +20,10 @@ from jev_client import load_log  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 FIG = ROOT / "artifacts" / "figures"
-BLOG = Path("C:/work/BLOG/content/articles/JevCalibration/figures/data")
+# Where the article keeps its figure data. Set JEV_ARTICLE_FIGURES to write there as
+# well; unset, only artifacts/figures is written.
+_article = os.environ.get("JEV_ARTICLE_FIGURES")
+BLOG = Path(_article) if _article else None
 ITEMS = ROOT / "artifacts" / "items"
 
 
@@ -195,7 +199,7 @@ def main():
     summary["confidence_field"]["banking77_r2_on_max"] = r3(1 - ((c - pr) ** 2).sum() / ((c - c.mean()) ** 2).sum())
     with open(FIG / "summary.json", "w", encoding="utf-8", newline="\n") as f:
         json.dump(summary, f, indent=1, default=float)
-    if BLOG.parent.exists():
+    if BLOG is not None and BLOG.parent.exists():
         BLOG.mkdir(parents=True, exist_ok=True)
         for name in ("reliability", "invariance", "decision"):
             shutil.copy(FIG / f"{name}.json", BLOG / f"{name}.json")

@@ -28,7 +28,7 @@ def test_es_corrector_widens_when_realised_exceeds_predicted():
     c = EsCorrector(alpha=0.025, Kp=0.2, Ki=0.02, Kd=0.05)
     # Realised = -3%, base_es = -1% → realised is 3× worse than predicted.
     for _ in range(10):
-        c.update(realised=-0.03, base_es=-0.01, breached=True)
+        c.update(realised=-0.03, stated_es=-0.01, breached=True)
     assert c.scale > 1.0, f"expected scale > 1 after under-estimated ES; got {c.scale}"
 
 
@@ -37,14 +37,14 @@ def test_es_corrector_tightens_when_realised_inside_predicted():
     the corrector should drive its scale BELOW 1."""
     c = EsCorrector(alpha=0.025, Kp=0.2, Ki=0.02, Kd=0.05)
     for _ in range(10):
-        c.update(realised=-0.005, base_es=-0.02, breached=True)
+        c.update(realised=-0.005, stated_es=-0.02, breached=True)
     assert c.scale < 1.0, f"expected scale < 1 after over-estimated ES; got {c.scale}"
 
 
 def test_es_corrector_no_op_when_no_breach():
     c = EsCorrector(alpha=0.025)
     for _ in range(50):
-        c.update(realised=-0.05, base_es=-0.02, breached=False)
+        c.update(realised=-0.05, stated_es=-0.02, breached=False)
     assert c.scale == 1.0
     assert c.state()["es_n_updates"] == 0
 
@@ -54,7 +54,7 @@ def test_es_corrector_respects_scale_bounds():
     # Hammer with extreme realised values; corrector should saturate at 2.5
     # rather than blow up.
     for _ in range(200):
-        c.update(realised=-1.0, base_es=-0.005, breached=True)
+        c.update(realised=-1.0, stated_es=-0.005, breached=True)
     assert 0.5 <= c.scale <= 2.5
 
 
@@ -120,17 +120,46 @@ def test_joint_calibrated_distribution_es_applies_corrector_scale():
     # At t=0, scale = 1.0 → es ≈ base_es.
     assert es == pytest.approx(base_es, rel=1e-9)
 
-    # Force a few breaches and recheck.
-    for _ in range(10):
-        cal.observe_realized(
-            realized=-0.5,
-            realized_per_asset={"SPY": -0.5, "TLT": -0.5, "GLD": -0.5},
-        )
-    pnl2 = cal.predict(weights).portfolio_pnl()
-    base_es2 = pnl2.base_es(0.025)
-    es2 = pnl2.es(0.025)
-    # Scale should now be > 1 ⇒ |es2| > |base_es2| (more negative).
-    assert abs(es2) > abs(base_es2), (
-        "expected ES corrected to be more extreme than base; "
-        f"got |es|={abs(es2):.5f}, |base|={abs(base_es2):.5f}"
-    )
+    # A scale above 1 deepens the stated ES by scaling its excess over the VaR.
+    # (The earlier version of this test forced ten 50% losses, which pushes the
+    # calibrated VaR beyond every base sample; the base tail is then empty, the
+    # excess is zero, and no scale can deepen it. That edge is coherent, ES
+    # equals VaR, and is not what this test is about.)
+    import math
+
+    cal.es_correctors[0.025]._log_scale = math.log(2.0)
+    var = pnl.quantile(0.025)
+    es2 = pnl.es(0.025)
+    assert es2 == pytest.approx(var + 2.0 * (base_es - var), rel=1e-9)
+    assert es2 < base_es < var
+
+
+# Coherence and closed-loop behaviour (0.2.0).
+
+
+def test_stated_es_is_never_shallower_than_stated_var():
+    """ES is the mean loss beyond the VaR. With the correction at its lower
+    bound the stated ES must still be at least as deep as the stated VaR."""
+    import math
+
+    cal = make_joint_calibrator()
+    cal.fit(synthetic_returns(n=600))
+    for corrector in cal.es_correctors.values():
+        corrector._log_scale = math.log(0.5)
+    pnl = cal.predict(np.full(3, 1.0 / 3)).portfolio_pnl()
+    for alpha in cal.es_correctors:
+        assert pnl.es(alpha) <= pnl.quantile(alpha)
+        assert pnl.es(alpha) > pnl.base_es(alpha)   # the correction did shrink the excess
+
+
+def test_corrector_loop_is_closed_and_settles_inside_its_bounds():
+    """Fed the ES it stated, the scale settles where stated ES matches the
+    realised tail mean instead of drifting to a bound."""
+    c = EsCorrector(alpha=0.025)
+    var, base_es, realised = -0.010, -0.020, -0.016   # fixed point at scale 0.6
+    for _ in range(600):
+        stated = var + c.scale * (base_es - var)
+        c.update(realised=realised, stated_es=stated, breached=True)
+    stated = var + c.scale * (base_es - var)
+    assert abs(stated - realised) < 5e-4
+    assert 0.5 < c.scale < 3.0

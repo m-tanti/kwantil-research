@@ -1,4 +1,4 @@
-"""Write the figure data for the KW-2026-04 article from the shipped sweep files.
+"""Write the figure data for the tail-risk article from the shipped sweep files.
 
 Reads experiments/factorial/{t,gaussian}/as_null_sensitivity.csv and writes
 factorial.json and null_sweep.json. Nothing is recomputed here; the numbers are

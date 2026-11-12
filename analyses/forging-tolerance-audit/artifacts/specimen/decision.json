@@ -1,0 +1,194 @@
+{
+ "upper_limit_mm": 237.0,
+ "n": 81,
+ "n_over_limit": 9,
+ "over_limit_per_100": 11.11111111111111,
+ "policies": [
+  {
+   "policy": "ship_all",
+   "label": "Ship every part unchecked",
+   "flagged_per_100": 0.0,
+   "flagged_in_limit_per_100": 0.0,
+   "escaped_per_100": 11.11111111111111,
+   "caught_per_100": 0.0
+  },
+  {
+   "policy": "check_all",
+   "label": "Check every part",
+   "flagged_per_100": 100.0,
+   "flagged_in_limit_per_100": 88.88888888888889,
+   "escaped_per_100": 0.0,
+   "caught_per_100": 11.11111111111111
+  },
+  {
+   "policy": "range_top",
+   "label": "Check when the top of the range passes the limit",
+   "flagged_per_100": 90.12345679012346,
+   "flagged_in_limit_per_100": 79.01234567901234,
+   "escaped_per_100": 0.0,
+   "caught_per_100": 11.11111111111111
+  },
+  {
+   "policy": "prediction",
+   "label": "Check when the prediction itself passes the limit",
+   "flagged_per_100": 3.7037037037037033,
+   "flagged_in_limit_per_100": 2.4691358024691357,
+   "escaped_per_100": 9.876543209876543,
+   "caught_per_100": 1.2345679012345678
+  }
+ ],
+ "curve": [
+  {
+   "threshold_mm": 233.0,
+   "flagged_per_100": 100.0,
+   "flagged_in_limit_per_100": 88.88888888888889,
+   "escaped_per_100": 0.0,
+   "caught_per_100": 11.11111111111111
+  },
+  {
+   "threshold_mm": 233.25,
+   "flagged_per_100": 100.0,
+   "flagged_in_limit_per_100": 88.88888888888889,
+   "escaped_per_100": 0.0,
+   "caught_per_100": 11.11111111111111
+  },
+  {
+   "threshold_mm": 233.5,
+   "flagged_per_100": 100.0,
+   "flagged_in_limit_per_100": 88.88888888888889,
+   "escaped_per_100": 0.0,
+   "caught_per_100": 11.11111111111111
+  },
+  {
+   "threshold_mm": 233.75,
+   "flagged_per_100": 98.76543209876543,
+   "flagged_in_limit_per_100": 87.65432098765432,
+   "escaped_per_100": 0.0,
+   "caught_per_100": 11.11111111111111
+  },
+  {
+   "threshold_mm": 234.0,
+   "flagged_per_100": 98.76543209876543,
+   "flagged_in_limit_per_100": 87.65432098765432,
+   "escaped_per_100": 0.0,
+   "caught_per_100": 11.11111111111111
+  },
+  {
+   "threshold_mm": 234.25,
+   "flagged_per_100": 98.76543209876543,
+   "flagged_in_limit_per_100": 87.65432098765432,
+   "escaped_per_100": 0.0,
+   "caught_per_100": 11.11111111111111
+  },
+  {
+   "threshold_mm": 234.5,
+   "flagged_per_100": 91.35802469135803,
+   "flagged_in_limit_per_100": 80.24691358024691,
+   "escaped_per_100": 0.0,
+   "caught_per_100": 11.11111111111111
+  },
+  {
+   "threshold_mm": 234.75,
+   "flagged_per_100": 83.9506172839506,
+   "flagged_in_limit_per_100": 72.8395061728395,
+   "escaped_per_100": 0.0,
+   "caught_per_100": 11.11111111111111
+  },
+  {
+   "threshold_mm": 235.0,
+   "flagged_per_100": 76.5432098765432,
+   "flagged_in_limit_per_100": 66.66666666666666,
+   "escaped_per_100": 1.2345679012345678,
+   "caught_per_100": 9.876543209876543
+  },
+  {
+   "threshold_mm": 235.25,
+   "flagged_per_100": 67.90123456790124,
+   "flagged_in_limit_per_100": 58.0246913580247,
+   "escaped_per_100": 1.2345679012345678,
+   "caught_per_100": 9.876543209876543
+  },
+  {
+   "threshold_mm": 235.5,
+   "flagged_per_100": 58.0246913580247,
+   "flagged_in_limit_per_100": 49.382716049382715,
+   "escaped_per_100": 2.4691358024691357,
+   "caught_per_100": 8.641975308641975
+  },
+  {
+   "threshold_mm": 235.75,
+   "flagged_per_100": 40.74074074074074,
+   "flagged_in_limit_per_100": 33.33333333333333,
+   "escaped_per_100": 3.7037037037037033,
+   "caught_per_100": 7.4074074074074066
+  },
+  {
+   "threshold_mm": 236.0,
+   "flagged_per_100": 28.39506172839506,
+   "flagged_in_limit_per_100": 22.22222222222222,
+   "escaped_per_100": 4.938271604938271,
+   "caught_per_100": 6.172839506172839
+  },
+  {
+   "threshold_mm": 236.25,
+   "flagged_per_100": 20.98765432098765,
+   "flagged_in_limit_per_100": 17.28395061728395,
+   "escaped_per_100": 7.4074074074074066,
+   "caught_per_100": 3.7037037037037033
+  },
+  {
+   "threshold_mm": 236.5,
+   "flagged_per_100": 13.580246913580247,
+   "flagged_in_limit_per_100": 11.11111111111111,
+   "escaped_per_100": 8.641975308641975,
+   "caught_per_100": 2.4691358024691357
+  },
+  {
+   "threshold_mm": 236.75,
+   "flagged_per_100": 6.172839506172839,
+   "flagged_in_limit_per_100": 4.938271604938271,
+   "escaped_per_100": 9.876543209876543,
+   "caught_per_100": 1.2345679012345678
+  },
+  {
+   "threshold_mm": 237.0,
+   "flagged_per_100": 3.7037037037037033,
+   "flagged_in_limit_per_100": 2.4691358024691357,
+   "escaped_per_100": 9.876543209876543,
+   "caught_per_100": 1.2345679012345678
+  },
+  {
+   "threshold_mm": 237.25,
+   "flagged_per_100": 1.2345679012345678,
+   "flagged_in_limit_per_100": 0.0,
+   "escaped_per_100": 9.876543209876543,
+   "caught_per_100": 1.2345679012345678
+  },
+  {
+   "threshold_mm": 237.5,
+   "flagged_per_100": 0.0,
+   "flagged_in_limit_per_100": 0.0,
+   "escaped_per_100": 11.11111111111111,
+   "caught_per_100": 0.0
+  },
+  {
+   "threshold_mm": 237.75,
+   "flagged_per_100": 0.0,
+   "flagged_in_limit_per_100": 0.0,
+   "escaped_per_100": 11.11111111111111,
+   "caught_per_100": 0.0
+  },
+  {
+   "threshold_mm": 238.0,
+   "flagged_per_100": 0.0,
+   "flagged_in_limit_per_100": 0.0,
+   "escaped_per_100": 11.11111111111111,
+   "caught_per_100": 0.0
+  }
+ ],
+ "illustrative_rates": {
+  "cost_check_eur": 15.0,
+  "cost_escape_eur": 400.0,
+  "note": "ILLUSTRATIVE defaults for the page's control. Not evidence, not from the data set."
+ }
+}

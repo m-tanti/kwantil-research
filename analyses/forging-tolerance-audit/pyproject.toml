@@ -1,0 +1,20 @@
+[project]
+name = "kwantil-forging-tolerance-audit"
+version = "1.0.0"
+description = "Specimen Process Calibration Audit on the AFRC radial forging data set: stated tolerances and predicted ranges against measured dimensions"
+requires-python = ">=3.11"
+
+# Pinned rather than bounded, to the versions the shipped artifacts were generated with.
+dependencies = [
+    "numpy==1.26.4",
+    "pandas==2.2.3",
+    "scipy==1.17.1",
+    "openpyxl==3.1.5",
+]
+
+[project.optional-dependencies]
+dev = ["pytest==8.3.5"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

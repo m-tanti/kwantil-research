@@ -1,0 +1,39 @@
+{
+ "n_parts": 81,
+ "n_traces": 81,
+ "n_days": 5,
+ "parts_per_day": {
+  "2017-10-31": 10,
+  "2017-11-01": 25,
+  "2017-11-02": 27,
+  "2017-11-03": 13,
+  "2017-11-06": 6
+ },
+ "missing_values": 0,
+ "trace_rows_median": 17880,
+ "trace_rows_min": 17760,
+ "trace_rows_max": 23853,
+ "long_traces": [
+  1,
+  22,
+  43,
+  53,
+  56,
+  60,
+  61,
+  65,
+  70,
+  71,
+  75,
+  77
+ ],
+ "description_says_days": 1,
+ "top4_lower_in_measurement_file": -5.0,
+ "top4_tolerance_in_summary_file": "plus 15, minus 8",
+ "constant_features": [
+  "temp_at_forge_start",
+  "l_pos_min",
+  "r_pos_min"
+ ],
+ "supports_analysis": true
+}

@@ -1,0 +1,110 @@
+[
+ {
+  "id": "F-01",
+  "kind": "limit",
+  "title": "No part meets the stated tolerance on the inner diameter at 55 mm: all 81 are outside",
+  "severity": "Material",
+  "severity_reason": "100% of parts lie outside the stated tolerance (lower bound 95.5%, above the 1% floor)",
+  "measurement": "Stated 30 mm, limits 29.7 to 30.3. Measured mean 29.568 mm, standard deviation 0.008 mm, range 29.544 to 29.591. 81 of 81 parts outside. The same diameter at 100 mm averages 29.857 mm and is inside on every part.",
+  "evidence": "limits.json",
+  "consequence": "Read as stated, every part in the record is a reject. The scatter is 8 thousandths of a millimetre, so this is not a process out of control: it is a process holding a value the specification does not describe.",
+  "action": "Resolve the specification before anything else. Either the nominal at this position is not 30 mm, or the tolerance was copied from the 100 mm position. Only the owner of the drawing can say which.",
+  "limit": "The audit cannot tell a wrong specification from a wrong process. It can tell that one of them is wrong, and that the offset is constant across 5 days."
+ },
+ {
+  "id": "F-02",
+  "kind": "limit",
+  "title": "Part length runs at the upper limit: 9 of 81 parts exceed it on at least one of the 4 measurements",
+  "severity": "Material",
+  "severity_reason": "7% of parts on Top4 lie outside the stated tolerance (lower bound 3.4%, above the 1% floor)",
+  "measurement": "Stated 222 mm, plus 15 and minus 5, so the upper limit is 237 mm. Top1: mean 234.5 mm, 0 of 81 over [0.0%, 4.5%], capability index 0.76; Top2: mean 235.0 mm, 3 of 81 over [1.3%, 10.3%], capability index 0.60; Top3: mean 233.8 mm, 0 of 81 over [0.0%, 4.5%], capability index 0.98; Top4: mean 235.5 mm, 6 of 81 over [3.4%, 15.2%], capability index 0.48. Intervals are 95% Wilson on 81 parts. By day, parts over the limit on any measurement: 2017-10-31 1 of 10, 2017-11-01 7 of 25, 2017-11-02 1 of 27, 2017-11-03 0 of 13, 2017-11-06 0 of 6.",
+  "evidence": "limits.json, predictions.json",
+  "consequence": "11.1% of parts are over the stated length limit, and the mean sits 1.4 standard deviations below it on the worst measurement. The decision table prices that at your own rates.",
+  "action": "Either re-centre the process about 2 mm shorter, or confirm that the upper limit is the one the customer holds you to. If the length is trimmed later, the limit that matters is the trim allowance, and this finding should be re-read against it.",
+  "limit": "81 parts over 5 days from a testbed, not a production line. The Wilson intervals treat parts as independent, which parts forged on one day are not; the per-day counts are given so the reader can see how uneven they are."
+ },
+ {
+  "id": "F-03",
+  "kind": "range",
+  "title": "A 90% range built from the model's own training errors covered 73% of parts on days it never saw",
+  "severity": "Material",
+  "severity_reason": "the stated 90% lies outside the interval of delivered coverage [62%, 81%], and on the longest parts coverage is 67% with an upper bound of 83%",
+  "measurement": "Predicting the longest of the 4 lengths from 14 process features, each day held out whole. Covered 73% [62%, 81%] of 81 parts against a stated 90%; on the 21 longest parts 67% [45%, 83%]. Median width 2.62 mm. By day: 2017-10-31 70%, 2017-11-01 64%, 2017-11-02 93%, 2017-11-03 38%, 2017-11-06 100%.",
+  "evidence": "ranges.json, predictions.json",
+  "consequence": "A range that covers less than it states will pass parts it should have flagged.",
+  "action": "Do not quote this range at 90%.",
+  "limit": "81 parts, 5 days. With 5 days, one unusual day moves every figure here, and the intervals treat parts as independent."
+ },
+ {
+  "id": "F-04",
+  "kind": "structure",
+  "title": "The two files that state the length tolerance disagree, and one sensor channel is constant",
+  "severity": "Significant",
+  "severity_reason": "the analysis runs, but a stated limit or a channel is ambiguous and only the owner of the specification can resolve it",
+  "measurement": "The measurement file gives the lower tolerance on Top4 as -5 mm; the structure summary gives 'plus 15, minus 8'. The data set's description says the parts were forged over one day; the measurement dates span 5 days (2017-10-31 to 2017-11-06). The pyrometer reading at the start of forging is the same on all 81 parts (243.8), which is the bottom of its range, so billet temperature at the hammer is not recorded. 12 traces are more than 20% longer than the median (parts 1, 22, 43, 53, 56, 60, 61, 65, 70, 71, 75, 77).",
+  "evidence": "structure.json",
+  "consequence": "None of these stops the analysis. Each changes how a result should be read, and the first is a question about which document is the specification.",
+  "action": "Confirm the lower length tolerance, the number of production days, and whether a billet temperature at transfer is logged anywhere else.",
+  "limit": "A structure check finds what is inconsistent inside the records. It cannot find what the records leave out without being told."
+ },
+ {
+  "id": "F-05",
+  "kind": "limit",
+  "title": "2 length measurements are inside the limit on every part and too close to it",
+  "severity": "Significant",
+  "severity_reason": "no share outside the tolerance is established, but the capability index is 0.76, below the conventional 1.33",
+  "measurement": "Top1: maximum 236.3 mm against 237, capability index 0.76; Top3: maximum 236.2 mm against 237, capability index 0.98.",
+  "evidence": "limits.json",
+  "consequence": "No reject yet on these measurements. At this capability a run several times longer would be expected to produce some.",
+  "action": "Treat with the finding above: it is the same length, measured at another angle.",
+  "limit": "A capability index assumes a stable, roughly normal process, and 81 parts cannot establish either."
+ },
+ {
+  "id": "F-06",
+  "kind": "limit",
+  "title": "8 of 18 stated tolerances were never tested by these records",
+  "severity": "Observation",
+  "severity_reason": "every part is inside, and the nearest limit is more than 6 standard deviations from the mean on each",
+  "measurement": "ID @100 (47 SD); 38 dia @200 (13 SD); 42 dia @140 (11 SD); 42 dia @80 (9 SD); Base angle BL (7 SD); 40.5mm taper F (8 SD); 40.5mm taper BR (11 SD); 40.5mm taper BL (10 SD).",
+  "evidence": "limits.json",
+  "consequence": "These limits are met, and by so wide a margin that the record says nothing about what would happen near them. A coverage figure over all 18 dimensions would be dominated by limits that cannot fail.",
+  "action": "None. Do not average them into a headline.",
+  "limit": "Wide margins on a testbed part do not show the tolerances are right for a customer."
+ },
+ {
+  "id": "F-07",
+  "kind": "range",
+  "title": "A 90% range built from errors on held-out days covered 94% of parts on days it never saw",
+  "severity": "Observation",
+  "severity_reason": "the stated 90% lies inside the interval of delivered coverage [86%, 97%]",
+  "measurement": "Predicting the longest of the 4 lengths from 14 process features, each day held out whole. Covered 94% [86%, 97%] of 81 parts against a stated 90%; on the 21 longest parts 100% [85%, 100%]. Median width 6.38 mm. By day: 2017-10-31 100%, 2017-11-01 100%, 2017-11-02 100%, 2017-11-03 62%, 2017-11-06 100%.",
+  "evidence": "ranges.json, predictions.json",
+  "consequence": "On this evidence the range does what it states, at the width shown.",
+  "action": "Usable as stated. Watch the per-day figures: a single day far below the rest is how a regime change first shows.",
+  "limit": "81 parts, 5 days. With 5 days, one unusual day moves every figure here, and the intervals treat parts as independent."
+ },
+ {
+  "id": "F-08",
+  "kind": "range",
+  "title": "A 90% range built from errors on held-out rows covered 88% of parts on days it never saw",
+  "severity": "Observation",
+  "severity_reason": "the stated 90% lies inside the interval of delivered coverage [79%, 93%]",
+  "measurement": "Predicting the longest of the 4 lengths from 14 process features, each day held out whole. Covered 88% [79%, 93%] of 81 parts against a stated 90%; on the 21 longest parts 81% [60%, 92%]. Median width 3.37 mm. By day: 2017-10-31 100%, 2017-11-01 80%, 2017-11-02 100%, 2017-11-03 62%, 2017-11-06 100%.",
+  "evidence": "ranges.json, predictions.json",
+  "consequence": "On this evidence the range does what it states, at the width shown.",
+  "action": "Usable as stated. Watch the per-day figures: a single day far below the rest is how a regime change first shows.",
+  "limit": "81 parts, 5 days. With 5 days, one unusual day moves every figure here, and the intervals treat parts as independent."
+ },
+ {
+  "id": "F-09",
+  "kind": "range",
+  "title": "The process features improve the prediction of part length by 0.13 mm on an error of 0.99 mm",
+  "severity": "Observation",
+  "severity_reason": "recorded as a limit on what the ranges above can be used for, not as a failure of a stated claim",
+  "measurement": "Mean absolute error 0.86 mm with 14 features, 0.99 mm predicting the mean of the training days, against a standard deviation of 1.11 mm. Predictions span 233.6 to 237.3 mm; measured lengths span 232.2 to 237.9 mm.",
+  "evidence": "ranges.json",
+  "consequence": "A flag-or-ship rule built on this prediction separates long parts only weakly. The decision curve shows the price: catching every over-limit part means checking about 9 parts in 10.",
+  "action": "Before paying for in-process prediction of length, find the variable that moves it. Billet length or volume before forging is the obvious candidate and is not in these records.",
+  "limit": "A fixed, short feature list on 81 parts. A richer model might do better and would need far more parts to show it honestly."
+ }
+]

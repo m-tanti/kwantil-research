@@ -1,0 +1,15 @@
+{
+ "model": "conformal_pid",
+ "alpha": 0.01,
+ "z1_before": -0.0004246168641697,
+ "z1_after": 0.009215810731551,
+ "model_effect": 0.0096404275957207,
+ "threshold_original_reference": 0.0191903067642149,
+ "threshold_new_reference": -0.0847339566708647,
+ "reference_effect": -0.1039242634350796,
+ "ratio": 10.78004708849332,
+ "zone_model_change_alone": "yellow",
+ "zone_both_changes": "green",
+ "severity": "Material",
+ "severity_reason": "the reference and the model changed in one revision; the reference moved the threshold 11 times as far as the model moved the statistic, and against the original reference the changed model still does not pass"
+}
