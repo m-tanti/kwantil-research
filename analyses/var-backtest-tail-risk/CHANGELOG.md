@@ -30,6 +30,16 @@ of the reference sweep, so no count in the article moves. `output/summary.csv`
 and both sweep files are regenerated. Found by the integrity check in
 `scripts/audit_health_check.py`.
 
+- 2026-11-13, specimen Model Health Check, wording only. No measured number
+  moved. Finding F-04's title said the unconditional ES test "holds its
+  verdicts across references"; 4 of its 10 cells change zone, between yellow
+  and red, and none changes between pass and fail, so the title now says it
+  passes the same 6 of 10 cells under every parametric reference. The factor
+  uplift in F-01, F-02 and F-07 is printed to 2 decimals, because 11.17% and
+  11.24% both rounded to 11.2%. `tests.json` gains `cells_pass_changed`. The
+  script hash, the artifact digest and `report/specimen-model-health-check.pdf`
+  are regenerated.
+
 ### Added
 
 - `scripts/audit_health_check.py` and `tests/test_health_check.py`: the

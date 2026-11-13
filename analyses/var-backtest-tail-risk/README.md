@@ -62,8 +62,8 @@ It scores 7 findings. The ones the article does not already carry:
   model.
 - **An illustration in money.** On an assumed EUR 100 million book, the addend
   of Article 366 of Regulation (EU) No 575/2013 raised the VaR component of the
-  own funds requirement by EUR 1.62 million on average (interval EUR 0.63
-  million to EUR 2.64 million). The book value is an assumption, only the VaR
+  own funds requirement by EUR 1.621 million on average (interval EUR 0.629
+  million to EUR 2.643 million). The book value is an assumption, only the VaR
   component is computed, and the rule is the one applicable until 1 January
   2027. With the addend included, that model still carried EUR 3.5 million less
   than the model that held its level.
