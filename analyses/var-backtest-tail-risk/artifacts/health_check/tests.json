@@ -3,6 +3,7 @@
   "statistic": "z1",
   "n_cells": 10,
   "cells_changed": 10,
+  "cells_pass_changed": 10,
   "share_changed": 1.0,
   "green_by_null": {
    "gaussian": 0,
@@ -41,6 +42,7 @@
   "statistic": "z2",
   "n_cells": 10,
   "cells_changed": 4,
+  "cells_pass_changed": 0,
   "share_changed": 0.4,
   "green_by_null": {
    "gaussian": 6,

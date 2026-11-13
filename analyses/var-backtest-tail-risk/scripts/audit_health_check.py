@@ -601,6 +601,10 @@ def main() -> None:
         n_cells = int(len(piv))
         green_by_null = {n_: int((piv[n_] == "green").sum())
                          for n_ in PARAMETRIC_NULLS + ["empirical"]}
+        # A cell passes only in the green zone, so a cell can change zone (yellow to red)
+        # without changing between pass and fail. Count the cells whose pass or fail changes.
+        is_green = piv[PARAMETRIC_NULLS] == "green"
+        pass_changed = int((is_green.any(axis=1) & ~is_green.all(axis=1)).sum())
         controls = []
         missed = []
         for ctrl, kind in CONTROLS[stat].items():
@@ -618,6 +622,7 @@ def main() -> None:
                                   f"p = {c[f'{stat}_p_value']:.3f}")
         sev, why = severity_test(changed / n_cells, missed)
         tests.append({"statistic": stat, "n_cells": n_cells, "cells_changed": changed,
+                      "cells_pass_changed": pass_changed,
                       "share_changed": changed / n_cells, "green_by_null": green_by_null,
                       "controls": controls, "severity": sev, "severity_reason": why})
     write_lf(out / "tests.json", json.dumps(tests, indent=1))
@@ -688,9 +693,9 @@ def main() -> None:
                 f"[{eur(h['extra_lo_eur'])}, {eur(h['extra_hi_eur'])}], and by {eur(h['peak_extra_eur'])} "
                 f"at its peak. With the addend the component averaged {eur(h['mean_with_addend_eur'])}")
             consequence += (
-                f" (a multiplication factor {pct(h['mean_uplift'])} higher on average; under the "
+                f" (a multiplication factor {pct(h['mean_uplift'], 2)} higher on average; under the "
                 f"add-on table that applies from 1 January 2027 the same counts give "
-                f"{pct(h['mean_uplift_2027'])})")
+                f"{pct(h['mean_uplift_2027'], 2)})")
             gap = ref["mean_with_addend_eur"] - h["mean_with_addend_eur"]
             if m == "conformal_pid":
                 consequence += "."
@@ -736,14 +741,20 @@ def main() -> None:
                      "reference the threshold moves less. With 17 to 79 breach days per cell the "
                      "statistic is an average over a few dozen numbers.")
         else:
-            title = (f"The unconditional ES test holds its verdicts across references and passes a "
-                     f"thin-tailed model with the right breach count")
+            passes = sorted({g[n_] for n_ in PARAMETRIC_NULLS})
+            held = (f"passes the same {passes[0]} of {t['n_cells']} cells under every parametric "
+                    f"reference" if len(passes) == 1 else
+                    f"passes {passes[0]} to {passes[-1]} of {t['n_cells']} cells across the "
+                    f"parametric references")
+            title = (f"The unconditional ES test {held} and passes a thin-tailed model with the "
+                     f"right breach count")
             action = ("Keep this statistic as the working ES check, paired with an exceedance-count "
                       "test, and do not read a pass as evidence about tail depth. Add a known-broken "
                       "model of each kind to the validation pack so the blind side stays visible.")
-            limit = ("The verdicts are stable here because the models it rejects breach too often by "
-                     "a wide margin. That is a property of these models on this data, not of the "
-                     "statistic in general.")
+            limit = ("The pass and fail verdicts are stable here because the models it rejects "
+                     "breach too often by a wide margin. That is a property of these models on this "
+                     "data, not of the statistic in general. Stable pass and fail is not a stable "
+                     "zone: a rejected cell can still move between yellow and red.")
         findings.append(Finding(
             id="", kind="test", title=title,
             severity=t["severity"], severity_reason=t["severity_reason"],
@@ -752,8 +763,9 @@ def main() -> None:
                 f"Cells passing by reference: " +
                 ", ".join(f"{NULL_LABEL[k]} {v}" for k, v in g.items()) +
                 f", of {t['n_cells']} (5 models at 2 levels). {t['cells_changed']} of {t['n_cells']} "
-                f"verdicts change zone across the 5 parametric references. Known-broken models under "
-                f"the reference as used: {controls_txt}. Each reference is {N_SIM_NOTE}."),
+                f"verdicts change zone across the 5 parametric references, and "
+                f"{t['cells_pass_changed']} of {t['n_cells']} change between pass and fail. "
+                f"Known-broken models under the reference as used: {controls_txt}. Each reference is {N_SIM_NOTE}."),
             evidence="tests.json, null_sweep.json",
             consequence=("A verdict that moves with a modelling choice nobody recorded cannot be "
                          "defended as a finding about the model. No euro figure is attached: an ES "

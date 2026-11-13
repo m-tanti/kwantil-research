@@ -295,10 +295,10 @@
   "retrieved": "2026-11-11, from the Publications Office of the European Union and bis.org",
   "scope": "The multiplication factor applies to institutions granted permission to use internal models under Article 363. It does not apply to a firm on the standardised approach."
  },
- "artifact_digest_sha256": "22c0150d835c8baffa864586c4a3203979d12126caa2042aea37b9490385c600",
+ "artifact_digest_sha256": "2130d812989c81fab076ce819bc25eda09ccd2167632aa9c877e7af8e0e22efe",
  "digest_rule": "sha256 over every file in artifacts/health_check except meta.json, in filename order, feeding each file's name as UTF-8 followed by its bytes. meta.json is excluded because it carries the digest and cannot hash itself.",
  "script": "scripts/audit_health_check.py",
- "script_sha256": "490b86355b799bb1424d240b37caa181737195bed01715ff03c7e3620cc05db5",
+ "script_sha256": "037dd82868ba72ca1c3825ade77ae27366f2e2edc44f836f022a3ad22873bd3a",
  "inputs": {
   "details": "experiments/factorial/t/details.csv (rebuilt by run_backtest.py, not shipped)",
   "sweep": "experiments/factorial/t/as_null_sensitivity.csv",
